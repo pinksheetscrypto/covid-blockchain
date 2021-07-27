@@ -43,9 +43,9 @@ dev_dependencies = [
 kwargs = dict(
     name="covid-blockchain",
     author="Mariano Sorgente",
-    author_email="mariano@covidnetwork.net",
+    author_email="mariano@covid.pinksheetscrypto.com",
     description="Covid blockchain full node, farmer, timelord, and wallet.",
-    url="https://covidnetwork.net/",
+    url="https://covid.pinksheetscrypto.com/",
     license="Apache License",
     python_requires=">=3.7, <4",
     keywords="covid blockchain node",

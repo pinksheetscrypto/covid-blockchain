@@ -86,7 +86,7 @@ def configure(
         if testnet == "true" or testnet == "t":
             print("Setting Testnet")
             testnet_port = "58444"
-            testnet_introducer = "beta1_introducer.covidnetwork.net"
+            testnet_introducer = "beta1_introducer.covid.pinksheetscrypto.com"
             testnet = "testnet7"
             config["full_node"]["port"] = int(testnet_port)
             config["full_node"]["introducer_peer"]["port"] = int(testnet_port)
@@ -111,7 +111,7 @@ def configure(
         elif testnet == "false" or testnet == "f":
             print("Setting Mainnet")
             mainnet_port = "18620"
-            mainnet_introducer = "dns-introducer.covidnetwork.net"
+            mainnet_introducer = "dns-introducer.covid.pinksheetscrypto.com"
             net = "mainnet"
             config["full_node"]["port"] = int(mainnet_port)
             config["full_node"]["introducer_peer"]["port"] = int(mainnet_port)

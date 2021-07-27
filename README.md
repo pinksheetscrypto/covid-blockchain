@@ -2,9 +2,9 @@ Covid is a cryptocurrency forked from Chia and uses the Proof of Space and Time 
 
 Discord Channel: https://discord.gg/xguteVCYHh
 
-Website: https://covidnetwork.net (coming soon)
+Website: https://covid.pinksheetscrypto.com (coming soon)
 
-Introducer: dns-introducer.covidnetwork.net:18620
+Introducer: dns-introducer.covid.pinksheetscrypto.com:18620
 
 Changelog:
 v1.0.0 - Initial Release
