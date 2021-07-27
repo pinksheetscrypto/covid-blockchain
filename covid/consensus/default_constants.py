@@ -32,10 +32,10 @@ testnet_kwargs = {
     # Forks of covid should change this value to provide replay attack protection. This is set to mainnet genesis chall
     "AGG_SIG_ME_ADDITIONAL_DATA": bytes.fromhex("11d8513356cee3cd17832ecfcb3ad6a3cea24971f6b6f9699e0dfa1e090a8cf0"),
     "GENESIS_PRE_FARM_POOL_PUZZLE_HASH": bytes.fromhex(
-        "2ef3d958c3fd425f57ca644c738fd6d322a697ebca3bedcaa22e339f16c24b62"
+        "210836d3c99ecbe716647dcee23c4b124ccbc7881007014d490c7e31ff613af2"
     ),
     "GENESIS_PRE_FARM_FARMER_PUZZLE_HASH": bytes.fromhex(
-        "2ef3d958c3fd425f57ca644c738fd6d322a697ebca3bedcaa22e339f16c24b62"
+        "210836d3c99ecbe716647dcee23c4b124ccbc7881007014d490c7e31ff613af2"
     ),
     "MAX_VDF_WITNESS_SIZE": 64,
     # Size of mempool = 50x the size of block
