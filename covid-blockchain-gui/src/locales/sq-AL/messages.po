@@ -799,7 +799,7 @@ msgid "Fee"
 msgstr "Tarifa"
 
 #: src/components/wallet/coloured/WalletColoured.tsx:420
-#~ msgid "Fee (TXTX)"
+#~ msgid "Fee (TCOV)"
 #~ msgstr ""
 
 #: src/components/wallet/coloured/WalletColoured.tsx:420
@@ -1003,16 +1003,16 @@ msgid "Join a Pool"
 msgstr "Bashkohu me një poll"
 
 #: src/components/plot/add/PlotAddNFT.tsx:44
-msgid "Join a pool and get consistent XTX farming rewards. The average returns are the same, but it is much less volatile."
-msgstr "Anëtarësohuni në një pishinë dhe merrni shpërblime të qëndrueshme XTX. Kthimi mesatar është i njëjtë, por është shumë më pak i paqëndrueshëm."
+msgid "Join a pool and get consistent COV farming rewards. The average returns are the same, but it is much less volatile."
+msgstr "Anëtarësohuni në një pishinë dhe merrni shpërblime të qëndrueshme COV. Kthimi mesatar është i njëjtë, por është shumë më pak i paqëndrueshëm."
 
 #: src/components/plotNFT/PlotNFTAdd.tsx:59
-msgid "Join a pool and get consistent XTX farming rewards. The average returns are the same, but it is much less volatile. Assign plots to a plot NFT. You can easily switch pools without having to re-plot."
-msgstr "Anëtarësohuni në një poll dhe merrni shpërblime të qëndrueshme në XTX. Kthimi mesatar është i njëjtë, por është shumë më pak i paqëndrueshëm. Caktoni një komplot NFT. Ju lehtë mund të ndërroni pollet pa pasur nevojë të ri-plotoni."
+msgid "Join a pool and get consistent COV farming rewards. The average returns are the same, but it is much less volatile. Assign plots to a plot NFT. You can easily switch pools without having to re-plot."
+msgstr "Anëtarësohuni në një poll dhe merrni shpërblime të qëndrueshme në COV. Kthimi mesatar është i njëjtë, por është shumë më pak i paqëndrueshëm. Caktoni një komplot NFT. Ju lehtë mund të ndërroni pollet pa pasur nevojë të ri-plotoni."
 
 #: src/components/plot/add/PlotAddNFT.tsx:133
-msgid "Join a pool and get more consistent XTX farming rewards. Create a plot NFT and assign your new plots to a group."
-msgstr "Bashkohuni me një poll dhe merrni shpërblime më të qëndrueshme XTX. Krijoni një plot NFT dhe caktoni plotet tuaja të reja në një grup."
+msgid "Join a pool and get more consistent COV farming rewards. Create a plot NFT and assign your new plots to a group."
+msgstr "Bashkohuni me një poll dhe merrni shpërblime më të qëndrueshme COV. Krijoni një plot NFT dhe caktoni plotet tuaja të reja në një grup."
 
 #: src/components/plot/overview/PlotOverviewPlots.tsx:63
 msgid "K-Size"
@@ -1245,8 +1245,8 @@ msgid "Not found Plots"
 msgstr "Nuk gjenden Plotet"
 
 #: src/components/farm/FarmManageFarmingRewards.tsx:184
-msgid "Note that this does not change your pooling payout addresses. This only affects old format plots, and the 0.25XTX reward for pooling plots."
-msgstr "Vini re se kjo nuk ndryshon adresat tuaja të grumbullimit të pagesave. Kjo ndikon vetëm në komplotet e formatit të vjetër dhe në shpërblimin 0.25XTX për komplotet e bashkimit."
+msgid "Note that this does not change your pooling payout addresses. This only affects old format plots, and the 0.25COV reward for pooling plots."
+msgstr "Vini re se kjo nuk ndryshon adresat tuaja të grumbullimit të pagesave. Kjo ndikon vetëm në komplotet e formatit të vjetër dhe në shpërblimin 0.25COV për komplotet e bashkimit."
 
 #: src/components/plotNFT/PlotExternalNFTCard.tsx:120
 #: src/components/plotNFT/PlotNFTCard.tsx:159
@@ -1813,8 +1813,8 @@ msgid "Self Pooling"
 msgstr "Vetë grumbullimi"
 
 #: src/components/plotNFT/select/PlotNFTSelectBase.tsx:105
-msgid "Self pool. When you win a block you will earn XTX rewards."
-msgstr "Vetë grumbullimi. Kur të fitoni një bllok, do të fitoni shpërblime XTX."
+msgid "Self pool. When you win a block you will earn COV rewards."
+msgstr "Vetë grumbullimi. Kur të fitoni një bllok, do të fitoni shpërblime COV."
 
 #: src/components/trading/CreateOffer.jsx:164
 #: src/components/trading/TradesTable.tsx:47
@@ -1866,8 +1866,8 @@ msgid "Skips adding a final directory to harvester for farming"
 msgstr "Kalon duke shtuar një direktori përfundimtare"
 
 #: src/components/pool/PoolHero.tsx:26
-msgid "Smooth out your XTX farming rewards by joining a pool."
-msgstr "Zbutoni shpërblimet tuaja minimit XTX duke u bashkuar me një poll."
+msgid "Smooth out your COV farming rewards by joining a pool."
+msgstr "Zbutoni shpërblimet tuaja minimit COV duke u bashkuar me një poll."
 
 #: src/components/plotNFT/PlotNFTGetPoolLoginLinkDialog.tsx:60
 msgid "Something went wrong"
@@ -1979,23 +1979,23 @@ msgstr "Sinkronizimi <0/>/<1/>"
 #~ msgstr "Syncing {progress}/{tip}"
 
 #: src/components/farm/card/FarmCardBlockRewards.tsx:15
-#~ msgid "TXTX Block Rewards"
+#~ msgid "TCOV Block Rewards"
 #~ msgstr ""
 
 #: src/components/farm/card/FarmCardCoinbaseRewards.tsx:12
-#~ msgid "TXTX Farming Rewards"
+#~ msgid "TCOV Farming Rewards"
 #~ msgstr ""
 
 #: src/components/farm/card/FarmCardFeesReward.tsx:12
-#~ msgid "TXTX Fees Collected"
+#~ msgid "TCOV Fees Collected"
 #~ msgstr ""
 
 #: src/components/farm/card/FarmCardUserFees.tsx:12
-#~ msgid "TXTX User Fees"
-#~ msgstr "TXTX User Fees"
+#~ msgid "TCOV User Fees"
+#~ msgstr "TCOV User Fees"
 
 #: src/components/farm/card/FarmCardUserFees.tsx:15
-#~ msgid "TXTX User Transaction Fees"
+#~ msgid "TCOV User Transaction Fees"
 #~ msgstr ""
 
 #: src/electron/main.tsx:419
@@ -2084,7 +2084,7 @@ msgid "The total transactions fees in this block. Rewarded to the farmer."
 msgstr "Tarifat totale të transaksioneve në këtë bllok. Shpërblyer për fermerin."
 
 #: src/components/plotNFT/PlotNFTPayoutInstructionsDialog.tsx:87
-msgid "These are the instructions for how the farmer wants to get paid. By default this will be an XTX address, but it can be set to any string with a size of less than 1024 characters, so it can represent another blockchain or payment system identifier."
+msgid "These are the instructions for how the farmer wants to get paid. By default this will be an COV address, but it can be set to any string with a size of less than 1024 characters, so it can represent another blockchain or payment system identifier."
 msgstr ""
 
 #: src/components/plot/PlotsFailed.tsx:40

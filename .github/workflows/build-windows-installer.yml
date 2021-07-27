@@ -1,14 +1,15 @@
 name: Windows Installer on Windows 10 and Python 3.7
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-        - '**'
-  pull_request:
-    branches:
-      - '**'
+  #push:
+  #  branches:
+  #    - main
+  #  tags:
+  #      - '**'
+  #pull_request:
+  #  branches:
+  #    - '**'   
+  workflow_dispatch:
 
 jobs:
   build:

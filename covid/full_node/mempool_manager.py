@@ -57,7 +57,7 @@ class MempoolManager:
         self.coin_store = coin_store
 
         # The fee per cost must be above this amount to consider the fee "nonzero", and thus able to kick out other
-        # transactions. This prevents spam. This is equivalent to 0.055 XTX per block, or about 0.00005 XTX for two
+        # transactions. This prevents spam. This is equivalent to 0.055 COV per block, or about 0.00005 COV for two
         # spends.
         self.nonzero_fee_minimum_fpc = 5
 
@@ -167,7 +167,7 @@ class MempoolManager:
 
     @staticmethod
     def get_min_fee_increase() -> int:
-        # 0.00001 XTX
+        # 0.00001 COV
         return 10000000
 
     def can_replace(

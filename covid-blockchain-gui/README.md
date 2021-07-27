@@ -1,5 +1,5 @@
 # covid-blockchain
-![Alt text](https://www.covid.net/img/covid_logo.svg)
+![Alt text](https://www.pinksheetscrypto.com/images/covid_logo.svg)
 
 ![GitHub contributors](https://img.shields.io/github/contributors/pinksheetscrypto/covid-blockchain?logo=GitHub)
 

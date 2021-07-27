@@ -112,14 +112,14 @@ describe('units', () => {
     });
     it('updates an existing display', () => {
       units.setDisplay('covid', {
-        format: '{amount} TXTX',
+        format: '{amount} TCOV',
         fractionDigits: 0,
       });
 
       const result = units.getDisplay('covid');
 
       expect(result).toEqual({
-        format: '{amount} TXTX',
+        format: '{amount} TCOV',
         fractionDigits: 0,
       });
     });

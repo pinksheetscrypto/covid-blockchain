@@ -147,7 +147,7 @@ class TestPoolWalletRpc:
         args.buffer = 100
         args.farmer_public_key = bytes(bt.farmer_pk).hex()
         args.pool_public_key = None
-        args.pool_contract_address = encode_puzzle_hash(p2_singleton_puzzle_hash, "txtx")
+        args.pool_contract_address = encode_puzzle_hash(p2_singleton_puzzle_hash, "tcov")
         args.tmp_dir = temp_dir
         args.tmp2_dir = plot_dir
         args.final_dir = plot_dir
@@ -469,7 +469,7 @@ class TestPoolWalletRpc:
         for summary in summaries_response:
             if WalletType(int(summary["type"])) == WalletType.POOLING_WALLET:
                 assert False
-        # Balance stars at 6 XTX
+        # Balance stars at 6 COV
         assert (await wallet_0.get_confirmed_balance()) == 6000000000000
         creation_tx: TransactionRecord = await client.create_new_pool_wallet(
             our_ph, "http://123.45.67.89", 10, "localhost:5000", "new", "FARMING_TO_POOL"
@@ -543,7 +543,7 @@ class TestPoolWalletRpc:
         assert (
             wallet_node_0.wallet_state_manager.get_peak().height == full_node_api.full_node.blockchain.get_peak().height
         )
-        # Balance stars at 6 XTX and 5 more blocks are farmed, total 22 XTX
+        # Balance stars at 6 COV and 5 more blocks are farmed, total 22 COV
         assert (await wallet_0.get_confirmed_balance()) == 21999999999999
 
     @pytest.mark.asyncio

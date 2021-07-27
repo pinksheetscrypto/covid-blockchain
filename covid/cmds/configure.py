@@ -110,8 +110,8 @@ def configure(
 
         elif testnet == "false" or testnet == "f":
             print("Setting Mainnet")
-            mainnet_port = "18620"
-            mainnet_introducer = "dns-introducer.covid.pinksheetscrypto.com"
+            mainnet_port = "18120"
+            mainnet_introducer = "introducer.covid.pinksheetscrypto.com"
             net = "mainnet"
             config["full_node"]["port"] = int(mainnet_port)
             config["full_node"]["introducer_peer"]["port"] = int(mainnet_port)
