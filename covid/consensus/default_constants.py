@@ -11,7 +11,7 @@ testnet_kwargs = {
     # DIFFICULTY_STARTING is the starting difficulty for the first epoch, which is then further
     # multiplied by another factor of DIFFICULTY_CONSTANT_FACTOR, to be used in the VDF iter calculation formula.
     "DIFFICULTY_CONSTANT_FACTOR": 2 ** 64,
-    "DIFFICULTY_STARTING": 20,
+    "DIFFICULTY_STARTING": 12,
     "DIFFICULTY_CHANGE_MAX_FACTOR": 3,  # The next difficulty is truncated to range [prev / FACTOR, prev * FACTOR]
     # These 3 constants must be changed at the same time
     "SUB_EPOCH_BLOCKS": 384,  # The number of blocks per sub-epoch, mainnet 384
@@ -28,14 +28,14 @@ testnet_kwargs = {
     # Used as the initial cc rc challenges, as well as first block back pointers, and first SES back pointer
     # We override this value based on the chain being run (testnet0, testnet1, mainnet, etc)
     # Default used for tests is std_hash(b'')
-    "GENESIS_CHALLENGE": bytes.fromhex("faed672adcd351b98e860a7b3d78de0a5e2af16c22df88e66e1919eb1e611f8e"),
+    "GENESIS_CHALLENGE": bytes.fromhex("c7e84e1f4f1bf4a4aa79b461957baf1fe02d5b9f3be7201230b91df728d20430"),
     # Forks of covid should change this value to provide replay attack protection. This is set to mainnet genesis chall
-    "AGG_SIG_ME_ADDITIONAL_DATA": bytes.fromhex("f37d35863a3cb05730a9905ed93b2370fea5a05726561b0b437cc841ce4b9dc5"),
+    "AGG_SIG_ME_ADDITIONAL_DATA": bytes.fromhex("11d8513356cee3cd17832ecfcb3ad6a3cea24971f6b6f9699e0dfa1e090a8cf0"),
     "GENESIS_PRE_FARM_POOL_PUZZLE_HASH": bytes.fromhex(
-        "5593755c5604a1651c85700d2db91a2fa4d978fcd9d5bb9aa948fbf4d0093193"
+        "210836d3c99ecbe716647dcee23c4b124ccbc7881007014d490c7e31ff613af2"
     ),
     "GENESIS_PRE_FARM_FARMER_PUZZLE_HASH": bytes.fromhex(
-        "5593755c5604a1651c85700d2db91a2fa4d978fcd9d5bb9aa948fbf4d0093193"
+        "210836d3c99ecbe716647dcee23c4b124ccbc7881007014d490c7e31ff613af2"
     ),
     "MAX_VDF_WITNESS_SIZE": 64,
     # Size of mempool = 50x the size of block
