@@ -5,23 +5,23 @@ from unittest import TestCase
 
 from blspy import AugSchemeMPL, G1Element, G2Element, PrivateKey
 
-from taco.types.blockchain_format.program import Program
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.blockchain_format.coin import Coin
-from taco.types.coin_solution import CoinSolution
-from taco.types.spend_bundle import SpendBundle
-from taco.util.ints import uint64, uint32
-from taco.consensus.default_constants import DEFAULT_CONSTANTS
-from taco.wallet.puzzles.p2_delegated_puzzle_or_hidden_puzzle import (
+from covid.types.blockchain_format.program import Program
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.blockchain_format.coin import Coin
+from covid.types.coin_solution import CoinSolution
+from covid.types.spend_bundle import SpendBundle
+from covid.util.ints import uint64, uint32
+from covid.consensus.default_constants import DEFAULT_CONSTANTS
+from covid.wallet.puzzles.p2_delegated_puzzle_or_hidden_puzzle import (
     puzzle_for_pk,
     solution_for_conditions,
     calculate_synthetic_secret_key,
     DEFAULT_HIDDEN_PUZZLE_HASH,
 )
-from taco.wallet.puzzles.p2_conditions import puzzle_for_conditions
-from taco.wallet.puzzles import singleton_top_layer
-from taco.pools.pool_wallet_info import PoolState
-from taco.pools.pool_puzzles import (
+from covid.wallet.puzzles.p2_conditions import puzzle_for_conditions
+from covid.wallet.puzzles import singleton_top_layer
+from covid.pools.pool_wallet_info import PoolState
+from covid.pools.pool_puzzles import (
     create_waiting_room_inner_puzzle,
     create_pooling_inner_puzzle,
     create_p2_singleton_puzzle,
@@ -47,9 +47,9 @@ from tests.clvm.coin_store import CoinStore, CoinTimestamp, BadSpendBundleError
 
 """
 This test suite aims to test:
-    - taco.pools.pool_puzzles.py
-    - taco.wallet.puzzles.pool_member_innerpuz.clvm
-    - taco.wallet.puzzles.pool_waiting_room_innerpuz.clvm
+    - covid.pools.pool_puzzles.py
+    - covid.wallet.puzzles.pool_member_innerpuz.clvm
+    - covid.wallet.puzzles.pool_waiting_room_innerpuz.clvm
 """
 
 

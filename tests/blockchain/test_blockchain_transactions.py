@@ -4,14 +4,14 @@ import logging
 import pytest
 from clvm.casts import int_to_bytes
 
-from taco.consensus.blockchain import ReceiveBlockResult
-from taco.protocols import full_node_protocol
-from taco.types.announcement import Announcement
-from taco.types.condition_opcodes import ConditionOpcode
-from taco.types.condition_with_args import ConditionWithArgs
-from taco.types.spend_bundle import SpendBundle
-from taco.util.errors import ConsensusError, Err
-from taco.util.ints import uint64
+from covid.consensus.blockchain import ReceiveBlockResult
+from covid.protocols import full_node_protocol
+from covid.types.announcement import Announcement
+from covid.types.condition_opcodes import ConditionOpcode
+from covid.types.condition_with_args import ConditionWithArgs
+from covid.types.spend_bundle import SpendBundle
+from covid.util.errors import ConsensusError, Err
+from covid.util.ints import uint64
 from tests.wallet_tools import WalletTool
 from tests.core.full_node.test_full_node import connect_and_get_peer
 from tests.setup_nodes import bt, setup_two_nodes, test_constants

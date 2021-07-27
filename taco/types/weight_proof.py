@@ -1,14 +1,14 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
-from taco.types.blockchain_format.proof_of_space import ProofOfSpace
-from taco.types.blockchain_format.reward_chain_block import RewardChainBlock
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.blockchain_format.vdf import VDFInfo, VDFProof
-from taco.types.end_of_slot_bundle import EndOfSubSlotBundle
-from taco.types.header_block import HeaderBlock
-from taco.util.ints import uint8, uint32, uint64, uint128
-from taco.util.streamable import Streamable, streamable
+from covid.types.blockchain_format.proof_of_space import ProofOfSpace
+from covid.types.blockchain_format.reward_chain_block import RewardChainBlock
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.blockchain_format.vdf import VDFInfo, VDFProof
+from covid.types.end_of_slot_bundle import EndOfSubSlotBundle
+from covid.types.header_block import HeaderBlock
+from covid.util.ints import uint8, uint32, uint64, uint128
+from covid.util.streamable import Streamable, streamable
 
 
 @dataclass(frozen=True)

@@ -6,20 +6,20 @@ from typing import List, Optional, Set, Tuple
 import aiosqlite
 import pytest
 
-from taco.consensus.block_rewards import calculate_base_farmer_reward, calculate_pool_reward
-from taco.consensus.blockchain import Blockchain, ReceiveBlockResult
-from taco.consensus.coinbase import create_farmer_coin, create_pool_coin
-from taco.full_node.block_store import BlockStore
-from taco.full_node.coin_store import CoinStore
-from taco.full_node.mempool_check_conditions import get_name_puzzle_conditions
-from taco.types.blockchain_format.coin import Coin
-from taco.types.coin_record import CoinRecord
-from taco.types.full_block import FullBlock
-from taco.types.generator_types import BlockGenerator
-from taco.util.generator_tools import tx_removals_and_additions
-from taco.util.ints import uint64, uint32
+from covid.consensus.block_rewards import calculate_base_farmer_reward, calculate_pool_reward
+from covid.consensus.blockchain import Blockchain, ReceiveBlockResult
+from covid.consensus.coinbase import create_farmer_coin, create_pool_coin
+from covid.full_node.block_store import BlockStore
+from covid.full_node.coin_store import CoinStore
+from covid.full_node.mempool_check_conditions import get_name_puzzle_conditions
+from covid.types.blockchain_format.coin import Coin
+from covid.types.coin_record import CoinRecord
+from covid.types.full_block import FullBlock
+from covid.types.generator_types import BlockGenerator
+from covid.util.generator_tools import tx_removals_and_additions
+from covid.util.ints import uint64, uint32
 from tests.wallet_tools import WalletTool
-from taco.util.db_wrapper import DBWrapper
+from covid.util.db_wrapper import DBWrapper
 from tests.setup_nodes import bt, test_constants
 
 

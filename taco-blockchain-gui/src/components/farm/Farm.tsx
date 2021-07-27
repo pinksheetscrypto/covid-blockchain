@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
 import { useSelector } from 'react-redux';
-import { AdvancedOptions, Flex } from '@taco/core';
+import { AdvancedOptions, Flex } from '@covid/core';
 import LayoutMain from '../layout/LayoutMain';
 import FarmOverview from './overview/FarmOverview';
 import FarmLatestBlockChallenges from './FarmLatestBlockChallenges';

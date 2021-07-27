@@ -3,12 +3,12 @@ from typing import Dict, List, Optional, Set
 import aiosqlite
 import sqlite3
 
-from taco.types.blockchain_format.coin import Coin
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.util.db_wrapper import DBWrapper
-from taco.util.ints import uint32, uint64
-from taco.wallet.util.wallet_types import WalletType
-from taco.wallet.wallet_coin_record import WalletCoinRecord
+from covid.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.util.db_wrapper import DBWrapper
+from covid.util.ints import uint32, uint64
+from covid.wallet.util.wallet_types import WalletType
+from covid.wallet.wallet_coin_record import WalletCoinRecord
 
 
 class WalletCoinStore:

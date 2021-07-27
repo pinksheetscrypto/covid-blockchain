@@ -5,10 +5,10 @@ from typing import Optional
 
 from blspy import G1Element, G2Element
 
-from taco.types.blockchain_format.proof_of_space import ProofOfSpace
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.util.ints import uint8, uint16, uint32, uint64
-from taco.util.streamable import Streamable, streamable
+from covid.types.blockchain_format.proof_of_space import ProofOfSpace
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.util.ints import uint8, uint16, uint32, uint64
+from covid.util.streamable import Streamable, streamable
 
 POOL_PROTOCOL_VERSION = uint8(1)
 

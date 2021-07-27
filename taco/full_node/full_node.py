@@ -10,53 +10,53 @@ from typing import Any, Callable, Dict, List, Optional, Set, Tuple, Union
 import aiosqlite
 from blspy import AugSchemeMPL
 
-import taco.server.ws_connection as ws  # lgtm [py/import-and-import-from]
-from taco.consensus.block_creation import unfinished_block_to_full_block
-from taco.consensus.block_record import BlockRecord
-from taco.consensus.blockchain import Blockchain, ReceiveBlockResult
-from taco.consensus.constants import ConsensusConstants
-from taco.consensus.difficulty_adjustment import get_next_sub_slot_iters_and_difficulty
-from taco.consensus.make_sub_epoch_summary import next_sub_epoch_summary
-from taco.consensus.multiprocess_validation import PreValidationResult
-from taco.consensus.pot_iterations import calculate_sp_iters
-from taco.full_node.block_store import BlockStore
-from taco.full_node.bundle_tools import detect_potential_template_generator
-from taco.full_node.coin_store import CoinStore
-from taco.full_node.full_node_store import FullNodeStore
-from taco.full_node.mempool_manager import MempoolManager
-from taco.full_node.signage_point import SignagePoint
-from taco.full_node.sync_store import SyncStore
-from taco.full_node.weight_proof import WeightProofHandler
-from taco.protocols import farmer_protocol, full_node_protocol, timelord_protocol, wallet_protocol
-from taco.protocols.full_node_protocol import (
+import covid.server.ws_connection as ws  # lgtm [py/import-and-import-from]
+from covid.consensus.block_creation import unfinished_block_to_full_block
+from covid.consensus.block_record import BlockRecord
+from covid.consensus.blockchain import Blockchain, ReceiveBlockResult
+from covid.consensus.constants import ConsensusConstants
+from covid.consensus.difficulty_adjustment import get_next_sub_slot_iters_and_difficulty
+from covid.consensus.make_sub_epoch_summary import next_sub_epoch_summary
+from covid.consensus.multiprocess_validation import PreValidationResult
+from covid.consensus.pot_iterations import calculate_sp_iters
+from covid.full_node.block_store import BlockStore
+from covid.full_node.bundle_tools import detect_potential_template_generator
+from covid.full_node.coin_store import CoinStore
+from covid.full_node.full_node_store import FullNodeStore
+from covid.full_node.mempool_manager import MempoolManager
+from covid.full_node.signage_point import SignagePoint
+from covid.full_node.sync_store import SyncStore
+from covid.full_node.weight_proof import WeightProofHandler
+from covid.protocols import farmer_protocol, full_node_protocol, timelord_protocol, wallet_protocol
+from covid.protocols.full_node_protocol import (
     RejectBlocks,
     RequestBlocks,
     RespondBlock,
     RespondBlocks,
     RespondSignagePoint,
 )
-from taco.protocols.protocol_message_types import ProtocolMessageTypes
-from taco.server.node_discovery import FullNodePeers
-from taco.server.outbound_message import Message, NodeType, make_msg
-from taco.server.server import TacoServer
-from taco.types.blockchain_format.classgroup import ClassgroupElement
-from taco.types.blockchain_format.pool_target import PoolTarget
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.blockchain_format.sub_epoch_summary import SubEpochSummary
-from taco.types.blockchain_format.vdf import CompressibleVDFField, VDFInfo, VDFProof
-from taco.types.end_of_slot_bundle import EndOfSubSlotBundle
-from taco.types.full_block import FullBlock
-from taco.types.header_block import HeaderBlock
-from taco.types.mempool_inclusion_status import MempoolInclusionStatus
-from taco.types.spend_bundle import SpendBundle
-from taco.types.unfinished_block import UnfinishedBlock
-from taco.util.bech32m import encode_puzzle_hash
-from taco.util.db_wrapper import DBWrapper
-from taco.util.errors import ConsensusError, Err
-from taco.util.ints import uint8, uint32, uint64, uint128
-from taco.util.path import mkdir, path_from_root
-from taco.util.safe_cancel_task import cancel_task_safe
-from taco.util.profiler import profile_task
+from covid.protocols.protocol_message_types import ProtocolMessageTypes
+from covid.server.node_discovery import FullNodePeers
+from covid.server.outbound_message import Message, NodeType, make_msg
+from covid.server.server import CovidServer
+from covid.types.blockchain_format.classgroup import ClassgroupElement
+from covid.types.blockchain_format.pool_target import PoolTarget
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.blockchain_format.sub_epoch_summary import SubEpochSummary
+from covid.types.blockchain_format.vdf import CompressibleVDFField, VDFInfo, VDFProof
+from covid.types.end_of_slot_bundle import EndOfSubSlotBundle
+from covid.types.full_block import FullBlock
+from covid.types.header_block import HeaderBlock
+from covid.types.mempool_inclusion_status import MempoolInclusionStatus
+from covid.types.spend_bundle import SpendBundle
+from covid.types.unfinished_block import UnfinishedBlock
+from covid.util.bech32m import encode_puzzle_hash
+from covid.util.db_wrapper import DBWrapper
+from covid.util.errors import ConsensusError, Err
+from covid.util.ints import uint8, uint32, uint64, uint128
+from covid.util.path import mkdir, path_from_root
+from covid.util.safe_cancel_task import cancel_task_safe
+from covid.util.profiler import profile_task
 
 
 class FullNode:
@@ -174,7 +174,7 @@ class FullNode:
         if peak is not None:
             await self.weight_proof_handler.create_sub_epoch_segments()
 
-    def set_server(self, server: TacoServer):
+    def set_server(self, server: CovidServer):
         self.server = server
         dns_servers = []
         try:
@@ -187,7 +187,7 @@ class FullNode:
             dns_servers = self.config["dns_servers"]
         elif self.config["port"] == 18620:
             # If `dns_servers` misses from the `config`, hardcode it if we're running mainnet.
-            dns_servers.append("dns-introducer.taconetwork.net")
+            dns_servers.append("dns-introducer.covidnetwork.net")
         try:
             self.full_node_peers = FullNodePeers(
                 self.server,
@@ -212,7 +212,7 @@ class FullNode:
         if self.state_changed_callback is not None:
             self.state_changed_callback(change)
 
-    async def short_sync_batch(self, peer: ws.WSTacoConnection, start_height: uint32, target_height: uint32) -> bool:
+    async def short_sync_batch(self, peer: ws.WSCovidConnection, start_height: uint32, target_height: uint32) -> bool:
         """
         Tries to sync to a chain which is not too far in the future, by downloading batches of blocks. If the first
         block that we download is not connected to our chain, we return False and do an expensive long sync instead.
@@ -282,7 +282,7 @@ class FullNode:
         return True
 
     async def short_sync_backtrack(
-        self, peer: ws.WSTacoConnection, peak_height: uint32, target_height: uint32, target_unf_hash: bytes32
+        self, peer: ws.WSCovidConnection, peak_height: uint32, target_height: uint32, target_unf_hash: bytes32
     ):
         """
         Performs a backtrack sync, where blocks are downloaded one at a time from newest to oldest. If we do not
@@ -338,7 +338,7 @@ class FullNode:
             await asyncio.sleep(sleep_before)
         self._state_changed("peer_changed_peak")
 
-    async def new_peak(self, request: full_node_protocol.NewPeak, peer: ws.WSTacoConnection):
+    async def new_peak(self, request: full_node_protocol.NewPeak, peer: ws.WSCovidConnection):
         """
         We have received a notification of a new peak from a peer. This happens either when we have just connected,
         or when the peer has updated their peak.
@@ -416,7 +416,7 @@ class FullNode:
             self._sync_task = asyncio.create_task(self._sync())
 
     async def send_peak_to_timelords(
-        self, peak_block: Optional[FullBlock] = None, peer: Optional[ws.WSTacoConnection] = None
+        self, peak_block: Optional[FullBlock] = None, peer: Optional[ws.WSCovidConnection] = None
     ):
         """
         Sends current peak to timelords
@@ -489,7 +489,7 @@ class FullNode:
         else:
             return True
 
-    async def on_connect(self, connection: ws.WSTacoConnection):
+    async def on_connect(self, connection: ws.WSCovidConnection):
         """
         Whenever we connect to another node / wallet, send them our current heads. Also send heads to farmers
         and challenges to timelords.
@@ -541,7 +541,7 @@ class FullNode:
             elif connection.connection_type is NodeType.TIMELORD:
                 await self.send_peak_to_timelords()
 
-    def on_disconnect(self, connection: ws.WSTacoConnection):
+    def on_disconnect(self, connection: ws.WSCovidConnection):
         self.log.info(f"peer disconnected {connection.get_peer_info()}")
         self._state_changed("close_connection")
         self._state_changed("sync_mode")
@@ -809,7 +809,7 @@ class FullNode:
     async def receive_block_batch(
         self,
         all_blocks: List[FullBlock],
-        peer: ws.WSTacoConnection,
+        peer: ws.WSCovidConnection,
         fork_point: Optional[uint32],
         wp_summaries: Optional[List[SubEpochSummary]] = None,
     ) -> Tuple[bool, bool, Optional[uint32]]:
@@ -903,7 +903,7 @@ class FullNode:
     async def signage_point_post_processing(
         self,
         request: full_node_protocol.RespondSignagePoint,
-        peer: ws.WSTacoConnection,
+        peer: ws.WSCovidConnection,
         ip_sub_slot: Optional[EndOfSubSlotBundle],
     ):
         self.log.info(
@@ -957,7 +957,7 @@ class FullNode:
         await self.server.send_to_all([msg], NodeType.FARMER)
 
     async def peak_post_processing(
-        self, block: FullBlock, record: BlockRecord, fork_height: uint32, peer: Optional[ws.WSTacoConnection]
+        self, block: FullBlock, record: BlockRecord, fork_height: uint32, peer: Optional[ws.WSCovidConnection]
     ):
         """
         Must be called under self.blockchain.lock. This updates the internal state of the full node with the
@@ -1106,7 +1106,7 @@ class FullNode:
     async def respond_block(
         self,
         respond_block: full_node_protocol.RespondBlock,
-        peer: Optional[ws.WSTacoConnection] = None,
+        peer: Optional[ws.WSCovidConnection] = None,
     ) -> Optional[Message]:
         """
         Receive a full block from a peer full node (or ourselves).
@@ -1267,7 +1267,7 @@ class FullNode:
     async def respond_unfinished_block(
         self,
         respond_unfinished_block: full_node_protocol.RespondUnfinishedBlock,
-        peer: Optional[ws.WSTacoConnection],
+        peer: Optional[ws.WSCovidConnection],
         farmed_block: bool = False,
     ):
         """
@@ -1424,7 +1424,7 @@ class FullNode:
         self._state_changed("unfinished_block")
 
     async def new_infusion_point_vdf(
-        self, request: timelord_protocol.NewInfusionPointVDF, timelord_peer: Optional[ws.WSTacoConnection] = None
+        self, request: timelord_protocol.NewInfusionPointVDF, timelord_peer: Optional[ws.WSCovidConnection] = None
     ) -> Optional[Message]:
         # Lookup unfinished blocks
         unfinished_block: Optional[UnfinishedBlock] = self.full_node_store.get_unfinished_block(
@@ -1527,7 +1527,7 @@ class FullNode:
         return None
 
     async def respond_end_of_sub_slot(
-        self, request: full_node_protocol.RespondEndOfSubSlot, peer: ws.WSTacoConnection
+        self, request: full_node_protocol.RespondEndOfSubSlot, peer: ws.WSCovidConnection
     ) -> Tuple[Optional[Message], bool]:
 
         fetched_ss = self.full_node_store.get_sub_slot(request.end_of_slot_bundle.challenge_chain.get_hash())
@@ -1615,7 +1615,7 @@ class FullNode:
         self,
         transaction: SpendBundle,
         spend_name: bytes32,
-        peer: Optional[ws.WSTacoConnection] = None,
+        peer: Optional[ws.WSCovidConnection] = None,
         test: bool = False,
     ) -> Tuple[MempoolInclusionStatus, Optional[Err]]:
         if self.sync_store.get_sync_mode():
@@ -1827,7 +1827,7 @@ class FullNode:
         if self.server is not None:
             await self.server.send_to_all([msg], NodeType.FULL_NODE)
 
-    async def new_compact_vdf(self, request: full_node_protocol.NewCompactVDF, peer: ws.WSTacoConnection):
+    async def new_compact_vdf(self, request: full_node_protocol.NewCompactVDF, peer: ws.WSCovidConnection):
         is_fully_compactified = await self.block_store.is_fully_compactified(request.header_hash)
         if is_fully_compactified is None or is_fully_compactified:
             return False
@@ -1845,7 +1845,7 @@ class FullNode:
             if response is not None and isinstance(response, full_node_protocol.RespondCompactVDF):
                 await self.respond_compact_vdf(response, peer)
 
-    async def request_compact_vdf(self, request: full_node_protocol.RequestCompactVDF, peer: ws.WSTacoConnection):
+    async def request_compact_vdf(self, request: full_node_protocol.RequestCompactVDF, peer: ws.WSCovidConnection):
         header_block = await self.blockchain.get_header_block_by_height(
             request.height, request.header_hash, tx_filter=False
         )
@@ -1889,7 +1889,7 @@ class FullNode:
         msg = make_msg(ProtocolMessageTypes.respond_compact_vdf, compact_vdf)
         await peer.send_message(msg)
 
-    async def respond_compact_vdf(self, request: full_node_protocol.RespondCompactVDF, peer: ws.WSTacoConnection):
+    async def respond_compact_vdf(self, request: full_node_protocol.RespondCompactVDF, peer: ws.WSCovidConnection):
         field_vdf = CompressibleVDFField(int(request.field_vdf))
         if not await self._can_accept_compact_proof(
             request.vdf_info, request.vdf_proof, request.height, request.header_hash, field_vdf

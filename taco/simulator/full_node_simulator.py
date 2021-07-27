@@ -1,12 +1,12 @@
 from typing import List, Optional
 
-from taco.consensus.block_record import BlockRecord
-from taco.full_node.full_node_api import FullNodeAPI
-from taco.protocols.full_node_protocol import RespondBlock
-from taco.simulator.simulator_protocol import FarmNewBlockProtocol, ReorgProtocol
-from taco.types.full_block import FullBlock
-from taco.util.api_decorators import api_request
-from taco.util.ints import uint8
+from covid.consensus.block_record import BlockRecord
+from covid.full_node.full_node_api import FullNodeAPI
+from covid.protocols.full_node_protocol import RespondBlock
+from covid.simulator.simulator_protocol import FarmNewBlockProtocol, ReorgProtocol
+from covid.types.full_block import FullBlock
+from covid.util.api_decorators import api_request
+from covid.util.ints import uint8
 
 
 class FullNodeSimulator(FullNodeAPI):

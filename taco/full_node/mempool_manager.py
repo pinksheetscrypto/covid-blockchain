@@ -8,32 +8,32 @@ from typing import Dict, List, Optional, Set, Tuple
 from blspy import AugSchemeMPL, G1Element
 from chiabip158 import PyBIP158
 
-from taco.consensus.block_record import BlockRecord
-from taco.consensus.constants import ConsensusConstants
-from taco.consensus.cost_calculator import NPCResult, calculate_cost_of_program
-from taco.full_node.bundle_tools import simple_solution_generator
-from taco.full_node.coin_store import CoinStore
-from taco.full_node.mempool import Mempool
-from taco.full_node.mempool_check_conditions import mempool_check_conditions_dict, get_name_puzzle_conditions
-from taco.types.blockchain_format.coin import Coin
-from taco.types.blockchain_format.program import SerializedProgram
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.coin_record import CoinRecord
-from taco.types.condition_opcodes import ConditionOpcode
-from taco.types.condition_with_args import ConditionWithArgs
-from taco.types.mempool_inclusion_status import MempoolInclusionStatus
-from taco.types.mempool_item import MempoolItem
-from taco.types.spend_bundle import SpendBundle
-from taco.util.clvm import int_from_bytes
-from taco.util.condition_tools import (
+from covid.consensus.block_record import BlockRecord
+from covid.consensus.constants import ConsensusConstants
+from covid.consensus.cost_calculator import NPCResult, calculate_cost_of_program
+from covid.full_node.bundle_tools import simple_solution_generator
+from covid.full_node.coin_store import CoinStore
+from covid.full_node.mempool import Mempool
+from covid.full_node.mempool_check_conditions import mempool_check_conditions_dict, get_name_puzzle_conditions
+from covid.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.program import SerializedProgram
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.coin_record import CoinRecord
+from covid.types.condition_opcodes import ConditionOpcode
+from covid.types.condition_with_args import ConditionWithArgs
+from covid.types.mempool_inclusion_status import MempoolInclusionStatus
+from covid.types.mempool_item import MempoolItem
+from covid.types.spend_bundle import SpendBundle
+from covid.util.clvm import int_from_bytes
+from covid.util.condition_tools import (
     pkm_pairs_for_conditions_dict,
     coin_announcements_names_for_npc,
     puzzle_announcements_names_for_npc,
 )
-from taco.util.errors import Err
-from taco.util.generator_tools import additions_for_npc
-from taco.util.ints import uint32, uint64
-from taco.util.streamable import recurse_jsonify
+from covid.util.errors import Err
+from covid.util.generator_tools import additions_for_npc
+from covid.util.ints import uint32, uint64
+from covid.util.streamable import recurse_jsonify
 
 log = logging.getLogger(__name__)
 

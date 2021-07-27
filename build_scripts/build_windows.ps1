@@ -34,24 +34,24 @@ pip install pyinstaller==4.2
 pip install setuptools_scm
 
 Write-Output "   ---"
-Write-Output "Get TACO_INSTALLER_VERSION"
-# The environment variable TACO_INSTALLER_VERSION needs to be defined
-$env:TACO_INSTALLER_VERSION = python .\build_scripts\installer-version.py -win
+Write-Output "Get COVID_INSTALLER_VERSION"
+# The environment variable COVID_INSTALLER_VERSION needs to be defined
+$env:COVID_INSTALLER_VERSION = python .\build_scripts\installer-version.py -win
 
-if (-not (Test-Path env:TACO_INSTALLER_VERSION)) {
-  $env:TACO_INSTALLER_VERSION = '0.0.0'
-  Write-Output "WARNING: No environment variable TACO_INSTALLER_VERSION set. Using 0.0.0"
+if (-not (Test-Path env:COVID_INSTALLER_VERSION)) {
+  $env:COVID_INSTALLER_VERSION = '0.0.0'
+  Write-Output "WARNING: No environment variable COVID_INSTALLER_VERSION set. Using 0.0.0"
   }
-Write-Output "Taco Version is: $env:TACO_INSTALLER_VERSION"
+Write-Output "Covid Version is: $env:COVID_INSTALLER_VERSION"
 Write-Output "   ---"
 
 Write-Output "   ---"
-Write-Output "Build taco-blockchain wheels"
+Write-Output "Build covid-blockchain wheels"
 Write-Output "   ---"
 pip wheel --use-pep517 --extra-index-url https://pypi.chia.net/simple/ -f . --wheel-dir=.\build_scripts\win_build .
 
 Write-Output "   ---"
-Write-Output "Install taco-blockchain wheels into venv with pip"
+Write-Output "Install covid-blockchain wheels into venv with pip"
 Write-Output "   ---"
 
 Write-Output "pip install miniupnpc"
@@ -60,20 +60,20 @@ pip install --no-index --find-links=.\win_build\ miniupnpc
 # Write-Output "pip install setproctitle"
 # pip install setproctitle==1.2.2
 
-Write-Output "pip install taco-blockchain"
-pip install --no-index --find-links=.\win_build\ taco-blockchain
+Write-Output "pip install covid-blockchain"
+pip install --no-index --find-links=.\win_build\ covid-blockchain
 
 Write-Output "   ---"
-Write-Output "Use pyinstaller to create taco .exe's"
+Write-Output "Use pyinstaller to create covid .exe's"
 Write-Output "   ---"
-$SPEC_FILE = (python -c 'import taco; print(taco.PYINSTALLER_SPEC_PATH)') -join "`n"
+$SPEC_FILE = (python -c 'import covid; print(covid.PYINSTALLER_SPEC_PATH)') -join "`n"
 pyinstaller --log-level INFO $SPEC_FILE
 
 Write-Output "   ---"
-Write-Output "Copy taco executables to taco-blockchain-gui\"
+Write-Output "Copy covid executables to covid-blockchain-gui\"
 Write-Output "   ---"
-Copy-Item "dist\daemon" -Destination "..\taco-blockchain-gui\" -Recurse
-Set-Location -Path "..\taco-blockchain-gui" -PassThru
+Copy-Item "dist\daemon" -Destination "..\covid-blockchain-gui\" -Recurse
+Set-Location -Path "..\covid-blockchain-gui" -PassThru
 
 git status
 
@@ -97,19 +97,19 @@ If ($LastExitCode -gt 0){
 }
 
 Write-Output "   ---"
-Write-Output "Increase the stack for taco command for (taco plots create) chiapos limitations"
+Write-Output "Increase the stack for covid command for (covid plots create) chiapos limitations"
 # editbin.exe needs to be in the path
-editbin.exe /STACK:8000000 daemon\taco.exe
+editbin.exe /STACK:8000000 daemon\covid.exe
 Write-Output "   ---"
 
-$packageVersion = "$env:TACO_INSTALLER_VERSION"
-$packageName = "Taco-$packageVersion"
+$packageVersion = "$env:COVID_INSTALLER_VERSION"
+$packageName = "Covid-$packageVersion"
 
 Write-Output "packageName is $packageName"
 
 Write-Output "   ---"
 Write-Output "electron-packager"
-electron-packager . Taco --asar.unpack="**\daemon\**" --overwrite --icon=.\src\assets\img\taco.ico --app-version=$packageVersion
+electron-packager . Covid --asar.unpack="**\daemon\**" --overwrite --icon=.\src\assets\img\covid.ico --app-version=$packageVersion
 Write-Output "   ---"
 
 Write-Output "   ---"
@@ -123,8 +123,8 @@ If ($env:HAS_SECRET) {
    Write-Output "   ---"
    Write-Output "Add timestamp and verify signature"
    Write-Output "   ---"
-   signtool.exe timestamp /v /t http://timestamp.comodoca.com/ .\release-builds\windows-installer\TacoSetup-$packageVersion.exe
-   signtool.exe verify /v /pa .\release-builds\windows-installer\TacoSetup-$packageVersion.exe
+   signtool.exe timestamp /v /t http://timestamp.comodoca.com/ .\release-builds\windows-installer\CovidSetup-$packageVersion.exe
+   signtool.exe verify /v /pa .\release-builds\windows-installer\CovidSetup-$packageVersion.exe
    }   Else    {
    Write-Output "Skipping timestamp and verify signatures - no authorization to install certificates"
 }

@@ -6,16 +6,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: ja_JP\n"
-"Project-Id-Version: taco-blockchain\n"
+"Project-Id-Version: covid-blockchain\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2021-07-06 23:47\n"
 "Last-Translator: \n"
 "Language-Team: Japanese\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: taco-blockchain\n"
+"X-Crowdin-Project: covid-blockchain\n"
 "X-Crowdin-Project-ID: 440660\n"
 "X-Crowdin-Language: ja\n"
-"X-Crowdin-File: /[Taco-Network.taco-blockchain-gui] main/src/locales/en-US/messages.po\n"
+"X-Crowdin-File: /[pinksheetscrypto.covid-blockchain-gui] main/src/locales/en-US/messages.po\n"
 "X-Crowdin-File-ID: 118\n"
 
 #: src/components/plot/add/PlotAddNFT.tsx:62
@@ -23,8 +23,8 @@ msgid "(Optional)"
 msgstr ""
 
 #: src/components/farm/FarmLatestBlockChallenges.tsx:64
-msgid "*Want to explore Taco’s blocks further? Check out <0>Taco Explorer</0> built by an open source developer."
-msgstr "*チアのブロックをさらに調べたいですか？オープンソース開発者に提供していただいた <0>Taco Explorer</0> を是非ご覧ください。"
+msgid "*Want to explore Covid’s blocks further? Check out <0>Covid Explorer</0> built by an open source developer."
+msgstr "*チアのブロックをさらに調べたいですか？オープンソース開発者に提供していただいた <0>Covid Explorer</0> を是非ご覧ください。"
 
 #: src/components/plot/add/PlotAddNFT.tsx:123
 msgid "+ Add New Plot NFT"
@@ -44,7 +44,7 @@ msgstr "収穫機は耕地が実際に保存されているデバイス上に走
 
 #: src/electron/main.tsx:422
 #: src/electron/main.tsx:509
-msgid "About Taco Blockchain"
+msgid "About Covid Blockchain"
 msgstr "チアブロックチェーンについて"
 
 #: src/components/trading/ViewOffer.jsx:74
@@ -216,7 +216,7 @@ msgid "Block VDF Iterations"
 msgstr "ブロック VDF 評価回数"
 
 #: src/components/block/Block.jsx:336
-msgid "Block at height {0} in the Taco blockchain"
+msgid "Block at height {0} in the Covid blockchain"
 msgstr "チアブロックチェーン内の高さ {0} のブロック"
 
 #: src/components/fullNode/FullNode.jsx:331
@@ -674,7 +674,7 @@ msgid "Edit"
 msgstr "編集"
 
 #: src/components/wallet/WalletImport.tsx:147
-msgid "Enter the 24 word mnemonic that you have saved in order to restore your Taco wallet."
+msgid "Enter the 24 word mnemonic that you have saved in order to restore your Covid wallet."
 msgstr "チアウォレットを復元するには、24語の合言葉を入力してください。"
 
 #: src/components/farm/FarmerStatus.tsx:21
@@ -688,7 +688,7 @@ msgid "Error"
 msgstr "エラー"
 
 #: src/components/wallet/standard/WalletStandard.tsx:456
-msgid "Error: Cannot send taco to coloured address. Please enter a taco address."
+msgid "Error: Cannot send covid to coloured address. Please enter a covid address."
 msgstr "エラー: チアは色付きのアドレスには送れません。チアのアドレスを入力してください。"
 
 #: src/components/fullNode/card/FullNodeEstimatedNetworkSpace.tsx:20
@@ -1464,7 +1464,7 @@ msgid "Plots Passed Filter"
 msgstr "フィルターを通過した耕地数"
 
 #: src/components/plot/overview/PlotOverviewHero.tsx:35
-msgid "Plots are allocated space on your hard drive used to farm and earn Taco. <0>Learn more</0>"
+msgid "Plots are allocated space on your hard drive used to farm and earn Covid. <0>Learn more</0>"
 msgstr "耕地とは、チアを収穫し、得るためにハードドライブ上に確保する領域です。<0>詳しく</0>"
 
 #: src/components/plot/queue/PlotQueueIndicator.tsx:34
@@ -1902,7 +1902,7 @@ msgstr "支払いインターバル長 (ブロック数)"
 
 #: src/components/wallet/rateLimited/WalletRateLimited.jsx:401
 #: src/components/wallet/rateLimited/WalletRateLimited.jsx:448
-msgid "Spending Limit (taco per interval): {0}"
+msgid "Spending Limit (covid per interval): {0}"
 msgstr "支払い額上限 (チア毎インターバル): {0}"
 
 #: src/components/fullNode/FullNode.jsx:100
@@ -1951,8 +1951,8 @@ msgstr "状態:"
 #~ msgstr "Sub Block Height"
 
 #: src/components/block/Block.jsx:338
-#~ msgid "Sub Block at height {0} in the Taco blockchain"
-#~ msgstr "Sub Block at height {0} in the Taco blockchain"
+#~ msgid "Sub Block at height {0} in the Covid blockchain"
+#~ msgstr "Sub Block at height {0} in the Covid blockchain"
 
 #: src/components/wallet/rateLimited/WalletRateLimited.jsx:347
 msgid "Submit"
@@ -1999,15 +1999,15 @@ msgstr "同期中 <0/>/<1/>"
 #~ msgstr ""
 
 #: src/electron/main.tsx:419
-msgid "Taco"
+msgid "Covid"
 msgstr "チア"
 
 #: src/electron/main.tsx:358
-msgid "Taco Blockchain Wiki"
+msgid "Covid Blockchain Wiki"
 msgstr "チアブロックチェーンの Wiki"
 
 #: src/components/wallet/standard/WalletStandard.tsx:647
-msgid "Taco Wallet"
+msgid "Covid Wallet"
 msgstr "チアウォレット"
 
 #: src/components/pool/PoolInfo.tsx:37
@@ -2107,7 +2107,7 @@ msgid "This feature is available only from the GUI."
 msgstr "この機能は GUI 限定です。"
 
 #: src/components/wallet/card/WalletCardSpendableBalance.tsx:26
-msgid "This is the amount of Taco that you can currently use to make transactions. It does not include pending farming rewards, pending incoming transactions, and Taco that you have just spent but is not yet in the blockchain."
+msgid "This is the amount of Covid that you can currently use to make transactions. It does not include pending farming rewards, pending incoming transactions, and Covid that you have just spent but is not yet in the blockchain."
 msgstr "取引に使用できるチアの額です。承認待ちの耕作報酬、承認待ちの入金取引、及びブロックチェーンにまだ含まれていない消費チアはいずれも含まれていません。"
 
 #: src/components/wallet/card/WalletCardPendingChange.tsx:26
@@ -2127,7 +2127,7 @@ msgid "This is the time the block was created by the farmer, which is before it 
 msgstr "これが農家がブロックを作成した日時です。時間証明によって完成する前の段階です。"
 
 #: src/components/wallet/card/WalletCardTotalBalance.tsx:34
-msgid "This is the total amount of taco in the blockchain at the current peak sub block that is controlled by your private keys. It includes frozen farming rewards, but not pending incoming and outgoing transactions."
+msgid "This is the total amount of covid in the blockchain at the current peak sub block that is controlled by your private keys. It includes frozen farming rewards, but not pending incoming and outgoing transactions."
 msgstr "現在の先端サブブロックにおいて、あなたの秘密鍵が所有している全チアの額です。凍結中の耕作報酬は含まれますが、承認待ちの入出金取引は反映されていません。"
 
 #: src/components/wallet/card/WalletCardPendingTotalBalance.tsx:29
@@ -2173,7 +2173,7 @@ msgid "This trade was included on blockchain at this block height"
 msgstr "このトレードはこのブロック高でブロックチェーンに取り込まれました。"
 
 #: src/components/app/AppTimeBombAlert.tsx:19
-msgid "This version of Taco is no longer compatible with the blockchain and can not safely farm."
+msgid "This version of Covid is no longer compatible with the blockchain and can not safely farm."
 msgstr "ご使用のバージョンのチアアプリはブロックチェーンと互換性が無く、安全に耕作できません。"
 
 #: src/components/fullNode/FullNode.jsx:92
@@ -2214,8 +2214,8 @@ msgstr "全耕地容量:"
 msgid "Total Size of Plots"
 msgstr "全ての耕地の容量の合計"
 
-#: src/components/farm/card/FarmCardTotalTacoFarmed.tsx:15
-#~ msgid "Total Taco Farmed"
+#: src/components/farm/card/FarmCardTotalCovidFarmed.tsx:15
+#~ msgid "Total Covid Farmed"
 #~ msgstr ""
 
 #: src/components/block/Block.jsx:225
@@ -2379,7 +2379,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/wallet/Wallets.tsx:30
-#~ msgid "WalletItem.tacoWallet"
+#~ msgid "WalletItem.covidWallet"
 #~ msgstr ""
 
 #: src/components/wallet/Wallets.tsx:107
@@ -2408,7 +2408,7 @@ msgid "Want to Join a Pool? Create a Plot NFT"
 msgstr ""
 
 #: src/components/plot/overview/PlotOverviewPlots.tsx:139
-msgid "Want to earn more Taco? Add more plots to your farm."
+msgid "Want to earn more Covid? Add more plots to your farm."
 msgstr "畑に耕地を増やしましょう。さらにチアを得られますよ。"
 
 #: src/components/plot/add/PlotAddNumberOfPlots.tsx:86
@@ -2424,7 +2424,7 @@ msgid "Weight is the total added difficulty of all sub blocks up to and includin
 msgstr "ブロック重とはこのブロックを含めた全てのブロックの難易度の合計です。"
 
 #: src/components/selectKey/SelectKey.tsx:112
-msgid "Welcome to Taco. Please log in with an existing key, or create a new key."
+msgid "Welcome to Covid. Please log in with an existing key, or create a new key."
 msgstr "チアにようこそ。お持ちの鍵でログインするか、新しく鍵を作成してください。"
 
 #: src/components/wallet/WalletAdd.tsx:66
@@ -2495,8 +2495,8 @@ msgid "You need to claim your rewards first"
 msgstr ""
 
 #: src/components/app/AppTimeBomb.tsx:28
-#~ msgid "You need to upgrade the Taco application as this version will stop working soon!"
-#~ msgstr "You need to upgrade the Taco application as this version will stop working soon!"
+#~ msgid "You need to upgrade the Covid application as this version will stop working soon!"
+#~ msgstr "You need to upgrade the Covid application as this version will stop working soon!"
 
 #: src/components/plotNFT/select/PlotNFTSelectFaucet.tsx:37
 msgid "You need {currencyCode} to join a pool."
@@ -2583,8 +2583,8 @@ msgstr ""
 msgid "{currencyCode} Block Rewards"
 msgstr "{currencyCode} ブロック報酬"
 
-#: src/components/farm/card/FarmCardTotalTacoFarmed.tsx:29
-msgid "{currencyCode} Total Taco Farmed"
+#: src/components/farm/card/FarmCardTotalCovidFarmed.tsx:29
+msgid "{currencyCode} Total Covid Farmed"
 msgstr "{currencyCode} 全収穫チア"
 
 #: src/components/farm/card/FarmCardUserFees.tsx:28

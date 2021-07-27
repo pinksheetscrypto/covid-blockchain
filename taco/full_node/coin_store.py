@@ -2,13 +2,13 @@ from typing import List, Optional
 
 import aiosqlite
 
-from taco.types.blockchain_format.coin import Coin
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.coin_record import CoinRecord
-from taco.types.full_block import FullBlock
-from taco.util.db_wrapper import DBWrapper
-from taco.util.ints import uint32, uint64
-from taco.util.lru_cache import LRUCache
+from covid.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.coin_record import CoinRecord
+from covid.types.full_block import FullBlock
+from covid.util.db_wrapper import DBWrapper
+from covid.util.ints import uint32, uint64
+from covid.util.lru_cache import LRUCache
 
 
 class CoinStore:

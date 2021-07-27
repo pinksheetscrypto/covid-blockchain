@@ -8,23 +8,23 @@ from typing import Any, Dict, List, Optional, Set
 
 from blspy import AugSchemeMPL, G2Element
 
-from taco.consensus.cost_calculator import calculate_cost_of_program, NPCResult
-from taco.full_node.bundle_tools import simple_solution_generator
-from taco.full_node.mempool_check_conditions import get_name_puzzle_conditions
-from taco.protocols.wallet_protocol import PuzzleSolutionResponse
-from taco.types.blockchain_format.coin import Coin
-from taco.types.blockchain_format.program import Program
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.coin_solution import CoinSolution
-from taco.types.generator_types import BlockGenerator
-from taco.types.spend_bundle import SpendBundle
-from taco.util.byte_types import hexstr_to_bytes
-from taco.util.condition_tools import conditions_dict_for_solution, pkm_pairs_for_conditions_dict
-from taco.util.ints import uint8, uint32, uint64, uint128
-from taco.util.json_util import dict_to_json_str
-from taco.wallet.block_record import HeaderBlockRecord
-from taco.wallet.cc_wallet.cc_info import CCInfo
-from taco.wallet.cc_wallet.cc_utils import (
+from covid.consensus.cost_calculator import calculate_cost_of_program, NPCResult
+from covid.full_node.bundle_tools import simple_solution_generator
+from covid.full_node.mempool_check_conditions import get_name_puzzle_conditions
+from covid.protocols.wallet_protocol import PuzzleSolutionResponse
+from covid.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.program import Program
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.coin_solution import CoinSolution
+from covid.types.generator_types import BlockGenerator
+from covid.types.spend_bundle import SpendBundle
+from covid.util.byte_types import hexstr_to_bytes
+from covid.util.condition_tools import conditions_dict_for_solution, pkm_pairs_for_conditions_dict
+from covid.util.ints import uint8, uint32, uint64, uint128
+from covid.util.json_util import dict_to_json_str
+from covid.wallet.block_record import HeaderBlockRecord
+from covid.wallet.cc_wallet.cc_info import CCInfo
+from covid.wallet.cc_wallet.cc_utils import (
     CC_MOD,
     SpendableCC,
     cc_puzzle_for_inner_puzzle,
@@ -33,22 +33,22 @@ from taco.wallet.cc_wallet.cc_utils import (
     spend_bundle_for_spendable_ccs,
     uncurry_cc,
 )
-from taco.wallet.derivation_record import DerivationRecord
-from taco.wallet.puzzles.genesis_by_coin_id_with_0 import (
+from covid.wallet.derivation_record import DerivationRecord
+from covid.wallet.puzzles.genesis_by_coin_id_with_0 import (
     create_genesis_or_zero_coin_checker,
     genesis_coin_id_for_genesis_coin_checker,
     lineage_proof_for_genesis,
 )
-from taco.wallet.puzzles.p2_delegated_puzzle_or_hidden_puzzle import (
+from covid.wallet.puzzles.p2_delegated_puzzle_or_hidden_puzzle import (
     DEFAULT_HIDDEN_PUZZLE_HASH,
     calculate_synthetic_secret_key,
 )
-from taco.wallet.transaction_record import TransactionRecord
-from taco.wallet.util.transaction_type import TransactionType
-from taco.wallet.util.wallet_types import WalletType
-from taco.wallet.wallet import Wallet
-from taco.wallet.wallet_coin_record import WalletCoinRecord
-from taco.wallet.wallet_info import WalletInfo
+from covid.wallet.transaction_record import TransactionRecord
+from covid.wallet.util.transaction_type import TransactionType
+from covid.wallet.util.wallet_types import WalletType
+from covid.wallet.wallet import Wallet
+from covid.wallet.wallet_coin_record import WalletCoinRecord
+from covid.wallet.wallet_info import WalletInfo
 
 
 class CCWallet:

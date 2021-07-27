@@ -1,8 +1,8 @@
 {
-  "name": "taco-blockchain",
-  "author": "Taco Network <hello@taco.net> (https://taco.net/)",
-  "description": "GUI for Taco Blockchain",
-  "productName": "Taco Blockchain",
+  "name": "covid-blockchain",
+  "author": "Covid Network <hello@covid.net> (https://covid.net/)",
+  "description": "GUI for Covid Blockchain",
+  "productName": "Covid Blockchain",
   "private": true,
   "homepage": "./",
   "main": "build/electron/main.js",

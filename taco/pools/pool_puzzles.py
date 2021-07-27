@@ -3,20 +3,20 @@ from typing import Tuple, List, Optional
 from blspy import G1Element
 from clvm.casts import int_from_bytes, int_to_bytes
 
-from taco.clvm.singleton import SINGLETON_LAUNCHER
-from taco.consensus.block_rewards import calculate_pool_reward
-from taco.consensus.coinbase import pool_parent_id
-from taco.pools.pool_wallet_info import PoolState, LEAVING_POOL, SELF_POOLING
+from covid.clvm.singleton import SINGLETON_LAUNCHER
+from covid.consensus.block_rewards import calculate_pool_reward
+from covid.consensus.coinbase import pool_parent_id
+from covid.pools.pool_wallet_info import PoolState, LEAVING_POOL, SELF_POOLING
 
-from taco.types.blockchain_format.coin import Coin
-from taco.types.blockchain_format.program import Program, SerializedProgram
+from covid.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.program import Program, SerializedProgram
 
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.coin_solution import CoinSolution
-from taco.wallet.puzzles.load_clvm import load_clvm
-from taco.wallet.puzzles.singleton_top_layer import puzzle_for_singleton
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.coin_solution import CoinSolution
+from covid.wallet.puzzles.load_clvm import load_clvm
+from covid.wallet.puzzles.singleton_top_layer import puzzle_for_singleton
 
-from taco.util.ints import uint32, uint64
+from covid.util.ints import uint32, uint64
 
 log = logging.getLogger(__name__)
 # "Full" is the outer singleton, with the inner puzzle filled in

@@ -2,9 +2,9 @@ import asyncio
 import logging
 from typing import Dict, List, Optional, Tuple
 
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.header_block import HeaderBlock
-from taco.util.ints import uint32
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.header_block import HeaderBlock
+from covid.util.ints import uint32
 
 log = logging.getLogger(__name__)
 

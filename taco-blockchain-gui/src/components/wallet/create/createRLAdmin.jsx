@@ -1,6 +1,6 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
-import { AlertDialog } from '@taco/core';
+import { AlertDialog } from '@covid/core';
 import {
   Typography,
   Button,
@@ -20,7 +20,7 @@ import {
 } from '../../../modules/createWallet';
 import { useStyles } from './WalletCreate';
 import { create_rl_admin_action } from '../../../modules/message';
-import { taco_to_mojo } from '../../../util/taco';
+import { covid_to_mojo } from '../../../util/covid';
 import { openDialog } from '../../../modules/dialog';
 
 export const customStyles = makeStyles((theme) => ({
@@ -76,7 +76,7 @@ export const CreateRLAdminWallet = () => {
   const custom = customStyles();
   const dispatch = useDispatch();
   let interval_input = null;
-  let tacoper_input = null;
+  let covidper_input = null;
   let userpubkey_input = null;
   let amount_input = null;
   let fee_input = null;
@@ -104,10 +104,10 @@ export const CreateRLAdminWallet = () => {
       return;
     }
     if (
-      tacoper_input.value === '' ||
-      Number(tacoper_input.value) === 0 ||
-      !Number(tacoper_input.value) ||
-      isNaN(Number(tacoper_input.value))
+      covidper_input.value === '' ||
+      Number(covidper_input.value) === 0 ||
+      !Number(covidper_input.value) ||
+      isNaN(Number(covidper_input.value))
     ) {
       dispatch(
         openDialog(
@@ -156,18 +156,18 @@ export const CreateRLAdminWallet = () => {
     dispatch(createState(true, true));
     const interval = interval_input.value;
     const interval_value = Number.parseInt(Number(interval));
-    const tacoper = taco_to_mojo(tacoper_input.value);
-    const tacoper_value = Number.parseInt(Number(tacoper));
+    const covidper = covid_to_mojo(covidper_input.value);
+    const covidper_value = Number.parseInt(Number(covidper));
     const userpubkey = userpubkey_input.value;
-    const amount = taco_to_mojo(amount_input.value);
+    const amount = covid_to_mojo(amount_input.value);
     const amount_value = Number.parseInt(Number(amount));
-    // var fee = taco_to_mojo(fee_input.value);
+    // var fee = covid_to_mojo(fee_input.value);
     // TODO(lipa): send fee to server
     // const fee_value = parseInt(Number(fee));
     dispatch(
       create_rl_admin_action(
         interval_value,
-        tacoper_value,
+        covidper_value,
         userpubkey,
         amount_value,
       ),
@@ -225,7 +225,7 @@ export const CreateRLAdminWallet = () => {
               color="secondary"
               fullWidth
               inputRef={(input) => {
-                tacoper_input = input;
+                covidper_input = input;
               }}
               label={<Trans>Spendable Amount</Trans>}
             />

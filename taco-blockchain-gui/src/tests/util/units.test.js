@@ -2,8 +2,8 @@ const units = require('../../util/units');
 
 describe('units', () => {
   describe('#getUnit', () => {
-    it('gets unit of taco', () => {
-      const result = units.getUnit('taco');
+    it('gets unit of covid', () => {
+      const result = units.getUnit('covid');
 
       expect(result).toBe(1);
     });
@@ -18,11 +18,11 @@ describe('units', () => {
       expect(result).toBe(1e-9);
     });
     it('supports uppercase characters', () => {
-      const result = units.getUnit('TACO');
+      const result = units.getUnit('COVID');
 
       expect(result).toBe(1);
     });
-    it('gets unit of taco using alias', () => {
+    it('gets unit of covid using alias', () => {
       const result = units.getUnit('ch');
 
       expect(result).toBe(1);
@@ -46,8 +46,8 @@ describe('units', () => {
     });
   });
   describe('#getDisplay', () => {
-    it('gets display of taco', () => {
-      const result = units.getDisplay('taco');
+    it('gets display of covid', () => {
+      const result = units.getDisplay('covid');
 
       expect(result).toEqual({
         format: '{amount} CH',
@@ -87,13 +87,13 @@ describe('units', () => {
       expect(result).toEqual(1);
     });
     it('modifies an existing unit', () => {
-      units.setUnit('taco', 9);
+      units.setUnit('covid', 9);
 
-      const result = units.getUnit('taco');
+      const result = units.getUnit('covid');
 
       expect(result).toEqual(9);
 
-      units.setUnit('taco', 1);
+      units.setUnit('covid', 1);
     });
   });
   describe('#setDisplay', () => {
@@ -111,12 +111,12 @@ describe('units', () => {
       });
     });
     it('updates an existing display', () => {
-      units.setDisplay('taco', {
+      units.setDisplay('covid', {
         format: '{amount} TXTX',
         fractionDigits: 0,
       });
 
-      const result = units.getDisplay('taco');
+      const result = units.getDisplay('covid');
 
       expect(result).toEqual({
         format: '{amount} TXTX',

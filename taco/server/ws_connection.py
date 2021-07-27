@@ -6,24 +6,24 @@ from typing import Any, Callable, Dict, List, Optional
 
 from aiohttp import WSCloseCode, WSMessage, WSMsgType
 
-from taco.cmds.init_funcs import taco_full_version_str
-from taco.protocols.protocol_message_types import ProtocolMessageTypes
-from taco.protocols.shared_protocol import Capability, Handshake
-from taco.server.outbound_message import Message, NodeType, make_msg
-from taco.server.rate_limits import RateLimiter
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.peer_info import PeerInfo
-from taco.util.errors import Err, ProtocolError
-from taco.util.ints import uint8, uint16
+from covid.cmds.init_funcs import covid_full_version_str
+from covid.protocols.protocol_message_types import ProtocolMessageTypes
+from covid.protocols.shared_protocol import Capability, Handshake
+from covid.server.outbound_message import Message, NodeType, make_msg
+from covid.server.rate_limits import RateLimiter
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.peer_info import PeerInfo
+from covid.util.errors import Err, ProtocolError
+from covid.util.ints import uint8, uint16
 
 # Each message is prepended with LENGTH_BYTES bytes specifying the length
-from taco.util.network import class_for_type, is_localhost
+from covid.util.network import class_for_type, is_localhost
 
 # Max size 2^(8*4) which is around 4GiB
 LENGTH_BYTES: int = 4
 
 
-class WSTacoConnection:
+class WSCovidConnection:
     """
     Represents a connection to another node. Local host and port are ours, while peer host and
     port are the host and port of the peer that we are connected to. Node_id and connection_type are
@@ -69,7 +69,7 @@ class WSTacoConnection:
         self.is_outbound = is_outbound
         self.is_feeler = is_feeler
 
-        # TacoConnection metrics
+        # CovidConnection metrics
         self.creation_time = time.time()
         self.bytes_read = 0
         self.bytes_written = 0
@@ -108,9 +108,9 @@ class WSTacoConnection:
             outbound_handshake = make_msg(
                 ProtocolMessageTypes.handshake,
                 Handshake(
-                    'taco-' + network_id,
+                    'covid-' + network_id,
                     protocol_version,
-                    taco_full_version_str(),
+                    covid_full_version_str(),
                     uint16(server_port),
                     uint8(local_type.value),
                     [(uint16(Capability.BASE.value), "1")],
@@ -132,7 +132,7 @@ class WSTacoConnection:
             if message_type != ProtocolMessageTypes.handshake:
                 raise ProtocolError(Err.INVALID_HANDSHAKE)
 
-            if inbound_handshake.network_id != 'taco-' + network_id:
+            if inbound_handshake.network_id != 'covid-' + network_id:
                 raise ProtocolError(Err.INCOMPATIBLE_NETWORK_ID)
 
             self.peer_server_port = inbound_handshake.server_port
@@ -157,14 +157,14 @@ class WSTacoConnection:
                 raise ProtocolError(Err.INVALID_HANDSHAKE)
 
             inbound_handshake = Handshake.from_bytes(message.data)
-            if inbound_handshake.network_id != 'taco-' + network_id:
+            if inbound_handshake.network_id != 'covid-' + network_id:
                 raise ProtocolError(Err.INCOMPATIBLE_NETWORK_ID)
             outbound_handshake = make_msg(
                 ProtocolMessageTypes.handshake,
                 Handshake(
-                    'taco-' + network_id,
+                    'covid-' + network_id,
                     protocol_version,
-                    taco_full_version_str(),
+                    covid_full_version_str(),
                     uint16(server_port),
                     uint8(local_type.value),
                     [(uint16(Capability.BASE.value), "1")],

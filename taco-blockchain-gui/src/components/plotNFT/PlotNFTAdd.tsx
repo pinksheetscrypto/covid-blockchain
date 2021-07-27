@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { Trans } from '@lingui/macro';
 import { ChevronRight as ChevronRightIcon } from '@material-ui/icons';
-import { Flex } from '@taco/core';
+import { Flex } from '@covid/core';
 import { createPlotNFT } from '../../modules/plotNFT';
 import PlotNFTState from '../../constants/PlotNFTState';
 import useUnconfirmedPlotNFTs from '../../hooks/useUnconfirmedPlotNFTs';

@@ -5,15 +5,15 @@ from typing import List
 import pytest
 from blspy import PrivateKey
 
-from taco.pools.pool_wallet import PoolWallet
-from taco.pools.pool_wallet_info import PoolState, FARMING_TO_POOL
-from taco.simulator.simulator_protocol import FarmNewBlockProtocol
-from taco.types.coin_solution import CoinSolution
-from taco.types.full_block import FullBlock
-from taco.types.peer_info import PeerInfo
-from taco.util.ints import uint16, uint32
-from taco.wallet.derive_keys import master_sk_to_singleton_owner_sk
-from taco.wallet.wallet_state_manager import WalletStateManager
+from covid.pools.pool_wallet import PoolWallet
+from covid.pools.pool_wallet_info import PoolState, FARMING_TO_POOL
+from covid.simulator.simulator_protocol import FarmNewBlockProtocol
+from covid.types.coin_solution import CoinSolution
+from covid.types.full_block import FullBlock
+from covid.types.peer_info import PeerInfo
+from covid.util.ints import uint16, uint32
+from covid.wallet.derive_keys import master_sk_to_singleton_owner_sk
+from covid.wallet.wallet_state_manager import WalletStateManager
 from tests.setup_nodes import self_hostname, setup_simulators_and_wallets
 
 

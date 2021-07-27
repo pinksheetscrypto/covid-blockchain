@@ -2,17 +2,17 @@ from collections import defaultdict
 from dataclasses import dataclass, replace
 from typing import Dict, Iterator, Optional, Set
 
-from taco.full_node.mempool_check_conditions import mempool_check_conditions_dict  # noqa
-from taco.types.blockchain_format.coin import Coin
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.coin_record import CoinRecord
-from taco.types.spend_bundle import SpendBundle
-from taco.util.condition_tools import (
+from covid.full_node.mempool_check_conditions import mempool_check_conditions_dict  # noqa
+from covid.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.coin_record import CoinRecord
+from covid.types.spend_bundle import SpendBundle
+from covid.util.condition_tools import (
     conditions_dict_for_solution,
     coin_announcement_names_for_conditions_dict,
     puzzle_announcement_names_for_conditions_dict,
 )
-from taco.util.ints import uint32, uint64
+from covid.util.ints import uint32, uint64
 
 
 MAX_COST = 11000000000

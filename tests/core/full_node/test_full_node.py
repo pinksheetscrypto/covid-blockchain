@@ -9,38 +9,38 @@ from typing import Dict, Optional, List
 
 import pytest
 
-from taco.consensus.pot_iterations import is_overflow_block
-from taco.full_node.bundle_tools import detect_potential_template_generator
-from taco.full_node.full_node_api import FullNodeAPI
-from taco.full_node.signage_point import SignagePoint
-from taco.protocols import full_node_protocol as fnp, full_node_protocol
-from taco.protocols import timelord_protocol
-from taco.protocols.full_node_protocol import RespondTransaction
-from taco.protocols.protocol_message_types import ProtocolMessageTypes
-from taco.server.address_manager import AddressManager
-from taco.server.outbound_message import Message
-from taco.simulator.simulator_protocol import FarmNewBlockProtocol
-from taco.types.blockchain_format.classgroup import ClassgroupElement
-from taco.types.blockchain_format.program import SerializedProgram
-from taco.types.blockchain_format.vdf import CompressibleVDFField, VDFProof
-from taco.types.condition_opcodes import ConditionOpcode
-from taco.types.condition_with_args import ConditionWithArgs
-from taco.types.full_block import FullBlock
-from taco.types.mempool_inclusion_status import MempoolInclusionStatus
-from taco.types.peer_info import PeerInfo, TimestampedPeerInfo
-from taco.types.spend_bundle import SpendBundle
-from taco.types.unfinished_block import UnfinishedBlock
+from covid.consensus.pot_iterations import is_overflow_block
+from covid.full_node.bundle_tools import detect_potential_template_generator
+from covid.full_node.full_node_api import FullNodeAPI
+from covid.full_node.signage_point import SignagePoint
+from covid.protocols import full_node_protocol as fnp, full_node_protocol
+from covid.protocols import timelord_protocol
+from covid.protocols.full_node_protocol import RespondTransaction
+from covid.protocols.protocol_message_types import ProtocolMessageTypes
+from covid.server.address_manager import AddressManager
+from covid.server.outbound_message import Message
+from covid.simulator.simulator_protocol import FarmNewBlockProtocol
+from covid.types.blockchain_format.classgroup import ClassgroupElement
+from covid.types.blockchain_format.program import SerializedProgram
+from covid.types.blockchain_format.vdf import CompressibleVDFField, VDFProof
+from covid.types.condition_opcodes import ConditionOpcode
+from covid.types.condition_with_args import ConditionWithArgs
+from covid.types.full_block import FullBlock
+from covid.types.mempool_inclusion_status import MempoolInclusionStatus
+from covid.types.peer_info import PeerInfo, TimestampedPeerInfo
+from covid.types.spend_bundle import SpendBundle
+from covid.types.unfinished_block import UnfinishedBlock
 from tests.block_tools import get_signage_point
-from taco.util.clvm import int_to_bytes
-from taco.util.errors import Err
-from taco.util.hash import std_hash
-from taco.util.ints import uint8, uint16, uint32, uint64
-from taco.util.recursive_replace import recursive_replace
-from taco.util.vdf_prover import get_vdf_info_and_proof
+from covid.util.clvm import int_to_bytes
+from covid.util.errors import Err
+from covid.util.hash import std_hash
+from covid.util.ints import uint8, uint16, uint32, uint64
+from covid.util.recursive_replace import recursive_replace
+from covid.util.vdf_prover import get_vdf_info_and_proof
 from tests.wallet_tools import WalletTool
 from tests.core.fixtures import empty_blockchain  # noqa: F401
-from taco.wallet.cc_wallet.cc_wallet import CCWallet
-from taco.wallet.transaction_record import TransactionRecord
+from covid.wallet.cc_wallet.cc_wallet import CCWallet
+from covid.wallet.transaction_record import TransactionRecord
 
 from tests.connection_utils import add_dummy_connection, connect_and_get_peer
 from tests.core.full_node.test_coin_store import get_future_reward_coins

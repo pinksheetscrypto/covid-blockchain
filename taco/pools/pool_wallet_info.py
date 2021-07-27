@@ -4,13 +4,13 @@ from typing import Optional, Dict
 
 from blspy import G1Element
 
-from taco.protocols.pool_protocol import POOL_PROTOCOL_VERSION
-from taco.types.blockchain_format.coin import Coin
-from taco.types.blockchain_format.program import Program
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.util.byte_types import hexstr_to_bytes
-from taco.util.ints import uint32, uint8
-from taco.util.streamable import streamable, Streamable
+from covid.protocols.pool_protocol import POOL_PROTOCOL_VERSION
+from covid.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.program import Program
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.util.byte_types import hexstr_to_bytes
+from covid.util.ints import uint32, uint8
+from covid.util.streamable import streamable, Streamable
 
 
 class PoolSingletonState(IntEnum):

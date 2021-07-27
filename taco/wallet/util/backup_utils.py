@@ -6,12 +6,12 @@ import aiohttp
 from blspy import AugSchemeMPL, PrivateKey, PublicKeyMPL, SignatureMPL
 from cryptography.fernet import Fernet
 
-from taco.server.server import ssl_context_for_root
-from taco.ssl.create_ssl import get_mozilla_ca_crt
-from taco.util.byte_types import hexstr_to_bytes
-from taco.util.hash import std_hash
-from taco.wallet.derive_keys import master_sk_to_backup_sk
-from taco.wallet.util.wallet_types import WalletType
+from covid.server.server import ssl_context_for_root
+from covid.ssl.create_ssl import get_mozilla_ca_crt
+from covid.util.byte_types import hexstr_to_bytes
+from covid.util.hash import std_hash
+from covid.wallet.derive_keys import master_sk_to_backup_sk
+from covid.wallet.util.wallet_types import WalletType
 
 
 def open_backup_file(file_path, private_key):

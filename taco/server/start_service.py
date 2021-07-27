@@ -6,23 +6,23 @@ import signal
 from sys import platform
 from typing import Any, Callable, List, Optional, Tuple
 
-from taco.daemon.server import singleton, service_launch_lock_path
-from taco.server.ssl_context import taco_ssl_ca_paths, private_ssl_ca_paths
+from covid.daemon.server import singleton, service_launch_lock_path
+from covid.server.ssl_context import covid_ssl_ca_paths, private_ssl_ca_paths
 
 try:
     import uvloop
 except ImportError:
     uvloop = None
 
-from taco.rpc.rpc_server import start_rpc_server
-from taco.server.outbound_message import NodeType
-from taco.server.server import TacoServer
-from taco.server.upnp import UPnP
-from taco.types.peer_info import PeerInfo
-from taco.util.taco_logging import initialize_logging
-from taco.util.config import load_config, load_config_cli
-from taco.util.setproctitle import setproctitle
-from taco.util.ints import uint16
+from covid.rpc.rpc_server import start_rpc_server
+from covid.server.outbound_message import NodeType
+from covid.server.server import CovidServer
+from covid.server.upnp import UPnP
+from covid.types.peer_info import PeerInfo
+from covid.util.covid_logging import initialize_logging
+from covid.util.config import load_config, load_config_cli
+from covid.util.setproctitle import setproctitle
+from covid.util.ints import uint16
 
 from .reconnect_task import start_reconnect_task
 
@@ -64,7 +64,7 @@ class Service:
         self._rpc_close_task: Optional[asyncio.Task] = None
         self._network_id: str = network_id
 
-        proctitle_name = f"taco_{service_name}"
+        proctitle_name = f"covid_{service_name}"
         setproctitle(proctitle_name)
         self._log = logging.getLogger(service_name)
 
@@ -76,11 +76,11 @@ class Service:
 
         self._rpc_info = rpc_info
         private_ca_crt, private_ca_key = private_ssl_ca_paths(root_path, self.config)
-        taco_ca_crt, taco_ca_key = taco_ssl_ca_paths(root_path, self.config)
+        covid_ca_crt, covid_ca_key = covid_ssl_ca_paths(root_path, self.config)
         inbound_rlp = self.config.get("inbound_rate_limit_percent")
         outbound_rlp = self.config.get("outbound_rate_limit_percent")
         assert inbound_rlp and outbound_rlp
-        self._server = TacoServer(
+        self._server = CovidServer(
             advertised_port,
             node,
             peer_api,
@@ -92,7 +92,7 @@ class Service:
             root_path,
             service_config,
             (private_ca_crt, private_ca_key),
-            (taco_ca_crt, taco_ca_key),
+            (covid_ca_crt, covid_ca_key),
             name=f"{service_name}_server",
         )
         f = getattr(node, "set_server", None)
@@ -226,7 +226,7 @@ class Service:
 
         self._log.info("Waiting for socket to be closed (if opened)")
 
-        self._log.info("Waiting for TacoServer to be closed")
+        self._log.info("Waiting for CovidServer to be closed")
         await self._server.await_closed()
 
         if self._rpc_close_task:

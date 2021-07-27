@@ -11,7 +11,7 @@ import {
   Loading,
   FormatLargeNumber,
   Link,
-} from '@taco/core';
+} from '@covid/core';
 import {
   Box,
   Card,

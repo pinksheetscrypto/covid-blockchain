@@ -1,20 +1,20 @@
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 
-from taco.pools.pool_wallet_info import PoolWalletInfo
-from taco.rpc.rpc_client import RpcClient
-from taco.types.blockchain_format.coin import Coin
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.util.bech32m import decode_puzzle_hash
-from taco.util.ints import uint32, uint64
-from taco.wallet.transaction_record import TransactionRecord
+from covid.pools.pool_wallet_info import PoolWalletInfo
+from covid.rpc.rpc_client import RpcClient
+from covid.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.util.bech32m import decode_puzzle_hash
+from covid.util.ints import uint32, uint64
+from covid.wallet.transaction_record import TransactionRecord
 
 
 class WalletRpcClient(RpcClient):
     """
-    Client to Taco RPC, connects to a local wallet. Uses HTTP/JSON, and converts back from
+    Client to Covid RPC, connects to a local wallet. Uses HTTP/JSON, and converts back from
     JSON into native python objects before returning. All api calls use POST requests.
-    Note that this is not the same as the peer protocol, or wallet protocol (which run Taco's
+    Note that this is not the same as the peer protocol, or wallet protocol (which run Covid's
     protocol on top of TCP), it's a separate protocol on top of HTTP that provides easy access
     to the full node.
     """
@@ -24,7 +24,7 @@ class WalletRpcClient(RpcClient):
         try:
             return await self.fetch(
                 "log_in",
-                {"host": "https://backup.taconetwork.net", "fingerprint": fingerprint, "type": "start"},
+                {"host": "https://backup.covidnetwork.net", "fingerprint": fingerprint, "type": "start"},
             )
 
         except ValueError as e:
@@ -35,7 +35,7 @@ class WalletRpcClient(RpcClient):
             return await self.fetch(
                 "log_in",
                 {
-                    "host": "https://backup.taconetwork.net",
+                    "host": "https://backup.covidnetwork.net",
                     "fingerprint": fingerprint,
                     "type": "restore_backup",
                     "file_path": file_path,
@@ -48,7 +48,7 @@ class WalletRpcClient(RpcClient):
         try:
             return await self.fetch(
                 "log_in",
-                {"host": "https://backup.taconetwork.net", "fingerprint": fingerprint, "type": "skip"},
+                {"host": "https://backup.covidnetwork.net", "fingerprint": fingerprint, "type": "skip"},
             )
         except ValueError as e:
             return e.args[0]

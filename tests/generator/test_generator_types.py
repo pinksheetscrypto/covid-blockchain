@@ -1,10 +1,10 @@
 from typing import Dict
 from unittest import TestCase
 
-from taco.types.blockchain_format.program import Program, SerializedProgram
-from taco.types.generator_types import GeneratorBlockCacheInterface
-from taco.full_node.generator import create_block_generator, create_generator_args
-from taco.util.ints import uint32
+from covid.types.blockchain_format.program import Program, SerializedProgram
+from covid.types.generator_types import GeneratorBlockCacheInterface
+from covid.full_node.generator import create_block_generator, create_generator_args
+from covid.util.ints import uint32
 
 gen0 = SerializedProgram.from_bytes(
     bytes.fromhex(

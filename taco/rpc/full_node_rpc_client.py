@@ -1,24 +1,24 @@
 from typing import Dict, List, Optional, Tuple, Any
 
-from taco.consensus.block_record import BlockRecord
-from taco.full_node.signage_point import SignagePoint
-from taco.rpc.rpc_client import RpcClient
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.coin_record import CoinRecord
-from taco.types.coin_solution import CoinSolution
-from taco.types.end_of_slot_bundle import EndOfSubSlotBundle
-from taco.types.full_block import FullBlock
-from taco.types.spend_bundle import SpendBundle
-from taco.types.unfinished_header_block import UnfinishedHeaderBlock
-from taco.util.byte_types import hexstr_to_bytes
-from taco.util.ints import uint32, uint64
+from covid.consensus.block_record import BlockRecord
+from covid.full_node.signage_point import SignagePoint
+from covid.rpc.rpc_client import RpcClient
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.coin_record import CoinRecord
+from covid.types.coin_solution import CoinSolution
+from covid.types.end_of_slot_bundle import EndOfSubSlotBundle
+from covid.types.full_block import FullBlock
+from covid.types.spend_bundle import SpendBundle
+from covid.types.unfinished_header_block import UnfinishedHeaderBlock
+from covid.util.byte_types import hexstr_to_bytes
+from covid.util.ints import uint32, uint64
 
 
 class FullNodeRpcClient(RpcClient):
     """
-    Client to Taco RPC, connects to a local full node. Uses HTTP/JSON, and converts back from
+    Client to Covid RPC, connects to a local full node. Uses HTTP/JSON, and converts back from
     JSON into native python objects before returning. All api calls use POST requests.
-    Note that this is not the same as the peer protocol, or wallet protocol (which run Taco's
+    Note that this is not the same as the peer protocol, or wallet protocol (which run Covid's
     protocol on top of TCP), it's a separate protocol on top of HTTP thats provides easy access
     to the full node.
     """

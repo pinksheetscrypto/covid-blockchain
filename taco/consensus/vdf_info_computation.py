@@ -1,12 +1,12 @@
 from typing import List, Optional
 
-from taco.consensus.block_record import BlockRecord
-from taco.consensus.blockchain_interface import BlockchainInterface
-from taco.consensus.constants import ConsensusConstants
-from taco.types.blockchain_format.classgroup import ClassgroupElement
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.end_of_slot_bundle import EndOfSubSlotBundle
-from taco.util.ints import uint64, uint128
+from covid.consensus.block_record import BlockRecord
+from covid.consensus.blockchain_interface import BlockchainInterface
+from covid.consensus.constants import ConsensusConstants
+from covid.types.blockchain_format.classgroup import ClassgroupElement
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.end_of_slot_bundle import EndOfSubSlotBundle
+from covid.util.ints import uint64, uint128
 
 
 def get_signage_point_vdf_info(

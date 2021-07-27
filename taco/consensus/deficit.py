@@ -1,8 +1,8 @@
 from typing import Optional
 
-from taco.consensus.block_record import BlockRecord
-from taco.consensus.constants import ConsensusConstants
-from taco.util.ints import uint8, uint32
+from covid.consensus.block_record import BlockRecord
+from covid.consensus.constants import ConsensusConstants
+from covid.util.ints import uint8, uint32
 
 
 def calculate_deficit(

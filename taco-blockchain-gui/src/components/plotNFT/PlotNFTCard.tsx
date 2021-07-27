@@ -15,7 +15,7 @@ import {
   FormatLargeNumber,
   Link,
   ConfirmDialog,
-} from '@taco/core';
+} from '@covid/core';
 import {
   Box,
   Button,
@@ -39,7 +39,7 @@ import usePlotNFTDetails from '../../hooks/usePlotNFTDetails';
 import useOpenDialog from '../../hooks/useOpenDialog';
 import PoolJoin from '../pool/PoolJoin';
 import PoolAbsorbRewards from '../pool/PoolAbsorbRewards';
-import { mojo_to_taco } from '../../util/taco';
+import { mojo_to_covid } from '../../util/covid';
 import { deleteUnconfirmedTransactions } from '../../modules/incoming';
 import PlotNFTGraph from './PlotNFTGraph';
 import PlotNFTGetPoolLoginLinkDialog from './PlotNFTGetPoolLoginLinkDialog';
@@ -149,7 +149,7 @@ export default function PlotNFTCard(props: Props) {
       label: <Trans>Unclaimed Rewards</Trans>,
       value: (
         <UnitFormat
-          value={mojo_to_taco(BigInt(balance))}
+          value={mojo_to_covid(BigInt(balance))}
           state={State.SUCCESS}
         />
       ),

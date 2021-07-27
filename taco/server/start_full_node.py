@@ -3,15 +3,15 @@ import pathlib
 from multiprocessing import freeze_support
 from typing import Dict
 
-from taco.consensus.constants import ConsensusConstants
-from taco.consensus.default_constants import DEFAULT_CONSTANTS
-from taco.full_node.full_node import FullNode
-from taco.full_node.full_node_api import FullNodeAPI
-from taco.rpc.full_node_rpc_api import FullNodeRpcApi
-from taco.server.outbound_message import NodeType
-from taco.server.start_service import run_service
-from taco.util.config import load_config_cli
-from taco.util.default_root import DEFAULT_ROOT_PATH
+from covid.consensus.constants import ConsensusConstants
+from covid.consensus.default_constants import DEFAULT_CONSTANTS
+from covid.full_node.full_node import FullNode
+from covid.full_node.full_node_api import FullNodeAPI
+from covid.rpc.full_node_rpc_api import FullNodeRpcApi
+from covid.server.outbound_message import NodeType
+from covid.server.start_service import run_service
+from covid.util.config import load_config_cli
+from covid.util.default_root import DEFAULT_ROOT_PATH
 
 # See: https://bugs.python.org/issue29288
 "".encode("idna")

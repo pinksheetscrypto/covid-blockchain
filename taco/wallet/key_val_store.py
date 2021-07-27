@@ -2,9 +2,9 @@ from typing import Any
 
 import aiosqlite
 
-from taco.util.byte_types import hexstr_to_bytes
-from taco.util.db_wrapper import DBWrapper
-from taco.util.streamable import Streamable
+from covid.util.byte_types import hexstr_to_bytes
+from covid.util.db_wrapper import DBWrapper
+from covid.util.streamable import Streamable
 
 
 class KeyValStore:

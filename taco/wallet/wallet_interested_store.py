@@ -2,8 +2,8 @@ from typing import List, Tuple, Optional
 
 import aiosqlite
 
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.util.db_wrapper import DBWrapper
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.util.db_wrapper import DBWrapper
 
 
 class WalletInterestedStore:

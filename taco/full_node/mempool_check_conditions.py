@@ -3,22 +3,22 @@ import time
 from typing import Tuple, Dict, List, Optional, Set
 from clvm import SExp
 
-from taco.consensus.cost_calculator import NPCResult
-from taco.consensus.condition_costs import ConditionCost
-from taco.full_node.generator import create_generator_args, setup_generator_args
-from taco.types.blockchain_format.coin import Coin
-from taco.types.blockchain_format.program import NIL
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.coin_record import CoinRecord
-from taco.types.condition_with_args import ConditionWithArgs
-from taco.types.generator_types import BlockGenerator
-from taco.types.name_puzzle_condition import NPC
-from taco.util.clvm import int_from_bytes, int_to_bytes
-from taco.util.condition_tools import ConditionOpcode, conditions_by_opcode
-from taco.util.errors import Err, ValidationError
-from taco.util.ints import uint32, uint64, uint16
-from taco.wallet.puzzles.generator_loader import GENERATOR_FOR_SINGLE_COIN_MOD
-from taco.wallet.puzzles.rom_bootstrap_generator import get_generator
+from covid.consensus.cost_calculator import NPCResult
+from covid.consensus.condition_costs import ConditionCost
+from covid.full_node.generator import create_generator_args, setup_generator_args
+from covid.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.program import NIL
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.coin_record import CoinRecord
+from covid.types.condition_with_args import ConditionWithArgs
+from covid.types.generator_types import BlockGenerator
+from covid.types.name_puzzle_condition import NPC
+from covid.util.clvm import int_from_bytes, int_to_bytes
+from covid.util.condition_tools import ConditionOpcode, conditions_by_opcode
+from covid.util.errors import Err, ValidationError
+from covid.util.ints import uint32, uint64, uint16
+from covid.wallet.puzzles.generator_loader import GENERATOR_FOR_SINGLE_COIN_MOD
+from covid.wallet.puzzles.rom_bootstrap_generator import get_generator
 
 GENERATOR_MOD = get_generator()
 

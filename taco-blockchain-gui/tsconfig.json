@@ -8,7 +8,7 @@
       "esnext"
     ],
     "paths": {
-      "@taco/*": ["./components/*"]
+      "@covid/*": ["./components/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,

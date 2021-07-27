@@ -14,18 +14,18 @@ from blspy import G2Element
 
 from clvm_tools.binutils import assemble
 
-from taco.consensus.blockchain import ReceiveBlockResult
-from taco.consensus.constants import ConsensusConstants
-from taco.types.announcement import Announcement
-from taco.types.blockchain_format.program import Program
-from taco.types.coin_record import CoinRecord
-from taco.types.coin_solution import CoinSolution
-from taco.types.condition_opcodes import ConditionOpcode
-from taco.types.full_block import FullBlock
-from taco.types.spend_bundle import SpendBundle
+from covid.consensus.blockchain import ReceiveBlockResult
+from covid.consensus.constants import ConsensusConstants
+from covid.types.announcement import Announcement
+from covid.types.blockchain_format.program import Program
+from covid.types.coin_record import CoinRecord
+from covid.types.coin_solution import CoinSolution
+from covid.types.condition_opcodes import ConditionOpcode
+from covid.types.full_block import FullBlock
+from covid.types.spend_bundle import SpendBundle
 from tests.block_tools import BlockTools, test_constants
-from taco.util.errors import Err
-from taco.util.ints import uint32
+from covid.util.errors import Err
+from covid.util.ints import uint32
 
 from .ram_db import create_ram_blockchain
 

@@ -6,28 +6,28 @@ from typing import Dict, Optional, List, Any, Set, Tuple, Union
 
 from blspy import AugSchemeMPL, G1Element
 from secrets import token_bytes
-from taco.protocols import wallet_protocol
-from taco.protocols.wallet_protocol import RespondAdditions, RejectAdditionsRequest
-from taco.server.outbound_message import NodeType
-from taco.types.blockchain_format.coin import Coin
-from taco.types.coin_solution import CoinSolution
-from taco.types.announcement import Announcement
-from taco.types.blockchain_format.program import Program
-from taco.types.spend_bundle import SpendBundle
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.wallet.util.transaction_type import TransactionType
-from taco.util.ints import uint64, uint32, uint8
+from covid.protocols import wallet_protocol
+from covid.protocols.wallet_protocol import RespondAdditions, RejectAdditionsRequest
+from covid.server.outbound_message import NodeType
+from covid.types.blockchain_format.coin import Coin
+from covid.types.coin_solution import CoinSolution
+from covid.types.announcement import Announcement
+from covid.types.blockchain_format.program import Program
+from covid.types.spend_bundle import SpendBundle
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.wallet.util.transaction_type import TransactionType
+from covid.util.ints import uint64, uint32, uint8
 
-from taco.wallet.did_wallet.did_info import DIDInfo
-from taco.wallet.lineage_proof import LineageProof
-from taco.wallet.transaction_record import TransactionRecord
-from taco.wallet.util.wallet_types import WalletType
-from taco.wallet.wallet import Wallet
-from taco.wallet.wallet_coin_record import WalletCoinRecord
-from taco.wallet.wallet_info import WalletInfo
-from taco.wallet.derivation_record import DerivationRecord
-from taco.wallet.did_wallet import did_wallet_puzzles
-from taco.wallet.derive_keys import master_sk_to_wallet_sk
+from covid.wallet.did_wallet.did_info import DIDInfo
+from covid.wallet.lineage_proof import LineageProof
+from covid.wallet.transaction_record import TransactionRecord
+from covid.wallet.util.wallet_types import WalletType
+from covid.wallet.wallet import Wallet
+from covid.wallet.wallet_coin_record import WalletCoinRecord
+from covid.wallet.wallet_info import WalletInfo
+from covid.wallet.derivation_record import DerivationRecord
+from covid.wallet.did_wallet import did_wallet_puzzles
+from covid.wallet.derive_keys import master_sk_to_wallet_sk
 
 
 class DIDWallet:

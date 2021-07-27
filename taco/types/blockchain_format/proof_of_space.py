@@ -6,11 +6,11 @@ from bitstring import BitArray
 from blspy import G1Element, AugSchemeMPL, PrivateKey
 from chiapos import Verifier
 
-from taco.consensus.constants import ConsensusConstants
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.util.hash import std_hash
-from taco.util.ints import uint8
-from taco.util.streamable import Streamable, streamable
+from covid.consensus.constants import ConsensusConstants
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.util.hash import std_hash
+from covid.util.ints import uint8
+from covid.util.streamable import Streamable, streamable
 
 log = logging.getLogger(__name__)
 

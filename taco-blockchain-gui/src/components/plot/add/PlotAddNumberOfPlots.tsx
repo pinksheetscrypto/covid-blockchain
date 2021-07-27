@@ -9,7 +9,7 @@ import {
   Flex,
   Checkbox,
   TooltipIcon,
-} from '@taco/core';
+} from '@covid/core';
 import {
   Grid,
   FormControl,

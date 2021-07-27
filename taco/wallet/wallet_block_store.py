@@ -3,16 +3,16 @@ from typing import Dict, List, Optional, Tuple
 
 import aiosqlite
 
-from taco.consensus.block_record import BlockRecord
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.blockchain_format.sub_epoch_summary import SubEpochSummary
-from taco.types.coin_solution import CoinSolution
-from taco.types.header_block import HeaderBlock
-from taco.util.db_wrapper import DBWrapper
-from taco.util.ints import uint32, uint64
-from taco.util.lru_cache import LRUCache
-from taco.util.streamable import Streamable, streamable
-from taco.wallet.block_record import HeaderBlockRecord
+from covid.consensus.block_record import BlockRecord
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.blockchain_format.sub_epoch_summary import SubEpochSummary
+from covid.types.coin_solution import CoinSolution
+from covid.types.header_block import HeaderBlock
+from covid.util.db_wrapper import DBWrapper
+from covid.util.ints import uint32, uint64
+from covid.util.lru_cache import LRUCache
+from covid.util.streamable import Streamable, streamable
+from covid.wallet.block_record import HeaderBlockRecord
 
 
 @dataclass(frozen=True)

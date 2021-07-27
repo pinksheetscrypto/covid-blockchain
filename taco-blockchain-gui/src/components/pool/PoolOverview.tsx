@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
 import { useToggle } from 'react-use';
-import { Flex, UnitFormat, More, Table } from '@taco/core';
+import { Flex, UnitFormat, More, Table } from '@covid/core';
 import { useHistory } from 'react-router';
 import {
   ViewList as ViewListIcon,
@@ -31,7 +31,7 @@ import PlotNFTStateEnum from '../../constants/PlotNFTState';
 import PlotNFTUnconfirmedCard from '../plotNFT/PlotNFTUnconfirmedCard';
 import PlotNFTState from '../plotNFT/PlotNFTState';
 import useUnconfirmedPlotNFTs from '../../hooks/useUnconfirmedPlotNFTs';
-import { mojo_to_taco } from '../../util/taco';
+import { mojo_to_covid } from '../../util/covid';
 import WalletStatus from '../wallet/WalletStatus';
 
 const groupsCols = [
@@ -54,7 +54,7 @@ const groupsCols = [
       if (state === PlotNFTStateEnum.SELF_POOLING) {
         return (
           <UnitFormat
-            value={mojo_to_taco(
+            value={mojo_to_covid(
               BigInt(nft.wallet_balance.confirmed_wallet_balance ?? 0),
             )}
           />

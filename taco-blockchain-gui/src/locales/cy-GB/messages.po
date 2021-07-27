@@ -6,16 +6,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: cy_GB\n"
-"Project-Id-Version: taco-blockchain\n"
+"Project-Id-Version: covid-blockchain\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2021-07-06 23:47\n"
 "Last-Translator: \n"
 "Language-Team: Welsh\n"
 "Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ((n == 1) ? 1 : ((n == 2) ? 2 : ((n == 3) ? 3 : ((n == 6) ? 4 : 5))));\n"
-"X-Crowdin-Project: taco-blockchain\n"
+"X-Crowdin-Project: covid-blockchain\n"
 "X-Crowdin-Project-ID: 440660\n"
 "X-Crowdin-Language: cy\n"
-"X-Crowdin-File: /[Taco-Network.taco-blockchain-gui] main/src/locales/en-US/messages.po\n"
+"X-Crowdin-File: /[pinksheetscrypto.covid-blockchain-gui] main/src/locales/en-US/messages.po\n"
 "X-Crowdin-File-ID: 118\n"
 
 #: src/components/plot/add/PlotAddNFT.tsx:62
@@ -23,7 +23,7 @@ msgid "(Optional)"
 msgstr ""
 
 #: src/components/farm/FarmLatestBlockChallenges.tsx:64
-msgid "*Want to explore Taco’s blocks further? Check out <0>Taco Explorer</0> built by an open source developer."
+msgid "*Want to explore Covid’s blocks further? Check out <0>Covid Explorer</0> built by an open source developer."
 msgstr ""
 
 #: src/components/plot/add/PlotAddNFT.tsx:127
@@ -44,7 +44,7 @@ msgstr ""
 
 #: src/electron/main.tsx:422
 #: src/electron/main.tsx:509
-msgid "About Taco Blockchain"
+msgid "About Covid Blockchain"
 msgstr ""
 
 #: src/components/trading/ViewOffer.jsx:74
@@ -216,7 +216,7 @@ msgid "Block VDF Iterations"
 msgstr ""
 
 #: src/components/block/Block.jsx:338
-msgid "Block at height {0} in the Taco blockchain"
+msgid "Block at height {0} in the Covid blockchain"
 msgstr ""
 
 #: src/components/fullNode/FullNode.jsx:331
@@ -309,15 +309,15 @@ msgid "Chat on KeyBase"
 msgstr ""
 
 #: src/electron/main.tsx:419
-msgid "Taco"
-msgstr "Taco"
+msgid "Covid"
+msgstr "Covid"
 
 #: src/electron/main.tsx:358
-msgid "Taco Blockchain Wiki"
+msgid "Covid Blockchain Wiki"
 msgstr ""
 
 #: src/components/wallet/standard/WalletStandard.tsx:647
-msgid "Taco Wallet"
+msgid "Covid Wallet"
 msgstr ""
 
 #: src/components/plot/add/PlotAddNumberOfPlots.tsx:36
@@ -686,7 +686,7 @@ msgid "Edit"
 msgstr ""
 
 #: src/components/wallet/WalletImport.tsx:147
-msgid "Enter the 24 word mnemonic that you have saved in order to restore your Taco wallet."
+msgid "Enter the 24 word mnemonic that you have saved in order to restore your Covid wallet."
 msgstr ""
 
 #: src/components/farm/FarmerStatus.tsx:21
@@ -700,7 +700,7 @@ msgid "Error"
 msgstr ""
 
 #: src/components/wallet/standard/WalletStandard.tsx:456
-msgid "Error: Cannot send taco to coloured address. Please enter a taco address."
+msgid "Error: Cannot send covid to coloured address. Please enter a covid address."
 msgstr ""
 
 #: src/components/fullNode/card/FullNodeEstimatedNetworkSpace.tsx:20
@@ -1468,7 +1468,7 @@ msgid "Plots Passed Filter"
 msgstr ""
 
 #: src/components/plot/overview/PlotOverviewHero.tsx:28
-msgid "Plots are allocated space on your hard drive used to farm and earn Taco. <0>Learn more</0>"
+msgid "Plots are allocated space on your hard drive used to farm and earn Covid. <0>Learn more</0>"
 msgstr ""
 
 #: src/components/plot/queue/PlotQueueIndicator.tsx:34
@@ -1905,7 +1905,7 @@ msgstr ""
 
 #: src/components/wallet/rateLimited/WalletRateLimited.jsx:401
 #: src/components/wallet/rateLimited/WalletRateLimited.jsx:448
-msgid "Spending Limit (taco per interval): {0}"
+msgid "Spending Limit (covid per interval): {0}"
 msgstr ""
 
 #: src/components/fullNode/FullNode.jsx:100
@@ -1954,8 +1954,8 @@ msgstr "Statws:"
 #~ msgstr "Sub Block Height"
 
 #: src/components/block/Block.jsx:338
-#~ msgid "Sub Block at height {0} in the Taco blockchain"
-#~ msgstr "Sub Block at height {0} in the Taco blockchain"
+#~ msgid "Sub Block at height {0} in the Covid blockchain"
+#~ msgstr "Sub Block at height {0} in the Covid blockchain"
 
 #: src/components/wallet/rateLimited/WalletRateLimited.jsx:347
 msgid "Submit"
@@ -2094,7 +2094,7 @@ msgid "This feature is available only from the GUI."
 msgstr ""
 
 #: src/components/wallet/card/WalletCardSpendableBalance.tsx:26
-msgid "This is the amount of Taco that you can currently use to make transactions. It does not include pending farming rewards, pending incoming transactions, and Taco that you have just spent but is not yet in the blockchain."
+msgid "This is the amount of Covid that you can currently use to make transactions. It does not include pending farming rewards, pending incoming transactions, and Covid that you have just spent but is not yet in the blockchain."
 msgstr ""
 
 #: src/components/wallet/card/WalletCardPendingChange.tsx:26
@@ -2114,7 +2114,7 @@ msgid "This is the time the block was created by the farmer, which is before it 
 msgstr ""
 
 #: src/components/wallet/card/WalletCardTotalBalance.tsx:34
-msgid "This is the total amount of taco in the blockchain at the current peak sub block that is controlled by your private keys. It includes frozen farming rewards, but not pending incoming and outgoing transactions."
+msgid "This is the total amount of covid in the blockchain at the current peak sub block that is controlled by your private keys. It includes frozen farming rewards, but not pending incoming and outgoing transactions."
 msgstr ""
 
 #: src/components/wallet/card/WalletCardPendingTotalBalance.tsx:29
@@ -2160,7 +2160,7 @@ msgid "This trade was included on blockchain at this block height"
 msgstr ""
 
 #: src/components/app/AppTimeBombAlert.tsx:19
-msgid "This version of Taco is no longer compatible with the blockchain and can not safely farm."
+msgid "This version of Covid is no longer compatible with the blockchain and can not safely farm."
 msgstr ""
 
 #: src/components/fullNode/FullNode.jsx:92
@@ -2185,8 +2185,8 @@ msgstr "I"
 msgid "Total Balance"
 msgstr ""
 
-#: src/components/farm/card/FarmCardTotalTacoFarmed.tsx:15
-#~ msgid "Total Taco Farmed"
+#: src/components/farm/card/FarmCardTotalCovidFarmed.tsx:15
+#~ msgid "Total Covid Farmed"
 #~ msgstr ""
 
 #: src/components/fullNode/card/FullNodeCardTotalIterations.tsx:20
@@ -2359,7 +2359,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/wallet/Wallets.tsx:30
-#~ msgid "WalletItem.tacoWallet"
+#~ msgid "WalletItem.covidWallet"
 #~ msgstr ""
 
 #: src/components/wallet/Wallets.tsx:48
@@ -2396,7 +2396,7 @@ msgid "Want to Join a Pool? Create a Plot NFT"
 msgstr ""
 
 #: src/components/plot/overview/PlotOverviewPlots.tsx:133
-msgid "Want to earn more Taco? Add more plots to your farm."
+msgid "Want to earn more Covid? Add more plots to your farm."
 msgstr ""
 
 #: src/components/plot/add/PlotAddNumberOfPlots.tsx:86
@@ -2412,7 +2412,7 @@ msgid "Weight is the total added difficulty of all sub blocks up to and includin
 msgstr ""
 
 #: src/components/selectKey/SelectKey.tsx:112
-msgid "Welcome to Taco. Please log in with an existing key, or create a new key."
+msgid "Welcome to Covid. Please log in with an existing key, or create a new key."
 msgstr ""
 
 #: src/components/wallet/WalletAdd.tsx:66
@@ -2483,8 +2483,8 @@ msgid "You need to claim your rewards first"
 msgstr ""
 
 #: src/components/app/AppTimeBomb.tsx:28
-#~ msgid "You need to upgrade the Taco application as this version will stop working soon!"
-#~ msgstr "You need to upgrade the Taco application as this version will stop working soon!"
+#~ msgid "You need to upgrade the Covid application as this version will stop working soon!"
+#~ msgstr "You need to upgrade the Covid application as this version will stop working soon!"
 
 #: src/components/plotNFT/select/PlotNFTSelectFaucet.tsx:37
 msgid "You need {currencyCode} to join a pool."
@@ -2571,8 +2571,8 @@ msgstr ""
 msgid "{currencyCode} Block Rewards"
 msgstr ""
 
-#: src/components/farm/card/FarmCardTotalTacoFarmed.tsx:29
-msgid "{currencyCode} Total Taco Farmed"
+#: src/components/farm/card/FarmCardTotalCovidFarmed.tsx:29
+msgid "{currencyCode} Total Covid Farmed"
 msgstr ""
 
 #: src/components/farm/card/FarmCardUserFees.tsx:28

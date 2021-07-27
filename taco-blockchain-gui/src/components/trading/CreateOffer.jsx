@@ -12,10 +12,10 @@ import {
   Button,
   InputLabel,
 } from '@material-ui/core';
-import { AlertDialog, Card, Flex } from '@taco/core';
+import { AlertDialog, Card, Flex } from '@covid/core';
 import isElectron from 'is-electron';
 import { newBuy, newSell, addTrade, resetTrades } from '../../modules/trade';
-import { taco_to_mojo, colouredcoin_to_mojo } from '../../util/taco';
+import { covid_to_mojo, colouredcoin_to_mojo } from '../../util/covid';
 import { openDialog } from '../../modules/dialog';
 import { create_trade_action } from '../../modules/trade_messages';
 import { COLOURED_COIN } from '../../util/wallet_types';
@@ -82,7 +82,7 @@ export default function CreateOffer() {
     const mojo =
       wallets[wallet_id.value].type === COLOURED_COIN
         ? colouredcoin_to_mojo(amount_input.value)
-        : taco_to_mojo(amount_input.value);
+        : covid_to_mojo(amount_input.value);
 
     const trade =
       buy_or_sell.value === 1

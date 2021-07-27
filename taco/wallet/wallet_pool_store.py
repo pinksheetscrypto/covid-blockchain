@@ -3,9 +3,9 @@ from typing import List, Tuple, Dict, Optional
 
 import aiosqlite
 
-from taco.types.coin_solution import CoinSolution
-from taco.util.db_wrapper import DBWrapper
-from taco.util.ints import uint32
+from covid.types.coin_solution import CoinSolution
+from covid.util.db_wrapper import DBWrapper
+from covid.util.ints import uint32
 
 log = logging.getLogger(__name__)
 

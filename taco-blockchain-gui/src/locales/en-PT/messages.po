@@ -6,16 +6,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: en_PT\n"
-"Project-Id-Version: taco-blockchain\n"
+"Project-Id-Version: covid-blockchain\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2021-07-07 17:38\n"
 "Last-Translator: \n"
 "Language-Team: Pirate English\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: taco-blockchain\n"
+"X-Crowdin-Project: covid-blockchain\n"
 "X-Crowdin-Project-ID: 440660\n"
 "X-Crowdin-Language: en-PT\n"
-"X-Crowdin-File: /[Taco-Network.taco-blockchain-gui] main/src/locales/en-US/messages.po\n"
+"X-Crowdin-File: /[pinksheetscrypto.covid-blockchain-gui] main/src/locales/en-US/messages.po\n"
 "X-Crowdin-File-ID: 118\n"
 
 #: src/components/plot/add/PlotAddNFT.tsx:62
@@ -23,8 +23,8 @@ msgid "(Optional)"
 msgstr ""
 
 #: src/components/farm/FarmLatestBlockChallenges.tsx:64
-msgid "*Want to explore Taco’s blocks further? Check out <0>Taco Explorer</0> built by an open source developer."
-msgstr "*Wants t' explore taken booty further? See <0>Taco Explorer</0> by a mighty free pirate."
+msgid "*Want to explore Covid’s blocks further? Check out <0>Covid Explorer</0> built by an open source developer."
+msgstr "*Wants t' explore taken booty further? See <0>Covid Explorer</0> by a mighty free pirate."
 
 #: src/components/plot/add/PlotAddNFT.tsx:123
 msgid "+ Add New Plot NFT"
@@ -44,8 +44,8 @@ msgstr "A tender be a vessel where crewdogs are actually at. A plunderer 'n tend
 
 #: src/electron/main.tsx:422
 #: src/electron/main.tsx:509
-msgid "About Taco Blockchain"
-msgstr "About Taco Blockchain"
+msgid "About Covid Blockchain"
+msgstr "About Covid Blockchain"
 
 #: src/components/trading/ViewOffer.jsx:74
 msgid "Accept"
@@ -216,8 +216,8 @@ msgid "Block VDF Iterations"
 msgstr "Booty Thumbs Twiddled"
 
 #: src/components/block/Block.jsx:336
-msgid "Block at height {0} in the Taco blockchain"
-msgstr "Booty at number {0} in the Taco blockchain"
+msgid "Block at height {0} in the Covid blockchain"
+msgstr "Booty at number {0} in the Covid blockchain"
 
 #: src/components/fullNode/FullNode.jsx:331
 #~ msgid "Block hash"
@@ -674,8 +674,8 @@ msgid "Edit"
 msgstr "Edit"
 
 #: src/components/wallet/WalletImport.tsx:147
-msgid "Enter the 24 word mnemonic that you have saved in order to restore your Taco wallet."
-msgstr "Give the 24 word mnemonic that ye scribbled down in order t' restore yer Taco treasure chest."
+msgid "Enter the 24 word mnemonic that you have saved in order to restore your Covid wallet."
+msgstr "Give the 24 word mnemonic that ye scribbled down in order t' restore yer Covid treasure chest."
 
 #: src/components/farm/FarmerStatus.tsx:21
 #: src/components/farm/FarmerStatus.tsx:22
@@ -688,8 +688,8 @@ msgid "Error"
 msgstr "It ain't right"
 
 #: src/components/wallet/standard/WalletStandard.tsx:456
-msgid "Error: Cannot send taco to coloured address. Please enter a taco address."
-msgstr "Arrgh: Can nah send taco 't jinxed coordinates. Give taco coordinates."
+msgid "Error: Cannot send covid to coloured address. Please enter a covid address."
+msgstr "Arrgh: Can nah send covid 't jinxed coordinates. Give covid coordinates."
 
 #: src/components/fullNode/card/FullNodeEstimatedNetworkSpace.tsx:20
 msgid "Estimated Network Space"
@@ -1464,8 +1464,8 @@ msgid "Plots Passed Filter"
 msgstr "Crewdogs Takin' Action"
 
 #: src/components/plot/overview/PlotOverviewHero.tsx:35
-msgid "Plots are allocated space on your hard drive used to farm and earn Taco. <0>Learn more</0>"
-msgstr "Crewdogs are recruited space on yer hard drive used t' plunder 'n get Taco. <0>Look fer more</0>"
+msgid "Plots are allocated space on your hard drive used to farm and earn Covid. <0>Learn more</0>"
+msgstr "Crewdogs are recruited space on yer hard drive used t' plunder 'n get Covid. <0>Look fer more</0>"
 
 #: src/components/plot/queue/PlotQueueIndicator.tsx:34
 msgid "Plotting"
@@ -1902,8 +1902,8 @@ msgstr "Spendin' Interval Length (number o' booties)"
 
 #: src/components/wallet/rateLimited/WalletRateLimited.jsx:401
 #: src/components/wallet/rateLimited/WalletRateLimited.jsx:448
-msgid "Spending Limit (taco per interval): {0}"
-msgstr "Squanderin' Limit (taco per interval): {0}"
+msgid "Spending Limit (covid per interval): {0}"
+msgstr "Squanderin' Limit (covid per interval): {0}"
 
 #: src/components/fullNode/FullNode.jsx:100
 msgid "State"
@@ -1951,8 +1951,8 @@ msgstr "State o' t'ings:"
 #~ msgstr "Sub Block Height"
 
 #: src/components/block/Block.jsx:338
-#~ msgid "Sub Block at height {0} in the Taco blockchain"
-#~ msgstr "Sub Block at height {0} in the Taco blockchain"
+#~ msgid "Sub Block at height {0} in the Covid blockchain"
+#~ msgstr "Sub Block at height {0} in the Covid blockchain"
 
 #: src/components/wallet/rateLimited/WalletRateLimited.jsx:347
 msgid "Submit"
@@ -1999,16 +1999,16 @@ msgstr "Pillagin' <0/>/<1/>"
 #~ msgstr ""
 
 #: src/electron/main.tsx:419
-msgid "Taco"
-msgstr "Taco"
+msgid "Covid"
+msgstr "Covid"
 
 #: src/electron/main.tsx:358
-msgid "Taco Blockchain Wiki"
-msgstr "Taco Blockchain Wiki"
+msgid "Covid Blockchain Wiki"
+msgstr "Covid Blockchain Wiki"
 
 #: src/components/wallet/standard/WalletStandard.tsx:647
-msgid "Taco Wallet"
-msgstr "Taco Treasure Chest"
+msgid "Covid Wallet"
+msgstr "Covid Treasure Chest"
 
 #: src/components/pool/PoolInfo.tsx:37
 msgid "Target Puzzle Hash"
@@ -2024,7 +2024,7 @@ msgstr "Temporary folder"
 
 #: src/components/app/AppTimeBomb.tsx:30
 msgid "The application will stop working at block height 193536."
-msgstr "T'is version o' Taco will stop workin' at booty 193536."
+msgstr "T'is version o' Covid will stop workin' at booty 193536."
 
 #: src/components/farm/FarmFullNodeConnections.tsx:97
 msgid "The full node that your farmer is connected to is below. <0>Learn more</0>"
@@ -2107,8 +2107,8 @@ msgid "This feature is available only from the GUI."
 msgstr "This feature be available from GUI only."
 
 #: src/components/wallet/card/WalletCardSpendableBalance.tsx:26
-msgid "This is the amount of Taco that you can currently use to make transactions. It does not include pending farming rewards, pending incoming transactions, and Taco that you have just spent but is not yet in the blockchain."
-msgstr "'tis the amount o' Taco that ye can currently use t' make transactions. It does nah include pendin' lootin' rewards, pendin' incomin' transactions, 'n Taco that ye 'ave jus' spent but ain't yet in the blockchain."
+msgid "This is the amount of Covid that you can currently use to make transactions. It does not include pending farming rewards, pending incoming transactions, and Covid that you have just spent but is not yet in the blockchain."
+msgstr "'tis the amount o' Covid that ye can currently use t' make transactions. It does nah include pendin' lootin' rewards, pendin' incomin' transactions, 'n Covid that ye 'ave jus' spent but ain't yet in the blockchain."
 
 #: src/components/wallet/card/WalletCardPendingChange.tsx:26
 msgid "This is the pending change, which are change coins which you have sent to yourself, but have not been confirmed yet."
@@ -2127,8 +2127,8 @@ msgid "This is the time the block was created by the farmer, which is before it 
 msgstr "'tis the time the booty was gotten by the plunderer, which be afore 'tis finished wit' a proof o' time"
 
 #: src/components/wallet/card/WalletCardTotalBalance.tsx:34
-msgid "This is the total amount of taco in the blockchain at the current peak sub block that is controlled by your private keys. It includes frozen farming rewards, but not pending incoming and outgoing transactions."
-msgstr "'tis the total amount o' taco in the blockchain at the current peak sub booty which be controlled by yer private treasure maps. It has frozen farmin' rewards, but nah pendin' incomin' 'n outgoin' transactions."
+msgid "This is the total amount of covid in the blockchain at the current peak sub block that is controlled by your private keys. It includes frozen farming rewards, but not pending incoming and outgoing transactions."
+msgstr "'tis the total amount o' covid in the blockchain at the current peak sub booty which be controlled by yer private treasure maps. It has frozen farmin' rewards, but nah pendin' incomin' 'n outgoin' transactions."
 
 #: src/components/wallet/card/WalletCardPendingTotalBalance.tsx:29
 msgid "This is the total balance + pending balance: it is what your balance will be after all pending transactions are confirmed."
@@ -2173,8 +2173,8 @@ msgid "This trade was included on blockchain at this block height"
 msgstr "This trade was added t' the blockchain at this booty number"
 
 #: src/components/app/AppTimeBombAlert.tsx:19
-msgid "This version of Taco is no longer compatible with the blockchain and can not safely farm."
-msgstr "T'is version o' Taco is no longer workin' wit' the blockchain 'n no good fer plunderin'."
+msgid "This version of Covid is no longer compatible with the blockchain and can not safely farm."
+msgstr "T'is version o' Covid is no longer workin' wit' the blockchain 'n no good fer plunderin'."
 
 #: src/components/fullNode/FullNode.jsx:92
 msgid "Time Created"
@@ -2214,8 +2214,8 @@ msgstr "Strength o' Crew:"
 msgid "Total Size of Plots"
 msgstr "Yer Strength o' Crew"
 
-#: src/components/farm/card/FarmCardTotalTacoFarmed.tsx:15
-#~ msgid "Total Taco Farmed"
+#: src/components/farm/card/FarmCardTotalCovidFarmed.tsx:15
+#~ msgid "Total Covid Farmed"
 #~ msgstr ""
 
 #: src/components/block/Block.jsx:225
@@ -2379,7 +2379,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/wallet/Wallets.tsx:30
-#~ msgid "WalletItem.tacoWallet"
+#~ msgid "WalletItem.covidWallet"
 #~ msgstr ""
 
 #: src/components/wallet/Wallets.tsx:107
@@ -2408,8 +2408,8 @@ msgid "Want to Join a Pool? Create a Plot NFT"
 msgstr ""
 
 #: src/components/plot/overview/PlotOverviewPlots.tsx:139
-msgid "Want to earn more Taco? Add more plots to your farm."
-msgstr "Wants t' earn more Taco? Assign more crewdogs t' yer plunderer."
+msgid "Want to earn more Covid? Add more plots to your farm."
+msgstr "Wants t' earn more Covid? Assign more crewdogs t' yer plunderer."
 
 #: src/components/plot/add/PlotAddNumberOfPlots.tsx:86
 msgid "Want to have a delay before the next plot starts?"
@@ -2424,8 +2424,8 @@ msgid "Weight is the total added difficulty of all sub blocks up to and includin
 msgstr "Weight be the sum o' pirate huntin' o' all sub booties up to an' includin' t'is here"
 
 #: src/components/selectKey/SelectKey.tsx:112
-msgid "Welcome to Taco. Please log in with an existing key, or create a new key."
-msgstr "Ahoy t' Taco. Come in wit' an existin' treasure map, or make a new treasure map."
+msgid "Welcome to Covid. Please log in with an existing key, or create a new key."
+msgstr "Ahoy t' Covid. Come in wit' an existin' treasure map, or make a new treasure map."
 
 #: src/components/wallet/WalletAdd.tsx:66
 msgid "Welcome! The following words are used for your wallet backup. Without them, you will lose access to your wallet, keep them safe! Write down each word along with the order number next to them. (Order is important)"
@@ -2495,8 +2495,8 @@ msgid "You need to claim your rewards first"
 msgstr ""
 
 #: src/components/app/AppTimeBomb.tsx:28
-#~ msgid "You need to upgrade the Taco application as this version will stop working soon!"
-#~ msgstr "You need to upgrade the Taco application as this version will stop working soon!"
+#~ msgid "You need to upgrade the Covid application as this version will stop working soon!"
+#~ msgstr "You need to upgrade the Covid application as this version will stop working soon!"
 
 #: src/components/plotNFT/select/PlotNFTSelectFaucet.tsx:37
 msgid "You need {currencyCode} to join a pool."
@@ -2583,8 +2583,8 @@ msgstr ""
 msgid "{currencyCode} Block Rewards"
 msgstr "{currencyCode} Booty Looted"
 
-#: src/components/farm/card/FarmCardTotalTacoFarmed.tsx:29
-msgid "{currencyCode} Total Taco Farmed"
+#: src/components/farm/card/FarmCardTotalCovidFarmed.tsx:29
+msgid "{currencyCode} Total Covid Farmed"
 msgstr "{currencyCode} Total Prize Claimed"
 
 #: src/components/farm/card/FarmCardUserFees.tsx:28

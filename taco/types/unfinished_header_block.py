@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
-from taco.types.blockchain_format.foliage import Foliage, FoliageTransactionBlock
-from taco.types.blockchain_format.reward_chain_block import RewardChainBlockUnfinished
-from taco.types.blockchain_format.vdf import VDFProof
-from taco.types.end_of_slot_bundle import EndOfSubSlotBundle
-from taco.util.streamable import Streamable, streamable
+from covid.types.blockchain_format.foliage import Foliage, FoliageTransactionBlock
+from covid.types.blockchain_format.reward_chain_block import RewardChainBlockUnfinished
+from covid.types.blockchain_format.vdf import VDFProof
+from covid.types.end_of_slot_bundle import EndOfSubSlotBundle
+from covid.util.streamable import Streamable, streamable
 
 
 @dataclass(frozen=True)

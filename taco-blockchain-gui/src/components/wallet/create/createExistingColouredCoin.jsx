@@ -1,6 +1,6 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
-import { AlertDialog } from '@taco/core';
+import { AlertDialog } from '@covid/core';
 import {
   Typography,
   Button,
@@ -19,7 +19,7 @@ import {
   CREATE_CC_WALLET_OPTIONS,
 } from '../../../modules/createWallet';
 import { useStyles } from './WalletCreate';
-import { taco_to_mojo } from '../../../util/taco';
+import { covid_to_mojo } from '../../../util/covid';
 import { create_cc_for_colour_action } from '../../../modules/message';
 import { openDialog } from '../../../modules/dialog';
 
@@ -75,7 +75,7 @@ export const CreateExistingCCWallet = () => {
     }
     dispatch(createState(true, true));
     const colour = colour_string.value;
-    const fee = taco_to_mojo(fee_input.value);
+    const fee = covid_to_mojo(fee_input.value);
     dispatch(create_cc_for_colour_action(colour, fee));
   }
 

@@ -2,9 +2,9 @@ from dataclasses import dataclass
 
 from blspy import G1Element
 
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.util.ints import uint32
-from taco.wallet.util.wallet_types import WalletType
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.util.ints import uint32
+from covid.wallet.util.wallet_types import WalletType
 
 
 @dataclass(frozen=True)

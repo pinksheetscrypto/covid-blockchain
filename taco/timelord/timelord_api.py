@@ -1,10 +1,10 @@
 import logging
 from typing import Callable, Optional
 
-from taco.protocols import timelord_protocol
-from taco.timelord.timelord import Chain, IterationType, Timelord, iters_from_block
-from taco.util.api_decorators import api_request
-from taco.util.ints import uint64
+from covid.protocols import timelord_protocol
+from covid.timelord.timelord import Chain, IterationType, Timelord, iters_from_block
+from covid.util.api_decorators import api_request
+from covid.util.ints import uint64
 
 log = logging.getLogger(__name__)
 

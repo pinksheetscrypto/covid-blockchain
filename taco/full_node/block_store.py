@@ -3,14 +3,14 @@ from typing import Dict, List, Optional, Tuple
 
 import aiosqlite
 
-from taco.consensus.block_record import BlockRecord
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.blockchain_format.sub_epoch_summary import SubEpochSummary
-from taco.types.full_block import FullBlock
-from taco.types.weight_proof import SubEpochChallengeSegment, SubEpochSegments
-from taco.util.db_wrapper import DBWrapper
-from taco.util.ints import uint32
-from taco.util.lru_cache import LRUCache
+from covid.consensus.block_record import BlockRecord
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.blockchain_format.sub_epoch_summary import SubEpochSummary
+from covid.types.full_block import FullBlock
+from covid.types.weight_proof import SubEpochChallengeSegment, SubEpochSegments
+from covid.util.db_wrapper import DBWrapper
+from covid.util.ints import uint32
+from covid.util.lru_cache import LRUCache
 
 log = logging.getLogger(__name__)
 

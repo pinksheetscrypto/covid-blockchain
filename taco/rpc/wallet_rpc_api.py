@@ -7,36 +7,36 @@ from typing import Callable, Dict, List, Optional, Tuple
 
 from blspy import PrivateKey, G1Element
 
-from taco.cmds.init_funcs import check_keys
-from taco.consensus.block_rewards import calculate_base_farmer_reward
-from taco.pools.pool_wallet import PoolWallet
-from taco.pools.pool_wallet_info import create_pool_state, FARMING_TO_POOL, PoolWalletInfo, PoolState
-from taco.protocols.protocol_message_types import ProtocolMessageTypes
-from taco.server.outbound_message import NodeType, make_msg
-from taco.simulator.simulator_protocol import FarmNewBlockProtocol
-from taco.types.blockchain_format.coin import Coin
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.util.bech32m import decode_puzzle_hash, encode_puzzle_hash
-from taco.util.byte_types import hexstr_to_bytes
-from taco.util.ints import uint32, uint64
-from taco.util.keychain import bytes_to_mnemonic, generate_mnemonic
-from taco.util.path import path_from_root
-from taco.util.ws_message import WsRpcMessage, create_payload_dict
-from taco.wallet.cc_wallet.cc_wallet import CCWallet
-from taco.wallet.derive_keys import master_sk_to_singleton_owner_sk
-from taco.wallet.rl_wallet.rl_wallet import RLWallet
-from taco.wallet.derive_keys import master_sk_to_farmer_sk, master_sk_to_pool_sk, master_sk_to_wallet_sk
-from taco.wallet.did_wallet.did_wallet import DIDWallet
-from taco.wallet.trade_record import TradeRecord
-from taco.wallet.transaction_record import TransactionRecord
-from taco.wallet.util.backup_utils import download_backup, get_backup_info, upload_backup
-from taco.wallet.util.trade_utils import trade_record_to_dict
-from taco.wallet.util.transaction_type import TransactionType
-from taco.wallet.util.wallet_types import WalletType
-from taco.wallet.wallet_info import WalletInfo
-from taco.wallet.wallet_node import WalletNode
-from taco.util.config import load_config
-from taco.consensus.coinbase import create_puzzlehash_for_pk
+from covid.cmds.init_funcs import check_keys
+from covid.consensus.block_rewards import calculate_base_farmer_reward
+from covid.pools.pool_wallet import PoolWallet
+from covid.pools.pool_wallet_info import create_pool_state, FARMING_TO_POOL, PoolWalletInfo, PoolState
+from covid.protocols.protocol_message_types import ProtocolMessageTypes
+from covid.server.outbound_message import NodeType, make_msg
+from covid.simulator.simulator_protocol import FarmNewBlockProtocol
+from covid.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.util.bech32m import decode_puzzle_hash, encode_puzzle_hash
+from covid.util.byte_types import hexstr_to_bytes
+from covid.util.ints import uint32, uint64
+from covid.util.keychain import bytes_to_mnemonic, generate_mnemonic
+from covid.util.path import path_from_root
+from covid.util.ws_message import WsRpcMessage, create_payload_dict
+from covid.wallet.cc_wallet.cc_wallet import CCWallet
+from covid.wallet.derive_keys import master_sk_to_singleton_owner_sk
+from covid.wallet.rl_wallet.rl_wallet import RLWallet
+from covid.wallet.derive_keys import master_sk_to_farmer_sk, master_sk_to_pool_sk, master_sk_to_wallet_sk
+from covid.wallet.did_wallet.did_wallet import DIDWallet
+from covid.wallet.trade_record import TradeRecord
+from covid.wallet.transaction_record import TransactionRecord
+from covid.wallet.util.backup_utils import download_backup, get_backup_info, upload_backup
+from covid.wallet.util.trade_utils import trade_record_to_dict
+from covid.wallet.util.transaction_type import TransactionType
+from covid.wallet.util.wallet_types import WalletType
+from covid.wallet.wallet_info import WalletInfo
+from covid.wallet.wallet_node import WalletNode
+from covid.util.config import load_config
+from covid.consensus.coinbase import create_puzzlehash_for_pk
 
 # Timeout for response from wallet/full node for sending a transaction
 TIMEOUT = 30
@@ -48,7 +48,7 @@ class WalletRpcApi:
     def __init__(self, wallet_node: WalletNode):
         assert wallet_node is not None
         self.service = wallet_node
-        self.service_name = "taco_wallet"
+        self.service_name = "covid_wallet"
 
     def get_routes(self) -> Dict[str, Callable]:
         return {
@@ -129,7 +129,7 @@ class WalletRpcApi:
             data["wallet_id"] = args[1]
         if args[2] is not None:
             data["additional_data"] = args[2]
-        return [create_payload_dict("state_changed", data, "taco_wallet", "wallet_ui")]
+        return [create_payload_dict("state_changed", data, "covid_wallet", "wallet_ui")]
 
     async def _stop_wallet(self):
         """
@@ -536,7 +536,7 @@ class WalletRpcApi:
             if request["mode"] == "new":
                 owner_puzzle_hash: bytes32 = await self.service.wallet_state_manager.main_wallet.get_puzzle_hash(True)
 
-                from taco.pools.pool_wallet_info import initial_pool_state_from_dict
+                from covid.pools.pool_wallet_info import initial_pool_state_from_dict
 
                 async with self.service.wallet_state_manager.lock:
                     last_wallet: Optional[

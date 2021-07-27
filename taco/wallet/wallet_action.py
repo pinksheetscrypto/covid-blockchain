@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from taco.util.ints import uint32
-from taco.wallet.util.wallet_types import WalletType
+from covid.util.ints import uint32
+from covid.wallet.util.wallet_types import WalletType
 
 
 @dataclass(frozen=True)

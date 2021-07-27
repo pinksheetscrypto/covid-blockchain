@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import List
 
-from taco.util.ints import uint8, uint32
-from taco.util.streamable import Streamable, streamable
+from covid.util.ints import uint8, uint32
+from covid.util.streamable import Streamable, streamable
 
 
 @dataclass(frozen=True)

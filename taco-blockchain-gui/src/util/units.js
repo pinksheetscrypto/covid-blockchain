@@ -1,17 +1,17 @@
 const units = {
-  taco: 1,
+  covid: 1,
   mojo: 1 / 1e12,
   colouredcoin: 1 / 1e9,
 };
 
 const aliases = {
-  taco: ['ch', 'taco', 'Taco'],
+  covid: ['ch', 'covid', 'Covid'],
   mojo: ['mj', 'mojo'],
   colouredcoin: ['cc', 'colouredcoin'],
 };
 
 const display = {
-  taco: {
+  covid: {
     format: '{amount} CH',
     fractionDigits: 12,
   },

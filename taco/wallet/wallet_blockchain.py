@@ -6,27 +6,27 @@ from concurrent.futures.process import ProcessPoolExecutor
 from enum import Enum
 from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 
-from taco.consensus.block_header_validation import validate_finished_header_block, validate_unfinished_header_block
-from taco.consensus.block_record import BlockRecord
-from taco.consensus.blockchain_interface import BlockchainInterface
-from taco.consensus.constants import ConsensusConstants
-from taco.consensus.difficulty_adjustment import get_next_sub_slot_iters_and_difficulty
-from taco.consensus.find_fork_point import find_fork_point_in_chain
-from taco.consensus.full_block_to_block_record import block_to_block_record
-from taco.consensus.multiprocess_validation import PreValidationResult, pre_validate_blocks_multiprocessing
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.blockchain_format.sub_epoch_summary import SubEpochSummary
-from taco.types.coin_solution import CoinSolution
-from taco.types.header_block import HeaderBlock
-from taco.types.unfinished_header_block import UnfinishedHeaderBlock
-from taco.util.errors import Err, ValidationError
-from taco.util.ints import uint32, uint64
-from taco.util.streamable import recurse_jsonify
-from taco.wallet.block_record import HeaderBlockRecord
-from taco.wallet.wallet_block_store import WalletBlockStore
-from taco.wallet.wallet_coin_store import WalletCoinStore
-from taco.wallet.wallet_pool_store import WalletPoolStore
-from taco.wallet.wallet_transaction_store import WalletTransactionStore
+from covid.consensus.block_header_validation import validate_finished_header_block, validate_unfinished_header_block
+from covid.consensus.block_record import BlockRecord
+from covid.consensus.blockchain_interface import BlockchainInterface
+from covid.consensus.constants import ConsensusConstants
+from covid.consensus.difficulty_adjustment import get_next_sub_slot_iters_and_difficulty
+from covid.consensus.find_fork_point import find_fork_point_in_chain
+from covid.consensus.full_block_to_block_record import block_to_block_record
+from covid.consensus.multiprocess_validation import PreValidationResult, pre_validate_blocks_multiprocessing
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.blockchain_format.sub_epoch_summary import SubEpochSummary
+from covid.types.coin_solution import CoinSolution
+from covid.types.header_block import HeaderBlock
+from covid.types.unfinished_header_block import UnfinishedHeaderBlock
+from covid.util.errors import Err, ValidationError
+from covid.util.ints import uint32, uint64
+from covid.util.streamable import recurse_jsonify
+from covid.wallet.block_record import HeaderBlockRecord
+from covid.wallet.wallet_block_store import WalletBlockStore
+from covid.wallet.wallet_coin_store import WalletCoinStore
+from covid.wallet.wallet_pool_store import WalletPoolStore
+from covid.wallet.wallet_transaction_store import WalletTransactionStore
 
 log = logging.getLogger(__name__)
 

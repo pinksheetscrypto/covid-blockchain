@@ -1,23 +1,23 @@
 import asyncio
-from taco.util.config import load_config, save_config
+from covid.util.config import load_config, save_config
 import logging
 from pathlib import Path
 
 import pytest
 
-from taco.consensus.block_rewards import calculate_base_farmer_reward, calculate_pool_reward
-from taco.rpc.full_node_rpc_api import FullNodeRpcApi
-from taco.rpc.full_node_rpc_client import FullNodeRpcClient
-from taco.rpc.rpc_server import start_rpc_server
-from taco.rpc.wallet_rpc_api import WalletRpcApi
-from taco.rpc.wallet_rpc_client import WalletRpcClient
-from taco.simulator.simulator_protocol import FarmNewBlockProtocol
-from taco.types.peer_info import PeerInfo
-from taco.util.bech32m import encode_puzzle_hash
-from taco.consensus.coinbase import create_puzzlehash_for_pk
-from taco.wallet.derive_keys import master_sk_to_wallet_sk
-from taco.util.ints import uint16, uint32
-from taco.wallet.transaction_record import TransactionRecord
+from covid.consensus.block_rewards import calculate_base_farmer_reward, calculate_pool_reward
+from covid.rpc.full_node_rpc_api import FullNodeRpcApi
+from covid.rpc.full_node_rpc_client import FullNodeRpcClient
+from covid.rpc.rpc_server import start_rpc_server
+from covid.rpc.wallet_rpc_api import WalletRpcApi
+from covid.rpc.wallet_rpc_client import WalletRpcClient
+from covid.simulator.simulator_protocol import FarmNewBlockProtocol
+from covid.types.peer_info import PeerInfo
+from covid.util.bech32m import encode_puzzle_hash
+from covid.consensus.coinbase import create_puzzlehash_for_pk
+from covid.wallet.derive_keys import master_sk_to_wallet_sk
+from covid.util.ints import uint16, uint32
+from covid.wallet.transaction_record import TransactionRecord
 from tests.setup_nodes import bt, setup_simulators_and_wallets, self_hostname
 from tests.time_out_assert import time_out_assert
 

@@ -1,6 +1,6 @@
-[submodule "taco-blockchain-gui"]
-	path = taco-blockchain-gui
-	url = https://github.com/Taco-Network/taco-blockchain-gui.git
+[submodule "covid-blockchain-gui"]
+	path = covid-blockchain-gui
+	url = https://github.com/pinksheetscrypto/covid-blockchain-gui.git
 	branch = pools
 [submodule "mozilla-ca"]
 	path = mozilla-ca

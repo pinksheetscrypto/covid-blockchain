@@ -1,19 +1,19 @@
 from typing import KeysView, Generator
 
 SERVICES_FOR_GROUP = {
-    "all": "taco_harvester taco_timelord_launcher taco_timelord taco_farmer taco_full_node taco_wallet".split(),
-    "node": "taco_full_node".split(),
-    "harvester": "taco_harvester".split(),
-    "farmer": "taco_harvester taco_farmer taco_full_node taco_wallet".split(),
-    "farmer-no-wallet": "taco_harvester taco_farmer taco_full_node".split(),
-    "farmer-only": "taco_farmer".split(),
-    "timelord": "taco_timelord_launcher taco_timelord taco_full_node".split(),
-    "timelord-only": "taco_timelord".split(),
-    "timelord-launcher-only": "taco_timelord_launcher".split(),
-    "wallet": "taco_wallet taco_full_node".split(),
-    "wallet-only": "taco_wallet".split(),
-    "introducer": "taco_introducer".split(),
-    "simulator": "taco_full_node_simulator".split(),
+    "all": "covid_harvester covid_timelord_launcher covid_timelord covid_farmer covid_full_node covid_wallet".split(),
+    "node": "covid_full_node".split(),
+    "harvester": "covid_harvester".split(),
+    "farmer": "covid_harvester covid_farmer covid_full_node covid_wallet".split(),
+    "farmer-no-wallet": "covid_harvester covid_farmer covid_full_node".split(),
+    "farmer-only": "covid_farmer".split(),
+    "timelord": "covid_timelord_launcher covid_timelord covid_full_node".split(),
+    "timelord-only": "covid_timelord".split(),
+    "timelord-launcher-only": "covid_timelord_launcher".split(),
+    "wallet": "covid_wallet covid_full_node".split(),
+    "wallet-only": "covid_wallet".split(),
+    "introducer": "covid_introducer".split(),
+    "simulator": "covid_full_node_simulator".split(),
 }
 
 

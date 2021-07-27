@@ -5,21 +5,21 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import yaml
 
-from taco import __version__
-from taco.consensus.coinbase import create_puzzlehash_for_pk
-from taco.ssl.create_ssl import generate_ca_signed_cert, get_taco_ca_crt_key, make_ca_cert
-from taco.util.bech32m import encode_puzzle_hash
-from taco.util.config import (
-    create_default_taco_config,
+from covid import __version__
+from covid.consensus.coinbase import create_puzzlehash_for_pk
+from covid.ssl.create_ssl import generate_ca_signed_cert, get_covid_ca_crt_key, make_ca_cert
+from covid.util.bech32m import encode_puzzle_hash
+from covid.util.config import (
+    create_default_covid_config,
     initial_config_file,
     load_config,
     save_config,
     unflatten_properties,
 )
-from taco.util.ints import uint32
-from taco.util.keychain import Keychain
-from taco.util.path import mkdir
-from taco.wallet.derive_keys import master_sk_to_pool_sk, master_sk_to_wallet_sk
+from covid.util.ints import uint32
+from covid.util.keychain import Keychain
+from covid.util.path import mkdir
+from covid.wallet.derive_keys import master_sk_to_pool_sk, master_sk_to_wallet_sk
 
 private_node_names = {"full_node", "wallet", "farmer", "harvester", "timelord", "daemon"}
 public_node_names = {"full_node", "wallet", "farmer", "introducer", "timelord"}
@@ -50,7 +50,7 @@ def check_keys(new_root: Path) -> None:
     keychain: Keychain = Keychain()
     all_sks = keychain.get_all_private_keys()
     if len(all_sks) == 0:
-        print("No keys are present in the keychain. Generate them with 'taco keys generate'")
+        print("No keys are present in the keychain. Generate them with 'covid keys generate'")
         return None
 
     config: Dict = load_config(new_root, "config.yaml")
@@ -176,11 +176,11 @@ def create_all_ssl(root: Path):
 
     private_ca_key_path = ca_dir / "private_ca.key"
     private_ca_crt_path = ca_dir / "private_ca.crt"
-    taco_ca_crt, taco_ca_key = get_taco_ca_crt_key()
-    taco_ca_crt_path = ca_dir / "taco_ca.crt"
-    taco_ca_key_path = ca_dir / "taco_ca.key"
-    taco_ca_crt_path.write_bytes(taco_ca_crt)
-    taco_ca_key_path.write_bytes(taco_ca_key)
+    covid_ca_crt, covid_ca_key = get_covid_ca_crt_key()
+    covid_ca_crt_path = ca_dir / "covid_ca.crt"
+    covid_ca_key_path = ca_dir / "covid_ca.key"
+    covid_ca_crt_path.write_bytes(covid_ca_crt)
+    covid_ca_key_path.write_bytes(covid_ca_key)
 
     if not private_ca_key_path.exists() or not private_ca_crt_path.exists():
         # Create private CA
@@ -197,8 +197,8 @@ def create_all_ssl(root: Path):
         ca_crt = private_ca_crt_path.read_bytes()
         generate_ssl_for_nodes(ssl_dir, ca_crt, ca_key, True)
 
-    taco_ca_crt, taco_ca_key = get_taco_ca_crt_key()
-    generate_ssl_for_nodes(ssl_dir, taco_ca_crt, taco_ca_key, False, overwrite=False)
+    covid_ca_crt, covid_ca_key = get_covid_ca_crt_key()
+    generate_ssl_for_nodes(ssl_dir, covid_ca_crt, covid_ca_key, False, overwrite=False)
 
 
 def generate_ssl_for_nodes(ssl_dir: Path, ca_crt: bytes, ca_key: bytes, private: bool, overwrite=True):
@@ -245,16 +245,16 @@ def init(create_certs: Optional[Path], root_path: Path):
         else:
             print(f"** {root_path} does not exist. Executing core init **")
             # sanity check here to prevent infinite recursion
-            if taco_init(root_path) == 0 and root_path.exists():
+            if covid_init(root_path) == 0 and root_path.exists():
                 return init(create_certs, root_path)
 
             print(f"** {root_path} was not created. Exiting **")
             return -1
     else:
-        return taco_init(root_path)
+        return covid_init(root_path)
 
 
-def taco_version_number() -> Tuple[str, str, str, str]:
+def covid_version_number() -> Tuple[str, str, str, str]:
     scm_full_version = __version__
     left_full_version = scm_full_version.split("+")
 
@@ -302,37 +302,37 @@ def taco_version_number() -> Tuple[str, str, str, str]:
     return major_release_number, minor_release_number, patch_release_number, dev_release_number
 
 
-def taco_minor_release_number():
-    res = int(taco_version_number()[2])
+def covid_minor_release_number():
+    res = int(covid_version_number()[2])
     print(f"Install release number: {res}")
     return res
 
 
-def taco_full_version_str() -> str:
-    major, minor, patch, dev = taco_version_number()
+def covid_full_version_str() -> str:
+    major, minor, patch, dev = covid_version_number()
     return f"{major}.{minor}.{patch}{dev}"
 
 
-def taco_init(root_path: Path):
-    if os.environ.get("TACO_ROOT", None) is not None:
+def covid_init(root_path: Path):
+    if os.environ.get("COVID_ROOT", None) is not None:
         print(
-            f"warning, your TACO_ROOT is set to {os.environ['TACO_ROOT']}. "
-            f"Please unset the environment variable and run taco init again\n"
+            f"warning, your COVID_ROOT is set to {os.environ['COVID_ROOT']}. "
+            f"Please unset the environment variable and run covid init again\n"
             f"or manually migrate config.yaml"
         )
 
-    print(f"Taco directory {root_path}")
+    print(f"Covid directory {root_path}")
     if root_path.is_dir() and Path(root_path / "config" / "config.yaml").exists():
-        # This is reached if TACO_ROOT is set, or if user has run taco init twice
+        # This is reached if COVID_ROOT is set, or if user has run covid init twice
         # before a new update.
         check_keys(root_path)
         print(f"{root_path} already exists, no migration action taken")
         return -1
 
-    create_default_taco_config(root_path)
+    create_default_covid_config(root_path)
     create_all_ssl(root_path)
     check_keys(root_path)
     print("")
-    print("To see your keys, run 'taco keys show --show-mnemonic-seed'")
+    print("To see your keys, run 'covid keys show --show-mnemonic-seed'")
 
     return 0

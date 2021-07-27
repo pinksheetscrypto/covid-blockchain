@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from typing import List, Optional, Tuple
 
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.util.ints import uint64
-from taco.util.streamable import streamable, Streamable
-from taco.wallet.lineage_proof import LineageProof
-from taco.types.blockchain_format.program import Program
-from taco.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.util.ints import uint64
+from covid.util.streamable import streamable, Streamable
+from covid.wallet.lineage_proof import LineageProof
+from covid.types.blockchain_format.program import Program
+from covid.types.blockchain_format.coin import Coin
 
 
 @dataclass(frozen=True)

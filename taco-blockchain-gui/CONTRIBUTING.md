@@ -1,15 +1,15 @@
 # Introduction
 
-Welcome to the taco-blockchain project!
-We are happy that you are taking a look at the code for Taco, a proof of space and time cryptocurrency.
+Welcome to the covid-blockchain project!
+We are happy that you are taking a look at the code for Covid, a proof of space and time cryptocurrency.
 
 A lot of fascinating new cryptography and blockchain concepts are used and implemented here.
-This repo includes the code for the Taco GUI in electron/react and TypeScript.
+This repo includes the code for the Covid GUI in electron/react and TypeScript.
 
-It is an input to the [taco-blockchain](https://github.com/Taco-Network/taco-blockchain) repository which also includes a verifiable delay function implementation that it imports from the [chiavdf repo](https://github.com/Taco-Network/chiavdf) (in c/c++), and a proof of space implementation that it imports from the [chiapos repo](https://github.com/Taco-Network/chiapos). BLS signatures are imported from the [bls-signatures repo](https://github.com/Taco-Network/bls-signatures) as blspy. There is an additional dependency on the [chiabip158 repo](https://github.com/Chia-Network/chiabip158).
-For major platforms, binary and source wheels are shipped to PyPI from each dependent repo and then taco-blockchain can pip install those from PyPI or they can be prepackaged as is done for the Windows and MacOS installer. On unsupported platforms, pip will fall back to the source distributions to be compiled locally.
+It is an input to the [covid-blockchain](https://github.com/pinksheetscrypto/covid-blockchain) repository which also includes a verifiable delay function implementation that it imports from the [chiavdf repo](https://github.com/pinksheetscrypto/chiavdf) (in c/c++), and a proof of space implementation that it imports from the [chiapos repo](https://github.com/pinksheetscrypto/chiapos). BLS signatures are imported from the [bls-signatures repo](https://github.com/pinksheetscrypto/bls-signatures) as blspy. There is an additional dependency on the [chiabip158 repo](https://github.com/Chia-Network/chiabip158).
+For major platforms, binary and source wheels are shipped to PyPI from each dependent repo and then covid-blockchain can pip install those from PyPI or they can be prepackaged as is done for the Windows and MacOS installer. On unsupported platforms, pip will fall back to the source distributions to be compiled locally.
 
-If you want to learn more about this project, read the [wiki](https://github.com/Taco-Network/taco-blockchain/wiki), or check out the [green paper](https://www.taco.net/assets/TacoGreenPaper.pdf).
+If you want to learn more about this project, read the [wiki](https://github.com/pinksheetscrypto/covid-blockchain/wiki), or check out the [green paper](https://www.covid.net/assets/CovidGreenPaper.pdf).
 
 ## Contributions
 
@@ -19,7 +19,7 @@ You can visit our [Trello project board](https://trello.com/b/ZuNx7sET) to get a
 Generally things to the left are in progress or done. Some things go through "Coming up soon" but some will come directly out of other columns.
 Usually the things closer to the top of each column are the ones that will be worked on soonest.
 If you are interested in cryptography, math, or just like hacking in python, there are many interesting problems to work on.
-Contact any of the team members on [Keybase](https://keybase.io/team/taco_network.public), which we use as the main communication method and you can comment on any Trello card.
+Contact any of the team members on [Keybase](https://keybase.io/team/covid_network.public), which we use as the main communication method and you can comment on any Trello card.
 
 ## Run tests and linting
 

@@ -6,11 +6,11 @@ from typing import Any, Dict, Optional
 
 import websockets
 
-from taco.server.server import ssl_context_for_client
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.util.config import load_config
-from taco.util.json_util import dict_to_json_str
-from taco.util.ws_message import WsRpcMessage, create_payload_dict
+from covid.server.server import ssl_context_for_client
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.util.config import load_config
+from covid.util.json_util import dict_to_json_str
+from covid.util.ws_message import WsRpcMessage, create_payload_dict
 
 
 class DaemonProxy:

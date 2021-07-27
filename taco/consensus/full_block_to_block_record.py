@@ -1,19 +1,19 @@
 from typing import List, Optional, Union
 
-from taco.consensus.block_record import BlockRecord
-from taco.consensus.blockchain_interface import BlockchainInterface
-from taco.consensus.constants import ConsensusConstants
-from taco.consensus.deficit import calculate_deficit
-from taco.consensus.difficulty_adjustment import get_next_sub_slot_iters_and_difficulty
-from taco.consensus.make_sub_epoch_summary import make_sub_epoch_summary
-from taco.consensus.pot_iterations import is_overflow_block
-from taco.types.blockchain_format.classgroup import ClassgroupElement
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.blockchain_format.slots import ChallengeBlockInfo
-from taco.types.blockchain_format.sub_epoch_summary import SubEpochSummary
-from taco.types.full_block import FullBlock
-from taco.types.header_block import HeaderBlock
-from taco.util.ints import uint8, uint32, uint64
+from covid.consensus.block_record import BlockRecord
+from covid.consensus.blockchain_interface import BlockchainInterface
+from covid.consensus.constants import ConsensusConstants
+from covid.consensus.deficit import calculate_deficit
+from covid.consensus.difficulty_adjustment import get_next_sub_slot_iters_and_difficulty
+from covid.consensus.make_sub_epoch_summary import make_sub_epoch_summary
+from covid.consensus.pot_iterations import is_overflow_block
+from covid.types.blockchain_format.classgroup import ClassgroupElement
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.blockchain_format.slots import ChallengeBlockInfo
+from covid.types.blockchain_format.sub_epoch_summary import SubEpochSummary
+from covid.types.full_block import FullBlock
+from covid.types.header_block import HeaderBlock
+from covid.util.ints import uint8, uint32, uint64
 
 
 def block_to_block_record(

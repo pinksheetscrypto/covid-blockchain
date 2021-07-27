@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 from typing import List, Optional, Tuple
 
-from taco.types.blockchain_format.coin import Coin
-from taco.types.blockchain_format.program import Program
-from taco.types.blockchain_format.sized_bytes import bytes32
-from taco.types.header_block import HeaderBlock
-from taco.types.spend_bundle import SpendBundle
-from taco.util.ints import uint8, uint32, uint128
-from taco.util.streamable import Streamable, streamable
+from covid.types.blockchain_format.coin import Coin
+from covid.types.blockchain_format.program import Program
+from covid.types.blockchain_format.sized_bytes import bytes32
+from covid.types.header_block import HeaderBlock
+from covid.types.spend_bundle import SpendBundle
+from covid.util.ints import uint8, uint32, uint128
+from covid.util.streamable import Streamable, streamable
 
 """
 Protocol between wallet (SPV node) and full node.

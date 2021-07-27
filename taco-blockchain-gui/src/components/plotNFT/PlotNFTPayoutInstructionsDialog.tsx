@@ -9,7 +9,7 @@ import {
   Loading,
   TextField,
   Form,
-} from '@taco/core';
+} from '@covid/core';
 import {
   Button,
   Dialog,
@@ -93,7 +93,7 @@ export default function PlotNFTPayoutInstructionsDialog(props: Props) {
                 </Trans>{' '}
                 <Link
                   target="_blank"
-                  href="https://github.com/Taco-Network/pool-reference/blob/main/SPECIFICATION.md#payloadpayout_instructions"
+                  href="https://github.com/pinksheetscrypto/pool-reference/blob/main/SPECIFICATION.md#payloadpayout_instructions"
                   noWrap
                 >
                   <Trans>Learn More</Trans>
