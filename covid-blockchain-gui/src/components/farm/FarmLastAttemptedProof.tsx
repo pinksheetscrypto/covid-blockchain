@@ -7,17 +7,18 @@ import moment from 'moment';
 import type { Row } from '../core/components/Table/Table';
 import usePlots from '../../hooks/usePlots';
 import { RootState } from '../../modules/rootReducer';
+import { FormatLargeNumber } from '@covid/core';
 
 const cols = [
   {
-    minWidth: '200px',
+    minWidth: '180px',
     field: 'challenge_hash',
     tooltip: true,
     title: <Trans>Challenge</Trans>,
   },
   {
     field(row: Row) {
-      return `${row.passed_filter} / ${row.total_plots}`;
+      return `${row.passed_filter} / ${FormatLargeNumber(row.total_plots)}`;
     },
     title: <Trans>Plots Passed Filter</Trans>,
   },
@@ -26,8 +27,10 @@ const cols = [
     title: <Trans>Proofs Found</Trans>,
   },
   {
-    field: 'timeconsuming',
-    title: <Trans>Time Consuming(ms)</Trans>,
+    field(row: Row) {
+      return `${FormatLargeNumber(row.timeconsuming)} ms`;
+    },
+    title: <Trans>Plot Response Time</Trans>,
   },
   {
     field(row: Row) {

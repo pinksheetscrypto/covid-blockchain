@@ -5,6 +5,7 @@ import type { RootState } from '../../../modules/rootReducer';
 import FarmCard from './FarmCard';
 import { mojo_to_covid } from '../../../util/covid';
 import useCurrencyCode from '../../../hooks/useCurrencyCode';
+import { FormatLargeNumber } from '@covid/core';
 
 export default function FarmCardTotalCovidFarmed() {
   const currencyCode = useCurrencyCode();
@@ -27,7 +28,7 @@ export default function FarmCardTotalCovidFarmed() {
   return (
     <FarmCard
       title={<Trans>{currencyCode} Total Covid Farmed</Trans>}
-      value={totalCovidFarmed}
+      value={<FormatLargeNumber value={totalCovidFarmed} />}
       loading={loading}
     />
   );

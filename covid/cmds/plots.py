@@ -194,3 +194,16 @@ def remove_cmd(ctx: click.Context, final_dir: str):
 @click.pass_context
 def show_cmd(ctx: click.Context):
     show_plots(ctx.obj["root_path"])
+
+@plots_cmd.command("refresh", short_help="Refreshes the list of plots")
+@click.pass_context
+def show_cmd(ctx: click.Context):
+    refresh_plots(ctx.obj["root_path"])
+
+def refresh_plots(root_path: Path):
+    from covid.plotting.plot_tools import load_plots
+
+    print("Refreshing Plots...")
+    print()
+    load_plots()
+
