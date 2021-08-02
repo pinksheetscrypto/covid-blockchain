@@ -7,17 +7,20 @@ import moment from 'moment';
 import type { Row } from '../core/components/Table/Table';
 import usePlots from '../../hooks/usePlots';
 import { RootState } from '../../modules/rootReducer';
+import useLocale from '../../hooks/useLocale';
+import { defaultLocale } from '../../config/locales';
 
 const cols = [
   {
-    minWidth: '200px',
+    minWidth: '180px',
     field: 'challenge_hash',
     tooltip: true,
     title: <Trans>Challenge</Trans>,
   },
   {
     field(row: Row) {
-      return `${row.passed_filter} / ${row.total_plots}`;
+      const [locale] = useLocale(defaultLocale);
+      return `${row.passed_filter} / ${BigInt(row.total_plots).toLocaleString(locale)}`;
     },
     title: <Trans>Plots Passed Filter</Trans>,
   },
@@ -26,8 +29,11 @@ const cols = [
     title: <Trans>Proofs Found</Trans>,
   },
   {
-    field: 'timeconsuming',
-    title: <Trans>Time Consuming(ms)</Trans>,
+    field(row: Row) {
+      const [locale] = useLocale(defaultLocale);
+      return `${BigInt(row.timeconsuming).toLocaleString(locale)} ms`;
+    },
+    title: <Trans>Plot Response Time</Trans>,
   },
   {
     field(row: Row) {
