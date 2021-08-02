@@ -1,10 +1,10 @@
-import asyncio
 import logging
 import sys
 from pathlib import Path
 from covid.plotting.plot_tools import load_plots
 
 import click
+import asyncio
 
 DEFAULT_STRIPE_SIZE = 65536
 log = logging.getLogger(__name__)
@@ -202,8 +202,8 @@ def show_cmd(ctx: click.Context):
 def show_cmd(ctx: click.Context):
     refresh_plots(ctx.obj["root_path"])
 
-def refresh_plots():
-    asyncio.run(refresh_plot_sub)
+def refresh_plots(self):
+    asyncio.run(refresh_plot_sub(self))
 
 async def refresh_plot_sub(self):
         print("Refreshing Plots...")
