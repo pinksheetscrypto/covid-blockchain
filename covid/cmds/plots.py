@@ -1,6 +1,7 @@
 import logging
 import sys
 from pathlib import Path
+from covid.plotting.plot_tools import load_plots
 
 import click
 
@@ -200,10 +201,23 @@ def show_cmd(ctx: click.Context):
 def show_cmd(ctx: click.Context):
     refresh_plots(ctx.obj["root_path"])
 
-def refresh_plots(root_path: Path):
-    from covid.plotting.plot_tools import load_plots
+async def refresh_plots(self):
+        print("Refreshing Plots...")
+        print()
 
-    print("Refreshing Plots...")
-    print()
-    load_plots()
-
+        locked: bool = self._refresh_lock.locked()
+        changed: bool = False
+        if not locked:
+            async with self._refresh_lock:
+                # Avoid double refreshing of plots
+                (changed, self.provers, self.failed_to_open_filenames, self.no_key_filenames,) = load_plots(
+                    self.provers,
+                    self.failed_to_open_filenames,
+                    self.farmer_public_keys,
+                    self.pool_public_keys,
+                    self.match_str,
+                    self.show_memo,
+                    self.root_path,
+                )
+        if changed:
+            self._state_changed("plots")

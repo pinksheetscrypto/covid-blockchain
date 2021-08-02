@@ -18,7 +18,7 @@ const cols = [
   },
   {
     field(row: Row) {
-      return `${row.passed_filter} / ${FormatLargeNumber(row.total_plots)}`;
+      return `${row.passed_filter} / ${FormatLargeNumber(row.total_plots).toString()}`;
     },
     title: <Trans>Plots Passed Filter</Trans>,
   },
@@ -28,7 +28,7 @@ const cols = [
   },
   {
     field(row: Row) {
-      return `${FormatLargeNumber(row.timeconsuming)} ms`;
+      return `${FormatLargeNumber(row.timeconsuming).toString()} ms`;
     },
     title: <Trans>Plot Response Time</Trans>,
   },
