@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import sys
 from pathlib import Path
@@ -201,7 +202,10 @@ def show_cmd(ctx: click.Context):
 def show_cmd(ctx: click.Context):
     refresh_plots(ctx.obj["root_path"])
 
-async def refresh_plots(self):
+def refresh_plots():
+    asyncio.run(refresh_plot_sub)
+
+async def refresh_plot_sub(self):
         print("Refreshing Plots...")
         print()
 
