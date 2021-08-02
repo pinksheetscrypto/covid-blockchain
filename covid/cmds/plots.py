@@ -125,6 +125,7 @@ def create_cmd(
             self.memo = memo
             self.nobitfield = nobitfield
             self.exclude_final_dir = exclude_final_dir
+            self._refresh_lock = False
 
     if size < 32 and not override_k:
         print("k=32 is the minimum size for farming.")
@@ -203,7 +204,9 @@ def show_cmd(ctx: click.Context):
     refresh_plots(ctx.obj["root_path"])
 
 def refresh_plots(self):
-    asyncio.run(refresh_plot_sub(self))
+    loop = asyncio.get_event_loop()
+    task = loop.create_task(refresh_plot_sub(self))
+    loop.run_until_complete(task)
 
 async def refresh_plot_sub(self):
         print("Refreshing Plots...")
