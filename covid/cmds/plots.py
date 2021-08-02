@@ -4,7 +4,6 @@ from pathlib import Path
 from covid.plotting.plot_tools import load_plots
 
 import click
-import asyncio
 
 DEFAULT_STRIPE_SIZE = 65536
 log = logging.getLogger(__name__)
@@ -204,27 +203,14 @@ def show_cmd(ctx: click.Context):
     refresh_plots(ctx.obj["root_path"])
 
 def refresh_plots(self):
-    loop = asyncio.get_event_loop()
-    task = loop.create_task(refresh_plot_sub(self))
-    loop.run_until_complete(task)
-
-async def refresh_plot_sub(self):
-        print("Refreshing Plots...")
-        print()
-
-        locked: bool = self._refresh_lock.locked()
-        changed: bool = False
-        if not locked:
-            async with self._refresh_lock:
-                # Avoid double refreshing of plots
-                (changed, self.provers, self.failed_to_open_filenames, self.no_key_filenames,) = load_plots(
-                    self.provers,
-                    self.failed_to_open_filenames,
-                    self.farmer_public_keys,
-                    self.pool_public_keys,
-                    self.match_str,
-                    self.show_memo,
-                    self.root_path,
-                )
-        if changed:
-            self._state_changed("plots")
+    print("Refreshing Plots...")
+    print()
+    load_plots(
+                self.provers,
+                self.failed_to_open_filenames,
+                self.farmer_public_keys,
+                self.pool_public_keys,
+                self.match_str,
+                self.show_memo,
+                self.root_path,
+            )
