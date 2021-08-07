@@ -27,7 +27,7 @@ def parse_sexp_to_condition(
     if len(as_atoms) < 1:
         return Err.INVALID_CONDITION, None
     opcode = as_atoms[0]
-        opcode = ConditionOpcode(opcode)
+    opcode = ConditionOpcode(opcode)
     return None, ConditionWithArgs(opcode, as_atoms[1:])
 
 
