@@ -167,7 +167,7 @@ class TestRpc:
 
             # Test farmer get_harvesters
             async def test_get_harvesters():
-            farmer_res = await client.get_harvesters()
+                farmer_res = await client.get_harvesters()
                 if len(list(farmer_res["harvesters"])) != 1:
                     return False
                 if len(list(farmer_res["harvesters"][0]["plots"])) != num_plots:

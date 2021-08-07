@@ -592,8 +592,8 @@ class Farmer:
                         new_data: Dict = response.to_json_dict()
                         if cache_entry.data != new_data:
                             updated = True
-                        self.log.debug(f"update_cached_harvesters cache updated: {connection.peer_node_id}")
-                    else:
+                            self.log.debug(f"update_cached_harvesters cache updated: {connection.peer_node_id}")
+                        else:
                             self.log.debug(f"update_cached_harvesters no changes for: {connection.peer_node_id}")
                         cache_entry.set_data(new_data)
                     else:

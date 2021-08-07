@@ -527,7 +527,7 @@ class WalletStateManager:
         return get_balance_from_coin_records(unspent_coin_records)
 
     async def get_confirmed_balance_for_wallet_with_lock(self, wallet_id: int) -> Set[WalletCoinRecord]:
-            async with self.lock:
+        async with self.lock:
             return await self.coin_store.get_unspent_coins_for_wallet(wallet_id)
 
     async def get_unconfirmed_balance(

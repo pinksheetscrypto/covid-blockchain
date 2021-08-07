@@ -53,12 +53,12 @@ class FarmerAPI:
 
         if self.farmer.constants.NETWORK_TYPE != NetworkType.MAINNET:
             # This is meant to make testnets more stable, when difficulty is very low
-        if self.farmer.number_of_responses[new_proof_of_space.sp_hash] > max_pos_per_sp:
-            self.farmer.log.info(
-                f"Surpassed {max_pos_per_sp} PoSpace for one SP, no longer submitting PoSpace for signage point "
-                f"{new_proof_of_space.sp_hash}"
-            )
-            return None
+            if self.farmer.number_of_responses[new_proof_of_space.sp_hash] > max_pos_per_sp:
+                self.farmer.log.info(
+                    f"Surpassed {max_pos_per_sp} PoSpace for one SP, no longer submitting PoSpace for signage point "
+                    f"{new_proof_of_space.sp_hash}"
+                )
+                return None
 
         if new_proof_of_space.sp_hash not in self.farmer.sps:
             self.farmer.log.warning(
