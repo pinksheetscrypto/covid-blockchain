@@ -50,15 +50,16 @@ const cols = [
       //   'GB':"🇬🇧", 
       // } 
       // var find_nat = national[Geo.country];
-      var emoji = require('node-emoji')
+      //var emoji = require('node-emoji')
 
 
-      var find_nat = emoji.get(Geo.country.toLowerCase())
-      var text = `${find_nat||''} ${Geo.country} ${Geo.city}`;
+      //var find_nat = emoji.get(Geo.country.toLowerCase())
+      //var text = `${find_nat||''} ${Geo.country} ${Geo.city}`;
 
-      return  emoji.emojify(text,(name)=>{
-        return '';
-      });
+      //return  emoji.emojify(text,(name)=>{
+      //  return '';
+      //});
+      return `${Geo.country} ${Geo.city}`;
     }, title: <Trans>Region</Trans>,
   }, 
   {
