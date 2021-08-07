@@ -477,6 +477,6 @@ async def validate_block_body(
     if not cached_bls.aggregate_verify(
         pairs_pks, pairs_msgs, block.transactions_info.aggregated_signature, force_cache
     ):
-            return Err.BAD_AGGREGATE_SIGNATURE, None
+        return Err.BAD_AGGREGATE_SIGNATURE, None
 
-        return None, npc_result
+    return None, npc_result
