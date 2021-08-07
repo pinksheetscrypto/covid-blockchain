@@ -623,7 +623,7 @@ class CovidServer:
         result = []
         for _, connection in self.all_connections.items():
             if node_type is None or connection.connection_type == node_type:
-            result.append(connection)
+                result.append(connection)
         return result
 
     async def close_all_connections(self) -> None:
