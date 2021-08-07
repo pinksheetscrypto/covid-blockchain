@@ -468,15 +468,15 @@ async def validate_block_body(
         if not block.transactions_info.aggregated_signature:
             return Err.BAD_AGGREGATE_SIGNATURE, None
 
-    # The pairing cache is not useful while syncing as each pairing is seen
-    # only once, so the extra effort of populating it is not justified.
-    # However, we force caching of pairings just for unfinished blocks
-    # as the cache is likely to be useful when validating the corresponding
-    # finished blocks later.
-    force_cache: bool = isinstance(block, UnfinishedBlock)
-    if not cached_bls.aggregate_verify(
-        pairs_pks, pairs_msgs, block.transactions_info.aggregated_signature, force_cache
-    ):
-        return Err.BAD_AGGREGATE_SIGNATURE, None
+        # The pairing cache is not useful while syncing as each pairing is seen
+        # only once, so the extra effort of populating it is not justified.
+        # However, we force caching of pairings just for unfinished blocks
+        # as the cache is likely to be useful when validating the corresponding
+        # finished blocks later.
+        force_cache: bool = isinstance(block, UnfinishedBlock)
+        if not cached_bls.aggregate_verify(
+            pairs_pks, pairs_msgs, block.transactions_info.aggregated_signature, force_cache
+        ):
+            return Err.BAD_AGGREGATE_SIGNATURE, None
 
-    return None, npc_result
+        return None, npc_result
