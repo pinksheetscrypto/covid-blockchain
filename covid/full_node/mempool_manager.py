@@ -5,9 +5,10 @@ import logging
 import time
 from concurrent.futures.process import ProcessPoolExecutor
 from typing import Dict, List, Optional, Set, Tuple
-from blspy import AugSchemeMPL, G1Element
+from blspy import G1Element
 from chiabip158 import PyBIP158
 
+from covid.util import cached_bls
 from covid.consensus.block_record import BlockRecord
 from covid.consensus.constants import ConsensusConstants
 from covid.consensus.cost_calculator import NPCResult, calculate_cost_of_program
@@ -83,11 +84,7 @@ class MempoolManager:
         Returns aggregated spendbundle that can be used for creating new block,
         additions and removals in that spend_bundle
         """
-        if (
-            self.peak is None
-            or self.peak.header_hash != last_tb_header_hash
-            or int(time.time()) <= self.constants.INITIAL_FREEZE_END_TIMESTAMP
-        ):
+        if self.peak is None or self.peak.header_hash != last_tb_header_hash:
             return None
 
         cost_sum = 0  # Checks that total cost does not exceed block maximum
@@ -427,7 +424,7 @@ class MempoolManager:
 
         if validate_signature:
             # Verify aggregated signature
-            if not AugSchemeMPL.aggregate_verify(pks, msgs, new_spend.aggregated_signature):
+            if not cached_bls.aggregate_verify(pks, msgs, new_spend.aggregated_signature, True):
                 log.warning(f"Aggsig validation error {pks} {msgs} {new_spend}")
                 return None, MempoolInclusionStatus.FAILED, Err.BAD_AGGREGATE_SIGNATURE
         # Remove all conflicting Coins and SpendBundles
@@ -507,8 +504,6 @@ class MempoolManager:
         if self.peak == new_peak:
             return []
         assert new_peak.timestamp is not None
-        if new_peak.timestamp <= self.constants.INITIAL_FREEZE_END_TIMESTAMP:
-            return []
 
         self.peak = new_peak
 

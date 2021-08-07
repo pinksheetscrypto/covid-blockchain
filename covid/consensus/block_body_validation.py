@@ -2,7 +2,7 @@ import collections
 import logging
 from typing import Dict, List, Optional, Set, Tuple, Union, Callable
 
-from blspy import AugSchemeMPL, G1Element
+from blspy import G1Element
 from chiabip158 import PyBIP158
 from clvm.casts import int_from_bytes
 
@@ -27,6 +27,7 @@ from covid.types.full_block import FullBlock
 from covid.types.generator_types import BlockGenerator
 from covid.types.name_puzzle_condition import NPC
 from covid.types.unfinished_block import UnfinishedBlock
+from covid.util import cached_bls
 from covid.util.condition_tools import (
     pkm_pairs_for_conditions_dict,
     coin_announcements_names_for_npc,
@@ -82,10 +83,7 @@ async def validate_block_body(
         while not prev_tb.is_transaction_block:
             prev_tb = blocks.block_record(prev_tb.prev_hash)
         assert prev_tb.timestamp is not None
-        if (
-            prev_tb.timestamp > constants.INITIAL_FREEZE_END_TIMESTAMP
-            and len(block.transactions_generator_ref_list) > 0
-        ):
+        if len(block.transactions_generator_ref_list) > 0:
             return Err.NOT_BLOCK_BUT_HAS_DATA, None
 
         return None, None  # This means the block is valid
@@ -155,10 +153,7 @@ async def validate_block_body(
     if set(block.transactions_info.reward_claims_incorporated) != expected_reward_coins:
         return Err.INVALID_REWARD_COINS, None
 
-    if block.foliage_transaction_block.timestamp > constants.INITIAL_FREEZE_END_TIMESTAMP:
         if len(block.transactions_info.reward_claims_incorporated) != len(expected_reward_coins):
-            # No duplicates, after transaction freeze period. Duplicates cause no issues because we filter them out
-            # anyway.
             return Err.INVALID_REWARD_COINS, None
 
     removals: List[bytes32] = []
@@ -170,14 +165,10 @@ async def validate_block_body(
     removals_puzzle_dic: Dict[bytes32, bytes32] = {}
     cost: uint64 = uint64(0)
 
-    # We check in header validation that timestamp is not more that 10 minutes into the future
-    if (
-        block.foliage_transaction_block.timestamp <= constants.INITIAL_FREEZE_END_TIMESTAMP
-        and block.transactions_generator is not None
-    ):
+    # In header validation we check that timestamp is not more that 10 minutes into the future
         # 6. No transactions before INITIAL_TRANSACTION_FREEZE timestamp
-        return Err.INITIAL_TRANSACTION_FREEZE, None
-    else:
+    # (this test has been removed)
+
         # 7a. The generator root must be the hash of the serialized bytes of
         #     the generator for this block (or zeroes if no generator)
         if block.transactions_generator is not None:
@@ -477,8 +468,15 @@ async def validate_block_body(
         if not block.transactions_info.aggregated_signature:
             return Err.BAD_AGGREGATE_SIGNATURE, None
 
-        # noinspection PyTypeChecker
-        if not AugSchemeMPL.aggregate_verify(pairs_pks, pairs_msgs, block.transactions_info.aggregated_signature):
+    # The pairing cache is not useful while syncing as each pairing is seen
+    # only once, so the extra effort of populating it is not justified.
+    # However, we force caching of pairings just for unfinished blocks
+    # as the cache is likely to be useful when validating the corresponding
+    # finished blocks later.
+    force_cache: bool = isinstance(block, UnfinishedBlock)
+    if not cached_bls.aggregate_verify(
+        pairs_pks, pairs_msgs, block.transactions_info.aggregated_signature, force_cache
+    ):
             return Err.BAD_AGGREGATE_SIGNATURE, None
 
         return None, npc_result

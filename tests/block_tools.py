@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Callable, Dict, List, Optional, Tuple, Any
 
 from blspy import AugSchemeMPL, G1Element, G2Element, PrivateKey
-from chiabip158 import PyBIP158
+from covidbip158 import PyBIP158
 
 from covid.cmds.init_funcs import create_all_ssl, create_default_covid_config
 from covid.full_node.bundle_tools import (
@@ -108,7 +108,6 @@ test_constants = DEFAULT_CONSTANTS.replace(
         * 10,  # Allows creating blockchains with timestamps up to 10 days in the future, for testing
         "COST_PER_BYTE": 1337,
         "MEMPOOL_BLOCK_BUFFER": 6,
-        "INITIAL_FREEZE_END_TIMESTAMP": int(time.time()) - 1,
         "NETWORK_TYPE": 1,
     }
 )
@@ -1557,6 +1556,10 @@ def create_test_foliage(
             for coin in additions:
                 addition_amount += coin.amount
             spend_bundle_fees = removal_amount - addition_amount
+            # in order to allow creating blocks that mint coins, clamp the fee
+            # to 0, if it ends up being negative
+            if spend_bundle_fees < 0:
+                spend_bundle_fees = 0
         else:
             spend_bundle_fees = 0
 

@@ -32,7 +32,7 @@ rm -rf dist
 mkdir dist
 
 echo "Create executables with pyinstaller"
-pip install pyinstaller==4.2
+pip install pyinstaller==4.5
 SPEC_FILE=$(python -c 'import covid; print(covid.PYINSTALLER_SPEC_PATH)')
 pyinstaller --log-level=INFO "$SPEC_FILE"
 LAST_EXIT_CODE=$?
@@ -55,10 +55,18 @@ if [ "$LAST_EXIT_CODE" -ne 0 ]; then
 	exit $LAST_EXIT_CODE
 fi
 
+# sets the version for covid-blockchain in package.json
+cp package.json package.json.orig
+jq --arg VER "$COVID_INSTALLER_VERSION" '.version=$VER' package.json > temp.json && mv temp.json package.json
+
 electron-packager . covid-blockchain --asar.unpack="**/daemon/**" --platform=linux \
 --icon=src/assets/img/Covid.icns --overwrite --app-bundle-id=net.covid.blockchain \
 --appVersion=$COVID_INSTALLER_VERSION
 LAST_EXIT_CODE=$?
+
+# reset the package.json to the original
+mv package.json.orig package.json
+
 if [ "$LAST_EXIT_CODE" -ne 0 ]; then
 	echo >&2 "electron-packager failed!"
 	exit $LAST_EXIT_CODE

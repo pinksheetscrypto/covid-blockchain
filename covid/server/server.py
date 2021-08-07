@@ -278,6 +278,11 @@ class CovidServer:
                 error_stack = traceback.format_exc()
                 self.log.error(f"Exception {e}, exception Stack: {error_stack}")
                 close_event.set()
+        except ValueError as e:
+            if connection is not None:
+                await connection.close(self.invalid_protocol_ban_seconds, WSCloseCode.PROTOCOL_ERROR, Err.UNKNOWN)
+            self.log.warning(f"{e} - closing connection")
+            close_event.set()
         except Exception as e:
             if connection is not None:
                 await connection.close(ws_close_code=WSCloseCode.PROTOCOL_ERROR, error=Err.UNKNOWN)
@@ -614,9 +619,10 @@ class CovidServer:
     def get_full_node_connections(self) -> List[WSCovidConnection]:
         return list(self.connection_by_type[NodeType.FULL_NODE].values())
 
-    def get_connections(self) -> List[WSCovidConnection]:
+    def get_connections(self, node_type: Optional[NodeType] = None) -> List[WSCovidConnection]:
         result = []
         for _, connection in self.all_connections.items():
+            if node_type is None or connection.connection_type == node_type:
             result.append(connection)
         return result
 

@@ -19,7 +19,7 @@ from covid.consensus.constants import ConsensusConstants
 from covid.types.announcement import Announcement
 from covid.types.blockchain_format.program import Program
 from covid.types.coin_record import CoinRecord
-from covid.types.coin_solution import CoinSolution
+from covid.types.coin_spend import CoinSpend
 from covid.types.condition_opcodes import ConditionOpcode
 from covid.types.full_block import FullBlock
 from covid.types.spend_bundle import SpendBundle
@@ -112,8 +112,8 @@ async def check_conditions(
     blocks = initial_blocks()
     coin = list(blocks[spend_reward_index].get_included_reward_coins())[0]
 
-    coin_solution = CoinSolution(coin, EASY_PUZZLE, condition_solution)
-    spend_bundle = SpendBundle([coin_solution], G2Element())
+    coin_spend = CoinSpend(coin, EASY_PUZZLE, condition_solution)
+    spend_bundle = SpendBundle([coin_spend], G2Element())
 
     # now let's try to create a block with the spend bundle and ensure that it doesn't validate
 

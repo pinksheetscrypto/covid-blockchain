@@ -65,12 +65,12 @@ export default function FarmLatestBlockChallenges() {
           *Want to explore Covid’s blocks further? Check out{' '}
           <Link
             color="primary"
-            href="https://covid.posat.io/"
+            href="https://https://alltheblocks.net/covid/"
             target="_blank"
           >
             Covid Explorer
           </Link>{' '}
-          built by that one smart guy on discord.
+          built by an open source developer.
         </Trans>
       </Typography>
     </Card>
