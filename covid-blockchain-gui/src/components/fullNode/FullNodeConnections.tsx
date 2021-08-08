@@ -45,10 +45,10 @@ const cols = [
 
       var emoji = require('node-emoji')
 
-      var find_nat = emoji.get("$flag-" + Geo.country.toLowerCase())
+      var find_nat = emoji.get("flag-" + Geo.country.toLowerCase())
       var cityRegion = `${Geo.city}`
       if(cityRegion.length == 0)
-        cityRegion = `{Geo.region}`
+        cityRegion = `${Geo.region}`
 
         var text = `${find_nat||''} ${Geo.country} ${cityRegion}`
 
