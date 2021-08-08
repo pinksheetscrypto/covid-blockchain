@@ -126,7 +126,7 @@
     "copy-webpack-plugin": "^9.0.1",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
-    "electron": "^11.4.10",
+    "electron": "^13.1.8",
     "electron-osx-sign": "github:electron/electron-osx-sign#master",
     "electron-winstaller": "^5.0.0",
     "eslint": "^7.30.0",
