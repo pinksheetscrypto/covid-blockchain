@@ -45,21 +45,26 @@ const cols = [
 
       var emoji = require('node-emoji')
 
-      var find_nat = emoji.get(Geo.country.toLowerCase())
+      var find_nat = emoji.get(`$flag-{Geo.country.toLowerCase()}`)
       var cityRegion = `${Geo.city}`
       if(cityRegion.length == 0)
         cityRegion = `${Geo.region}`
 
-      var text = `${find_nat||''} ${Geo.country} ${cityRegion}`
-
-      return  emoji.emojify(text,(name)=>{
-        return '';
+      var text = `${find_nat||''}`
+      var emojiText = emoji.emojify(text,(name)=>{
+        return ':earth_americas:';
       });
+
+      return `${emojiText} {Geo.country} {cityRegion}`
     }, title: <Trans>Region</Trans>,
   }, 
   {
     field(row: Connection) {
-      return `${row.peer_port}/${row.peer_server_port}`;
+      return (
+        <Tooltip title={`${row.peer_port}/${row.peer_server_port}`}>
+          <span>{row.peer_server_port}</span>
+        </Tooltip>
+      );
     },
     title: <Trans>Port</Trans>,
   },
@@ -132,7 +137,7 @@ export default function Connections() {
       }
     >
       {connections ? (
-        <Table cols={cols} rows={connections} />
+        <Table cols={cols} rows={connections.sort(a => (a.peak_height, a.bytes_read)).reverse()} />
       ) : (
         <Loading center />
       )}
