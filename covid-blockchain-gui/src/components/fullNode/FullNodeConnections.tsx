@@ -53,7 +53,7 @@ const cols = [
         var text = `${find_nat||''} ${Geo.country} ${cityRegion}`
 
         return  emoji.emojify(text,(name)=>{
-          return ':earth_americas:';
+          return emoji.get("earth_americas");
         });
     }, title: <Trans>Region</Trans>,
   }, 

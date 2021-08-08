@@ -65,7 +65,7 @@ export default function FarmLatestBlockChallenges() {
           *Want to explore Covid’s blocks further? Check out{' '}
           <Link
             color="primary"
-            href="https://https://alltheblocks.net/covid/"
+            href="https://alltheblocks.net/covid/"
             target="_blank"
           >
             Covid Explorer
