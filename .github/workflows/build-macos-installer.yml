@@ -41,7 +41,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     - name: Cache npm
-      uses: actions/cache@v2.1.5
+      uses: actions/cache@v2.1.6
       env:
         cache-name: cache-node-modules
       with:
@@ -59,7 +59,7 @@ jobs:
         echo "::set-output name=dir::$(pip cache dir)"
 
     - name: Cache pip
-      uses: actions/cache@v2.1.5
+      uses: actions/cache@v2.1.6
       with:
         # Note that new runners may break this https://github.com/actions/cache/issues/292
         path: ${{ steps.pip-cache.outputs.dir }}
@@ -92,7 +92,7 @@ jobs:
         sh install.sh
 
     - name: Setup Node 12.x
-      uses: actions/setup-node@v2.1.5
+      uses: actions/setup-node@v2.3.0
       with:
         node-version: '12.x'
 
@@ -107,6 +107,12 @@ jobs:
         git status
         cd ../build_scripts
         sh build_macos.sh
+
+    - name: Create installer version number
+      id: version_number
+      run: |
+        . ./activate
+        echo "::set-output name=CHIA_INSTALLER_VERSION::$(chia version)"
 
     - name: Upload MacOS artifacts
       uses: actions/upload-artifact@v2

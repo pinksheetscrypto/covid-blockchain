@@ -4,7 +4,7 @@ from typing import Dict, List, Optional, Any
 
 import aiohttp
 
-from covid.server.server import ssl_context_for_client
+from covid.server.server import NodeType, ssl_context_for_client
 from covid.server.ssl_context import private_ssl_ca_paths
 from covid.types.blockchain_format.sized_bytes import bytes32
 from covid.util.byte_types import hexstr_to_bytes
@@ -45,8 +45,11 @@ class RpcClient:
                 raise ValueError(res_json)
             return res_json
 
-    async def get_connections(self) -> List[Dict]:
-        response = await self.fetch("get_connections", {})
+    async def get_connections(self, node_type: Optional[NodeType] = None) -> List[Dict]:
+        request = {}
+        if node_type is not None:
+            request["node_type"] = node_type.value
+        response = await self.fetch("get_connections", request)
         for connection in response["connections"]:
             connection["node_id"] = hexstr_to_bytes(connection["node_id"])
         return response["connections"]

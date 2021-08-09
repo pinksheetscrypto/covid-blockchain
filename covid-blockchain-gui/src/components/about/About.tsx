@@ -70,7 +70,7 @@ const Spacer = styled.div`
   margin-bottom: 1rem;
 `;
 
-const url = 'https://covid.net';
+const url = 'https://chia.net';
 
 type Props = {
   version: string;
@@ -114,7 +114,7 @@ export default function About(props: Props) {
         </StyledLink>
         <StyledSubTitle>{description}</StyledSubTitle>
         <Spacer />
-        <div className="copyright">Copyright (c) 2021 Covid Network</div>
+        <div className="copyright">Copyright (c) 2021 Pink Sheets Crypto</div>
         <Spacer />
         <VersionsTable>
           {versions?.electron && (
