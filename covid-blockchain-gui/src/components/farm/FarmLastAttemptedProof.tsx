@@ -7,10 +7,6 @@ import moment from 'moment';
 import type { Row } from '../core/components/Table/Table';
 import usePlots from '../../hooks/usePlots';
 import { RootState } from '../../modules/rootReducer';
-import useLocale from '../../hooks/useLocale';
-import { defaultLocale } from '../../config/locales';
-
-const [locale] = useLocale(defaultLocale);
 
 const cols = [
   {
@@ -21,9 +17,7 @@ const cols = [
   },
   {
     field(row: Row) {
-      //const [locale] = useLocale(defaultLocale);
-      return `${row.passed_filter} / ${BigInt(row.total_plots).toLocaleString(locale)}`;
-      //return `${row.passed_filter} / ${row.total_plots}`;
+      return `${row.passed_filter} / ${row.total_plots}`;
     },
     title: <Trans>Plots Passed Filter</Trans>,
   },
@@ -33,9 +27,7 @@ const cols = [
   },
   {
     field(row: Row) {
-      //const [locale] = useLocale(defaultLocale);
-      return `${BigInt(row.timeconsuming).toLocaleString(locale)} ms`;
-      //return `${row.timeconsuming} ms`
+      return `${row.timeconsuming} ms`
     },
     title: <Trans>Plot Response Time</Trans>,
   },
