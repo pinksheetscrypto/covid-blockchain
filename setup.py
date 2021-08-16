@@ -20,7 +20,7 @@ dependencies = [
     #  See https://github.com/frispete/keyrings.cryptfile/issues/15
     "PyYAML==5.4.1",  # Used for config file format
     "setproctitle==1.2.2",  # Gives the covid processes readable names
-    "sortedcontainers==2.3.0",  # For maintaining sorted mempools
+    "sortedcontainers==2.4.0",  # For maintaining sorted mempools
     "websockets==9.1",  # For use in wallet RPC and electron UI
     "click==8.0.1",  # For the CLI
     "dnspython==2.1.0",  # Query DNS seeds
