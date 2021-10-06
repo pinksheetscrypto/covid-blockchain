@@ -59,12 +59,15 @@ export default function TextField(props: TextFieldProps): JSX.Element {
   return (
     // @ts-ignore
     <Controller
-      as={MaterialTextField}
       name={name}
       control={control}
+      render={({ field: { onChange, value } }) =>
+        (<MaterialTextField
+          value={value}
+          onChange={onChange}
       error={!!errorMessage}
       helperText={errorMessage?.message}
-      {...rest}
+          {...rest} /> )}
     />
   );
 }

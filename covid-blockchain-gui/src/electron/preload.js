@@ -1,4 +1,4 @@
-const electron = require('electron');
+const { ipcRenderer,shell } = require('electron');
 
 const geoip =require("geoip-lite");
 
