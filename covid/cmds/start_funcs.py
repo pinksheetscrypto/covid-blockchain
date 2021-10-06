@@ -47,7 +47,7 @@ async def create_start_daemon_connection(root_path: Path) -> Optional[DaemonProx
 
 async def async_start(root_path: Path, group: str, restart: bool) -> None:
     try:
-    daemon = await create_start_daemon_connection(root_path)
+        daemon = await create_start_daemon_connection(root_path)
     except KeyringMaxUnlockAttempts:
         print("Failed to unlock keyring")
         return None

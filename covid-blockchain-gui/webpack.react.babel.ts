@@ -63,7 +63,7 @@ export default {
     hot: true,
     port: PORT,
     devMiddleware: {
-    publicPath: '/',
+      publicPath: '/',
     },
   } : undefined,
   output: {

@@ -1310,7 +1310,7 @@ class FullNodeAPI:
         # new_compact_vdf() at a time, since it can be expensive
         async with self.full_node.compact_vdf_sem:
             try:
-            await self.full_node.new_compact_vdf(request, peer)
+                await self.full_node.new_compact_vdf(request, peer)
             finally:
                 self.full_node.compact_vdf_requests.remove(name)
 

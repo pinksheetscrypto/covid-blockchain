@@ -421,39 +421,39 @@ class FarmerAPI:
     @api_request
     async def new_signage_point(self, new_signage_point: farmer_protocol.NewSignagePoint):
         try:
-        pool_difficulties: List[PoolDifficulty] = []
-        for p2_singleton_puzzle_hash, pool_dict in self.farmer.pool_state.items():
-            if pool_dict["pool_config"].pool_url == "":
-                # Self pooling
-                continue
+            pool_difficulties: List[PoolDifficulty] = []
+            for p2_singleton_puzzle_hash, pool_dict in self.farmer.pool_state.items():
+                if pool_dict["pool_config"].pool_url == "":
+                    # Self pooling
+                    continue
 
-            if pool_dict["current_difficulty"] is None:
-                self.farmer.log.warning(
-                    f"No pool specific difficulty has been set for {p2_singleton_puzzle_hash}, "
-                    f"check communication with the pool, skipping this signage point, pool: "
-                    f"{pool_dict['pool_config'].pool_url} "
+                if pool_dict["current_difficulty"] is None:
+                    self.farmer.log.warning(
+                        f"No pool specific difficulty has been set for {p2_singleton_puzzle_hash}, "
+                        f"check communication with the pool, skipping this signage point, pool: "
+                        f"{pool_dict['pool_config'].pool_url} "
+                    )
+                    continue
+                pool_difficulties.append(
+                    PoolDifficulty(
+                        pool_dict["current_difficulty"],
+                        self.farmer.constants.POOL_SUB_SLOT_ITERS,
+                        p2_singleton_puzzle_hash,
+                    )
                 )
-                continue
-            pool_difficulties.append(
-                PoolDifficulty(
-                    pool_dict["current_difficulty"],
-                    self.farmer.constants.POOL_SUB_SLOT_ITERS,
-                    p2_singleton_puzzle_hash,
-                )
+            message = harvester_protocol.NewSignagePointHarvester(
+                new_signage_point.challenge_hash,
+                new_signage_point.difficulty,
+                new_signage_point.sub_slot_iters,
+                new_signage_point.signage_point_index,
+                new_signage_point.challenge_chain_sp,
+                pool_difficulties,
             )
-        message = harvester_protocol.NewSignagePointHarvester(
-            new_signage_point.challenge_hash,
-            new_signage_point.difficulty,
-            new_signage_point.sub_slot_iters,
-            new_signage_point.signage_point_index,
-            new_signage_point.challenge_chain_sp,
-            pool_difficulties,
-        )
 
-        msg = make_msg(ProtocolMessageTypes.new_signage_point_harvester, message)
-        await self.farmer.server.send_to_all([msg], NodeType.HARVESTER)
-        if new_signage_point.challenge_chain_sp not in self.farmer.sps:
-            self.farmer.sps[new_signage_point.challenge_chain_sp] = []
+            msg = make_msg(ProtocolMessageTypes.new_signage_point_harvester, message)
+            await self.farmer.server.send_to_all([msg], NodeType.HARVESTER)
+            if new_signage_point.challenge_chain_sp not in self.farmer.sps:
+                self.farmer.sps[new_signage_point.challenge_chain_sp] = []
         finally:
             # Age out old 24h information for every signage point regardless
             # of any failures.  Note that this still lets old data remain if

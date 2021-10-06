@@ -23,11 +23,11 @@ function getUniqueName(seed: string, iteration: number = 0): string {
 
   const uniqueName = uniqueNamesGenerator({
     dictionaries: [colors, animals, adjectives],
-      length: 2,
+    length: 2,
     seed: generator.int32(),
-      separator: ' ',
-      style: 'capital',
-    });
+    separator: ' ',
+    style: 'capital',
+  });
 
   if (uniqueNames[uniqueName] && uniqueNames[uniqueName] !== seed) {
     return getUniqueName(seed, iteration + 1);

@@ -61,7 +61,7 @@ export default function FarmManageFarmingRewards(props: Props) {
       onClose();
       }}
 
-  function checkAddress(stringToCheck: string): boolean {
+      function checkAddress(stringToCheck: string): boolean {
     try {
       bech32m.decode(stringToCheck);
       return true;

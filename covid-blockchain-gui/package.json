@@ -83,8 +83,8 @@
         "validator": "^13.6.0",
         "ws": "^8.2.2",
         "yarn": "^1.22.11",
-		"geoip-lite": "^1.4.2",
-		"node-emoji": "^1.10.0"
+	"geoip-lite": "^1.4.2",
+	"node-emoji": "^1.10.0"
     },
     "devDependencies": {
         "@babel/core": "^7.15.5",

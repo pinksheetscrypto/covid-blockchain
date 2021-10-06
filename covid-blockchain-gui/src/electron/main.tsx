@@ -153,10 +153,10 @@ if (!handleSquirrelEvent()) {
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:3000'
           : url.format({
-              pathname: path.join(__dirname, '/../renderer/index.html'),
-              protocol: 'file:',
-              slashes: true,
-            });
+            pathname: path.join(__dirname, '/../renderer/index.html'),
+            protocol: 'file:',
+            slashes: true,
+          });
 
       console.log('startUrl', startUrl);
 
@@ -188,10 +188,10 @@ if (!handleSquirrelEvent()) {
           const choice = dialog.showMessageBoxSync({
             type: 'question',
             buttons: [
-              i18n._(/* i18n */ { id: 'No' }),
-              i18n._(/* i18n */ { id: 'Yes' }),
+              i18n._(/* i18n */ {id: 'No'}),
+              i18n._(/* i18n */ {id: 'Yes'}),
             ],
-            title: i18n._(/* i18n */ { id: 'Confirm' }),
+            title: i18n._(/* i18n */ {id: 'Confirm'}),
             message: i18n._(
               /* i18n */ {
                 id: 'Are you sure you want to quit? GUI Plotting and farming will stop.',
@@ -205,7 +205,7 @@ if (!handleSquirrelEvent()) {
           isClosing = false;
           decidedToClose = true;
           mainWindow.webContents.send('exit-daemon');
-          mainWindow.setBounds({ height: 500, width: 500 });
+          mainWindow.setBounds({height: 500, width: 500});
           ipcMain.on('daemon-exited', (event, args) => {
             mainWindow.close();
 

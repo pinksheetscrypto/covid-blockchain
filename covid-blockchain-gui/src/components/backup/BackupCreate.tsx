@@ -42,7 +42,7 @@ export default function BackupCreate() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-          <Trans>Backup file is used to restore smart wallets.</Trans>
+            <Trans>Backup file is used to restore smart wallets.</Trans>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -50,13 +50,13 @@ export default function BackupCreate() {
             <Trans>Cancel</Trans>
           </Button>
           {' '}
-        <Button
+          <Button
             color="primary"
             variant="contained"
-          onClick={handleCreateBackup}
-        >
-          <Trans>Create</Trans>
-        </Button>
+            onClick={handleCreateBackup}
+          >
+            <Trans>Create</Trans>
+          </Button>
         </DialogActions>
       </Dialog>
     </Modal>

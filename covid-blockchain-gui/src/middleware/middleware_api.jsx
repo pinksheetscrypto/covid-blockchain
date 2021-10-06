@@ -112,16 +112,16 @@ async function ping_harvester(store) {
 }
 
 async function get_height(store) {
-    store.dispatch(get_height_info());
+  store.dispatch(get_height_info());
 }
 
 async function get_wallet_transactions(store, id) {
-    store.dispatch(get_transactions(id));
+  store.dispatch(get_transactions(id));
 }
 
 async function get_wallet_balance(store, id) {
-    store.dispatch(get_farmed_amount());
-      store.dispatch(get_balance_for_wallet(id));
+  store.dispatch(get_farmed_amount());
+  store.dispatch(get_balance_for_wallet(id));
 }
 
 export function refreshAllState() {

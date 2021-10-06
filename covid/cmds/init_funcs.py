@@ -244,8 +244,8 @@ def generate_ssl_for_nodes(ssl_dir: Path, ca_crt: bytes, ca_key: bytes, private:
 
 def copy_cert_files(cert_path: Path, new_path: Path):
     for old_path_child in cert_path.glob("*.crt"):
-            new_path_child = new_path / old_path_child.name
-            copy_files_rec(old_path_child, new_path_child)
+        new_path_child = new_path / old_path_child.name
+        copy_files_rec(old_path_child, new_path_child)
         check_and_fix_permissions_for_ssl_file(new_path_child, RESTRICT_MASK_CERT_FILE, DEFAULT_PERMISSIONS_CERT_FILE)
 
     for old_path_child in cert_path.glob("*.key"):
@@ -361,7 +361,7 @@ def covid_init(root_path: Path, *, should_check_keys: bool = True, fix_ssl_permi
         if fix_ssl_permissions:
             fix_ssl(root_path)
         if should_check_keys:
-        check_keys(root_path)
+            check_keys(root_path)
         print(f"{root_path} already exists, no migration action taken")
         return -1
 
@@ -370,7 +370,7 @@ def covid_init(root_path: Path, *, should_check_keys: bool = True, fix_ssl_permi
     if fix_ssl_permissions:
         fix_ssl(root_path)
     if should_check_keys:
-    check_keys(root_path)
+        check_keys(root_path)
     print("")
     print("To see your keys, run 'covid keys show --show-mnemonic-seed'")
 

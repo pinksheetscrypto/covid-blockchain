@@ -8,7 +8,7 @@ const OuterWrapper = styled(({ ration, ...rest }) => <Box {...rest} />)`
   display: flex;
 
   &:before {
-  padding-bottom: ${(props) => (1 / props.ratio) * 100}%;
+    padding-bottom: ${(props) => (1 / props.ratio) * 100}%;
     content: '';
     float: left;
   }

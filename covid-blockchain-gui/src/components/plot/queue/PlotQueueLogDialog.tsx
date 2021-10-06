@@ -48,7 +48,7 @@ export default function PlotQueueLogDialog(props: Props) {
 
   function handleClose(event: any, reason: any) {
     if (reason !== 'backdropClick' || reason !== 'EscapeKeyDown') {
-    onClose();
+      onClose();
     }}
 
   return (

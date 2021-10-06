@@ -656,11 +656,11 @@ class WalletNode:
             if peak is not None:
                 fork_height = self.wallet_state_manager.sync_store.get_potential_fork_point(peak.header_hash)
                 assert fork_height is not None
-                    # This is the fork point in SES in the case where no fork was detected
-                        peers = self.server.get_full_node_connections()
+                # This is the fork point in SES in the case where no fork was detected
+                peers = self.server.get_full_node_connections()
                 fork_height = await check_fork_next_block(
                     self.wallet_state_manager.blockchain, fork_height, peers, wallet_next_block_check
-                            )
+                )
 
             if fork_height is None:
                 fork_height = uint32(0)

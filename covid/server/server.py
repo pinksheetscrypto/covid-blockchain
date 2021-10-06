@@ -726,12 +726,12 @@ class CovidServer:
             try:
                 timeout = ClientTimeout(total=15)
                 async with ClientSession(timeout=timeout) as session:
-                async with session.get("https://checkip.amazonaws.com/") as resp:
-                    if resp.status == 200:
-                        ip = str(await resp.text())
-                        ip = ip.rstrip()
-        except Exception:
-            ip = None
+                    async with session.get("https://checkip.amazonaws.com/") as resp:
+                        if resp.status == 200:
+                            ip = str(await resp.text())
+                            ip = ip.rstrip()
+            except Exception:
+                ip = None
         if ip is None:
             return None
         peer = PeerInfo(ip, uint16(port))

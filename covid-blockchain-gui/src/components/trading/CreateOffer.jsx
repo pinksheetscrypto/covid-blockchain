@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useMemo } from 'react';
-import { Trans } from '@lingui/macro';
+import {Trans} from '@lingui/macro';
 import { useHistory } from 'react-router';
 import {
   Box,

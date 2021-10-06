@@ -24,8 +24,8 @@ export default function AppTimeBomb() {
 
     // @ts-ignore
     await window.ipcRenderer?.send('showMessageBox', {
-        type: 'warning',
-        message: t`The application will stop working at block height 193536.`,
+      type: 'warning',
+      message: t`The application will stop working at block height 193536.`,
     });
 
     const newTimeoutId = setTimeout(() => {

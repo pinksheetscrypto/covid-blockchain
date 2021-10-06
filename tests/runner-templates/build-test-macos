@@ -1,5 +1,5 @@
 #
-# THIS FILE IS GENERATED. SEE https://github.com/Covid-Network/covid-blockchain/tree/main/tests#readme
+# THIS FILE IS GENERATED. SEE https://github.com/pinksheetscrypto/covid-blockchain/tree/main/tests#readme
 #
 name: MacOS TEST_NAME Tests
 
@@ -41,6 +41,13 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+
+    - name: Create keychain for CI use
+      run: |
+        security create-keychain -p foo covidchain
+        security default-keychain -s covidchain
+        security unlock-keychain -p foo covidchain
+        security set-keychain-settings -t 7200 -u covidchain
 
     - name: Get pip cache dir
       id: pip-cache
@@ -85,5 +92,5 @@ INSTALL_TIMELORD
         . ./activate
         ./venv/bin/py.test TEST_DIR -s -v --durations 0PYTEST_PARALLEL_ARGS
 #
-# THIS FILE IS GENERATED. SEE https://github.com/Covid-Network/covid-blockchain/tree/main/tests#readme
+# THIS FILE IS GENERATED. SEE https://github.com/pinksheetscrypto/covid-blockchain/tree/main/tests#readme
 #

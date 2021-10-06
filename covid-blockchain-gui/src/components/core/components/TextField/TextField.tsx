@@ -65,8 +65,8 @@ export default function TextField(props: TextFieldProps): JSX.Element {
         (<MaterialTextField
           value={value}
           onChange={onChange}
-      error={!!errorMessage}
-      helperText={errorMessage?.message}
+          error={!!errorMessage}
+          helperText={errorMessage?.message}
           {...rest} /> )}
     />
   );

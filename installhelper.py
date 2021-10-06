@@ -1,6 +1,6 @@
 #
 # Install helper code to manage inserting the correct version for the GUI
-# Gets the version from the result of "chia version"
+# Gets the version from the result of "covid version"
 # Converts to proper symver format so NPM doesn't complain
 # Adds the version info to the package.json file
 #
@@ -53,7 +53,7 @@ def update_version():
     version: str = "0.0"
     output = subprocess.run(["covid", "version"], capture_output=True)
     if output.returncode == 0:
-        version = str(output.stdout.strip(), "utf-8")
+        version = str(output.stdout.strip(), "utf-8").splitlines()[-1]
 
     data["version"] = make_semver(version)
 

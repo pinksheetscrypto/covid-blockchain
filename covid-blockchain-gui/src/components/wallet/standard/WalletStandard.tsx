@@ -415,43 +415,43 @@ function SendCard(props: SendCardProps) {
     }
 
     if (syncing) {
-        openDialog(
-          <AlertDialog>
-            <Trans>Please finish syncing before making a transaction</Trans>
-          </AlertDialog>,
+      openDialog(
+        <AlertDialog>
+          <Trans>Please finish syncing before making a transaction</Trans>
+        </AlertDialog>,
       );
       return;
     }
 
     const amount = data.amount.trim();
     if (!isNumeric(amount)) {
-        openDialog(
-          <AlertDialog>
-            <Trans>Please enter a valid numeric amount</Trans>
-          </AlertDialog>,
+      openDialog(
+        <AlertDialog>
+          <Trans>Please enter a valid numeric amount</Trans>
+        </AlertDialog>,
       );
       return;
     }
 
     const fee = data.fee.trim();
     if (!isNumeric(fee)) {
-        openDialog(
-          <AlertDialog>
-            <Trans>Please enter a valid numeric fee</Trans>
-          </AlertDialog>,
+      openDialog(
+        <AlertDialog>
+          <Trans>Please enter a valid numeric fee</Trans>
+        </AlertDialog>,
       );
       return;
     }
 
     let address = data.address;
     if (address.includes('colour')) {
-        openDialog(
-          <AlertDialog>
-            <Trans>
-              Error: Cannot send covid to coloured address. Please enter a covid
-              address.
-            </Trans>
-          </AlertDialog>,
+      openDialog(
+        <AlertDialog>
+          <Trans>
+            Error: Cannot send covid to coloured address. Please enter a covid
+            address.
+          </Trans>
+        </AlertDialog>,
       );
       return;
     }
@@ -638,9 +638,9 @@ export default function StandardWallet(props: StandardWalletProps) {
       <Flex gap={1} alignItems="center">
         <Flex flexGrow={1}>
           {showTitle && (
-          <Typography variant="h5" gutterBottom>
-            <Trans>Covid Wallet</Trans>
-          </Typography>
+            <Typography variant="h5" gutterBottom>
+              <Trans>Covid Wallet</Trans>
+            </Typography>
           )}
         </Flex>
         <Flex gap={1} alignItems="center">
@@ -650,35 +650,35 @@ export default function StandardWallet(props: StandardWalletProps) {
             </Typography>
             &nbsp;
             <WalletStatus height />
+          </Flex>
+          <More>
+            {({ onClose }) => (
+              <Box>
+                <MenuItem
+                  onClick={() => {
+                    onClose();
+                    handleDeleteUnconfirmedTransactions();
+                  }}
+                >
+                  <ListItemIcon>
+                    <DeleteIcon />
+                  </ListItemIcon>
+                  <Typography variant="inherit" noWrap>
+                    <Trans>Delete Unconfirmed Transactions</Trans>
+                  </Typography>
+                </MenuItem>
+              </Box>
+            )}
+          </More>
         </Flex>
-        <More>
-          {({ onClose }) => (
-            <Box>
-              <MenuItem
-                onClick={() => {
-                  onClose();
-                  handleDeleteUnconfirmedTransactions();
-                }}
-              >
-                <ListItemIcon>
-                  <DeleteIcon />
-                </ListItemIcon>
-                <Typography variant="inherit" noWrap>
-                  <Trans>Delete Unconfirmed Transactions</Trans>
-                </Typography>
-              </MenuItem>
-            </Box>
-          )}
-        </More>
-      </Flex>
       </Flex>
 
-        <Flex flexDirection="column" gap={3}>
-          <WalletCards wallet_id={wallet_id} />
-          <SendCard wallet_id={wallet_id} />
-          <AddressCard wallet_id={wallet_id} />
-          <WalletHistory walletId={wallet_id} />
-        </Flex>
+      <Flex flexDirection="column" gap={3}>
+        <WalletCards wallet_id={wallet_id} />
+        <SendCard wallet_id={wallet_id} />
+        <AddressCard wallet_id={wallet_id} />
+        <WalletHistory walletId={wallet_id} />
       </Flex>
+    </Flex>
   );
 }

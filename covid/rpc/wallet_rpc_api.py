@@ -206,15 +206,15 @@ class WalletRpcApi:
         except Exception:
             return {"public_key_fingerprints": []}
         else:
-        return {"public_key_fingerprints": fingerprints}
+            return {"public_key_fingerprints": fingerprints}
 
     async def _get_private_key(self, fingerprint) -> Tuple[Optional[PrivateKey], Optional[bytes]]:
         try:
             assert self.service.keychain_proxy is not None  # An offering to the mypy gods
             all_keys = await self.service.keychain_proxy.get_all_private_keys()
             for sk, seed in all_keys:
-            if sk.get_g1().get_fingerprint() == fingerprint:
-                return sk, seed
+                if sk.get_g1().get_fingerprint() == fingerprint:
+                    return sk, seed
         except Exception as e:
             log.error(f"Failed to get private key by fingerprint: {e}")
         return None, None

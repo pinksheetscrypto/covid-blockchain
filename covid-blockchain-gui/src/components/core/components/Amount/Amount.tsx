@@ -77,10 +77,10 @@ export default function Amount(props: AmountProps) {
             <Flex flexGrow={1} gap={1}>
               {!!mojo && (
                 <>
-              <FormatLargeNumber value={mojo} />
-              <Box>
-                <Plural value={mojo} one="mojo" other="mojos" />
-              </Box>
+                  <FormatLargeNumber value={mojo} />
+                  <Box>
+                    <Plural value={mojo} one="mojo" other="mojos" />
+                  </Box>
                 </>
               )}
             </Flex>

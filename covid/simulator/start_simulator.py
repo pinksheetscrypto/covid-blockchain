@@ -57,19 +57,19 @@ def main() -> None:
         if "-D" in sys.argv:
             keychain = None
             sys.argv.remove("-D")  # Remove -D to avoid conflicting with load_config_cli's argparse usage
-    config = load_config_cli(DEFAULT_ROOT_PATH, "config.yaml", SERVICE_NAME)
-    config["database_path"] = config["simulator_database_path"]
-    config["peer_db_path"] = config["simulator_peer_db_path"]
-    config["introducer_peer"]["host"] = "127.0.0.1"
-    config["introducer_peer"]["port"] = 58555
-    config["selected_network"] = "testnet0"
-    config["simulation"] = True
-    kwargs = service_kwargs_for_full_node_simulator(
-        DEFAULT_ROOT_PATH,
-        config,
+        config = load_config_cli(DEFAULT_ROOT_PATH, "config.yaml", SERVICE_NAME)
+        config["database_path"] = config["simulator_database_path"]
+        config["peer_db_path"] = config["simulator_peer_db_path"]
+        config["introducer_peer"]["host"] = "127.0.0.1"
+        config["introducer_peer"]["port"] = 58555
+        config["selected_network"] = "testnet0"
+        config["simulation"] = True
+        kwargs = service_kwargs_for_full_node_simulator(
+            DEFAULT_ROOT_PATH,
+            config,
             create_block_tools(test_constants, root_path=DEFAULT_ROOT_PATH, keychain=keychain),
-    )
-    return run_service(**kwargs)
+        )
+        return run_service(**kwargs)
 
 
 if __name__ == "__main__":

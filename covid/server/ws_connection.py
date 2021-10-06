@@ -493,3 +493,12 @@ class WSCovidConnection:
         connection_host = result[0]
         port = self.peer_server_port if self.peer_server_port is not None else self.peer_port
         return PeerInfo(connection_host, port)
+
+    def get_peer_logging(self) -> PeerInfo:
+        info: Optional[PeerInfo] = self.get_peer_info()
+        if info is None:
+            # in this case, we will use self.peer_host which is friendlier for logging
+            port = self.peer_server_port if self.peer_server_port is not None else self.peer_port
+            return PeerInfo(self.peer_host, port)
+        else:
+            return info

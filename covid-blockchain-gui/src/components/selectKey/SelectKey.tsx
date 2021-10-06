@@ -66,9 +66,9 @@ export default function SelectKey() {
     const keyringCanBeModified = await handleKeyringMutator(e);
 
     if (keyringCanBeModified) {
-    dispatch(openProgress());
-    const response: any = await dispatch(check_delete_key_action(fingerprint));
-    dispatch(closeProgress());
+      dispatch(openProgress());
+      const response: any = await dispatch(check_delete_key_action(fingerprint));
+      dispatch(closeProgress());
 
     const deletePrivateKey = await openDialog(
       <ConfirmDialog
@@ -82,27 +82,27 @@ export default function SelectKey() {
             Warning: This key is used for your farming rewards address. 
             By deleting this key you may lose access to any future farming rewards
             </Trans>
-        </Alert>)}
+          </Alert>)}
 
-        {response.wallet_balance && (<Alert severity="warning">
+          {response.wallet_balance && (<Alert severity="warning">
+            <Trans>
+              Warning: This key is used for a wallet that may have a non-zero balance. 
+              By deleting this key you may lose access to this wallet
+            </Trans>
+          </Alert>)}
+
           <Trans>
-            Warning: This key is used for a wallet that may have a non-zero balance. 
-            By deleting this key you may lose access to this wallet
-          </Trans>
-        </Alert>)}
-
-        <Trans>
             Warning: This key is used for your pool rewards address.
             By deleting this key you may lose access to any future pool rewards
-        </Trans>
-      </ConfirmDialog>,
-    );
+          </Trans>
+        </ConfirmDialog>,
+      );
 
-    // @ts-ignore
-    if (deletePrivateKey) {
-      dispatch(delete_key(fingerprint));
+      // @ts-ignore
+      if (deletePrivateKey) {
+        dispatch(delete_key(fingerprint));
+      }
     }
-  }
   }
 
   async function handleDeleteAllKeys(e: React.MouseEvent<HTMLButtonElement>) {
@@ -110,10 +110,10 @@ export default function SelectKey() {
 
     if (keyringCanBeModified) {
       const deleteAllKeys = await openDialog((
-      <ConfirmDialog
-        title={<Trans>Delete all keys</Trans>}
-        confirmTitle={<Trans>Delete</Trans>}
-        cancelTitle={<Trans>Back</Trans>}
+        <ConfirmDialog
+          title={<Trans>Delete all keys</Trans>}
+          confirmTitle={<Trans>Delete</Trans>}
+          cancelTitle={<Trans>Back</Trans>}
           confirmColor="default"
         >
           <Trans>

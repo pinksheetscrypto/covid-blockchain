@@ -107,10 +107,10 @@ def make_ca_cert(cert_path: Path, key_path: Path):
 
     cert_pem = root_cert.public_bytes(encoding=serialization.Encoding.PEM)
     key_pem = root_key.private_bytes(
-            encoding=serialization.Encoding.PEM,
-            format=serialization.PrivateFormat.TraditionalOpenSSL,
-            encryption_algorithm=serialization.NoEncryption(),
-        )
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.TraditionalOpenSSL,
+        encryption_algorithm=serialization.NoEncryption(),
+    )
 
     write_ssl_cert_and_key(cert_path, cert_pem, key_path, key_pem)
 
