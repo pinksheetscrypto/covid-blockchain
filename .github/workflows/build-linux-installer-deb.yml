@@ -1,15 +1,18 @@
 name: Linux .deb installer on Python 3.8
 
 on:
+  #push:
+  #  branches:
+  #    - main
+  #  tags:
+  #      - '**'
+  #pull_request:
+  #  branches:
+  #    - '**'  
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created 
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    tags:
-        - '**'
-  pull_request:
-    branches:
-      - '**'
 
 jobs:
   build:

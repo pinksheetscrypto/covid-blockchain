@@ -1,14 +1,18 @@
 name: MacOS installer on Catalina and Python 3.8
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-        - '**'
-  pull_request:
-    branches:
-      - '**'
+  #push:
+  #  branches:
+  #    - main
+  #  tags:
+  #      - '**'
+  #pull_request:
+  #  branches:
+  #    - '**'  
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created 
+  workflow_dispatch:
 
 jobs:
   build:
