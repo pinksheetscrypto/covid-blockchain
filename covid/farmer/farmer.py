@@ -12,6 +12,12 @@ from blspy import AugSchemeMPL, G1Element, G2Element, PrivateKey
 import covid.server.ws_connection as ws  # lgtm [py/import-and-import-from]
 from covid.consensus.coinbase import create_puzzlehash_for_pk
 from covid.consensus.constants import ConsensusConstants
+from covid.daemon.keychain_proxy import (
+    KeychainProxy,
+    KeychainProxyConnectionFailure,
+    connect_to_keychain_and_validate,
+    wrap_local_keychain,
+)
 from covid.pools.pool_config import PoolWalletConfig, load_pool_config
 from covid.protocols import farmer_protocol, harvester_protocol
 from covid.protocols.pool_protocol import (
@@ -72,11 +78,11 @@ class HarvesterCacheEntry:
         self.data = data
         self.bump_last_update()
 
-    def needs_update(self):
-        return time.time() - self.last_update > UPDATE_HARVESTER_CACHE_INTERVAL
+    def needs_update(self, update_interval: int):
+        return time.time() - self.last_update > update_interval
 
-    def expired(self):
-        return time.time() - self.last_update > UPDATE_HARVESTER_CACHE_INTERVAL * 10
+    def expired(self, update_interval: int):
+        return time.time() - self.last_update > update_interval * 10
 
 
 class Farmer:
@@ -85,11 +91,14 @@ class Farmer:
         root_path: Path,
         farmer_config: Dict,
         pool_config: Dict,
-        keychain: Keychain,
         consensus_constants: ConsensusConstants,
+        local_keychain: Optional[Keychain] = None,
     ):
+        self.keychain_proxy: Optional[KeychainProxy] = None
+        self.local_keychain = local_keychain
         self._root_path = root_path
         self.config = farmer_config
+        self.pool_config = pool_config
         # Keep track of all sps, keyed on challenge chain signage point hash
         self.sps: Dict[bytes32, List[farmer_protocol.NewSignagePoint]] = {}
 
@@ -105,18 +114,34 @@ class Farmer:
         # A dictionary of keys to time added. These keys refer to keys in the above 4 dictionaries. This is used
         # to periodically clear the memory
         self.cache_add_time: Dict[bytes32, uint64] = {}
-        self.lastChannageTime = 0
+
+        # Interval to request plots from connected harvesters
+        self.update_harvester_cache_interval = UPDATE_HARVESTER_CACHE_INTERVAL
 
         self.cache_clear_task: asyncio.Task
         self.update_pool_state_task: asyncio.Task
         self.constants = consensus_constants
         self._shut_down = False
         self.server: Any = None
-        self.keychain = keychain
         self.state_changed_callback: Optional[Callable] = None
         self.log = log
-        self.all_root_sks: List[PrivateKey] = [sk for sk, _ in self.keychain.get_all_private_keys()]
 
+    async def ensure_keychain_proxy(self) -> KeychainProxy:
+        if not self.keychain_proxy:
+            if self.local_keychain:
+                self.keychain_proxy = wrap_local_keychain(self.local_keychain, log=self.log)
+            else:
+                self.keychain_proxy = await connect_to_keychain_and_validate(self._root_path, self.log)
+                if not self.keychain_proxy:
+                    raise KeychainProxyConnectionFailure("Failed to connect to keychain service")
+        return self.keychain_proxy
+
+    async def get_all_private_keys(self):
+        keychain_proxy = await self.ensure_keychain_proxy()
+        return await keychain_proxy.get_all_private_keys()
+
+    async def setup_keys(self):
+        self.all_root_sks: List[PrivateKey] = [sk for sk, _ in await self.get_all_private_keys()]
         self._private_keys = [master_sk_to_farmer_sk(sk) for sk in self.all_root_sks] + [
             master_sk_to_pool_sk(sk) for sk in self.all_root_sks
         ]
@@ -132,7 +157,7 @@ class Farmer:
         self.pool_public_keys = [G1Element.from_bytes(bytes.fromhex(pk)) for pk in self.config["pool_public_keys"]]
 
         # This is the self pooling configuration, which is only used for original self-pooled plots
-        self.pool_target_encoded = pool_config["cov_target_address"]
+        self.pool_target_encoded = self.pool_config["cov_target_address"]
         self.pool_target = decode_puzzle_hash(self.pool_target_encoded)
         self.pool_sks_map: Dict = {}
         for key in self.get_private_keys():
@@ -158,6 +183,7 @@ class Farmer:
         self.harvester_cache: Dict[str, Dict[str, HarvesterCacheEntry]] = {}
 
     async def _start(self):
+        await self.setup_keys()
         self.update_pool_state_task = asyncio.create_task(self._periodically_update_pool_state_task())
         self.cache_clear_task = asyncio.create_task(self._periodically_clear_cache_and_refresh_task())
 
@@ -196,14 +222,14 @@ class Farmer:
         )
 
     def on_disconnect(self, connection: ws.WSCovidConnection):
-        #self.log.info(f"peer disconnected {connection.get_peer_info()}")
+        self.log.info(f"peer disconnected {connection.get_peer_logging()}")
         self.state_changed("close_connection", {})
 
     async def _pool_get_pool_info(self, pool_config: PoolWalletConfig) -> Optional[Dict]:
         try:
             async with aiohttp.ClientSession(trust_env=True) as session:
                 async with session.get(
-                    f"{pool_config.pool_url}/pool_info", ssl=ssl_context_for_root(get_mozilla_ca_crt())
+                    f"{pool_config.pool_url}/pool_info", ssl=ssl_context_for_root(get_mozilla_ca_crt(), log=self.log)
                 ) as resp:
                     if resp.ok:
                         response: Dict = json.loads(await resp.text())
@@ -243,7 +269,7 @@ class Farmer:
                 async with session.get(
                     f"{pool_config.pool_url}/farmer",
                     params=get_farmer_params,
-                    ssl=ssl_context_for_root(get_mozilla_ca_crt()),
+                    ssl=ssl_context_for_root(get_mozilla_ca_crt(), log=self.log),
                 ) as resp:
                     if resp.ok:
                         response: Dict = json.loads(await resp.text())
@@ -281,7 +307,7 @@ class Farmer:
                 async with session.post(
                     f"{pool_config.pool_url}/farmer",
                     json=post_farmer_request.to_json_dict(),
-                    ssl=ssl_context_for_root(get_mozilla_ca_crt()),
+                    ssl=ssl_context_for_root(get_mozilla_ca_crt(), log=self.log),
                 ) as resp:
                     if resp.ok:
                         response: Dict = json.loads(await resp.text())
@@ -319,7 +345,7 @@ class Farmer:
                 async with session.put(
                     f"{pool_config.pool_url}/farmer",
                     json=put_farmer_request.to_json_dict(),
-                    ssl=ssl_context_for_root(get_mozilla_ca_crt()),
+                    ssl=ssl_context_for_root(get_mozilla_ca_crt(), log=self.log),
                 ) as resp:
                     if resp.ok:
                         response: Dict = json.loads(await resp.text())
@@ -478,9 +504,9 @@ class Farmer:
     def get_private_keys(self):
         return self._private_keys
 
-    def get_reward_targets(self, search_for_private_key: bool) -> Dict:
+    async def get_reward_targets(self, search_for_private_key: bool) -> Dict:
         if search_for_private_key:
-            all_sks = self.keychain.get_all_private_keys()
+            all_sks = await self.get_all_private_keys()
             stop_searching_for_farmer, stop_searching_for_pool = False, False
             for i in range(500):
                 if stop_searching_for_farmer and stop_searching_for_pool and i > 0:
@@ -568,7 +594,7 @@ class Farmer:
             remove_peers = []
             for peer_id, peer_cache in host_cache.items():
                 # If the peer cache is expired it means the harvester didn't respond for too long
-                if peer_cache.expired():
+                if peer_cache.expired(self.update_harvester_cache_interval):
                     remove_peers.append(peer_id)
             for key in remove_peers:
                 del host_cache[key]
@@ -581,11 +607,11 @@ class Farmer:
         updated = False
         for connection in self.server.get_connections(NodeType.HARVESTER):
             cache_entry = await self.get_cached_harvesters(connection)
-            if cache_entry.needs_update():
+            if cache_entry.needs_update(self.update_harvester_cache_interval):
                 self.log.debug(f"update_cached_harvesters update harvester: {connection.peer_node_id}")
                 cache_entry.bump_last_update()
                 response = await connection.request_plots(
-                    harvester_protocol.RequestPlots(), timeout=UPDATE_HARVESTER_CACHE_INTERVAL
+                    harvester_protocol.RequestPlots(), timeout=self.update_harvester_cache_interval
                 )
                 if response is not None:
                     if isinstance(response, harvester_protocol.RespondPlots):
@@ -603,7 +629,8 @@ class Farmer:
                         )
                 else:
                     self.log.error(
-                        "Harvester did not respond. You might need to update harvester to the latest version"
+                        f"Harvester '{connection.peer_host}/{connection.peer_node_id}' did not respond: "
+                        f"(version mismatch or time out {UPDATE_HARVESTER_CACHE_INTERVAL}s)"
                     )
         return updated
 
@@ -644,7 +671,7 @@ class Farmer:
             stat_info = config_path.stat()
             if stat_info.st_mtime > self.last_config_access_time:
                 # If we detect the config file changed, refresh private keys first just in case
-                self.all_root_sks: List[PrivateKey] = [sk for sk, _ in self.keychain.get_all_private_keys()]
+                self.all_root_sks: List[PrivateKey] = [sk for sk, _ in await self.get_all_private_keys()]
                 self.last_config_access_time = stat_info.st_mtime
                 await self.update_pool_state()
                 time_slept = uint64(0)

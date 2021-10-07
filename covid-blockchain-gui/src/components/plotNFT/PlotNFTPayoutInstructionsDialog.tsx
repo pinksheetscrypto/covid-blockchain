@@ -69,19 +69,24 @@ export default function PlotNFTPayoutInstructionsDialog(props: Props) {
     }
   }
 
+  function handleDialogClose(event: any, reason: any) {
+    if (reason !== 'backdropClick' || reason !== 'EscapeKeyDown') {
+      onClose();
+    }}
+
   return (
-    <Dialog disableBackdropClick disableEscapeKeyDown maxWidth="md" open={open}>
+    <Dialog onClose={handleDialogClose} maxWidth="md" open={open}>
       <Form methods={methods} onSubmit={handleSubmit}>
-      <DialogTitle>
+        <DialogTitle>
           <Trans>Edit Payout Instructions</Trans>
-      </DialogTitle>
-      <DialogContent dividers>
-        <Flex gap={2} flexDirection="column">
-          {loading ? (
-            <Loading center />
-          ) : (
-            <Flex flexDirection="column" gap={2}>
-              {error && <Alert severity="error">{error.message}</Alert>}
+        </DialogTitle>
+        <DialogContent dividers>
+          <Flex gap={2} flexDirection="column">
+            {loading ? (
+              <Loading center />
+            ) : (
+              <Flex flexDirection="column" gap={2}>
+                {error && <Alert severity="error">{error.message}</Alert>}
 
                 <TextField
                   label={<Trans>Pool Payout Instructions</Trans>}
@@ -98,34 +103,34 @@ export default function PlotNFTPayoutInstructionsDialog(props: Props) {
                   fullWidth
                 />
 
-              <Typography variant="body2" color="textSecondary">
-                <Trans>
-                  These are the instructions for how the farmer wants to get
-                  paid. By default this will be an COV address, but it can be
-                  set to any string with a size of less than 1024 characters, so
-                  it can represent another blockchain or payment system
-                  identifier.
-                </Trans>{' '}
-                <Link
-                  target="_blank"
-                  href="https://github.com/pinksheetscrypto/pool-reference/blob/main/SPECIFICATION.md#payloadpayout_instructions"
-                  noWrap
-                >
-                  <Trans>Learn More</Trans>
-                </Link>
-              </Typography>
-            </Flex>
-          )}
-        </Flex>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color="secondary">
+                <Typography variant="body2" color="textSecondary">
+                  <Trans>
+                    These are the instructions for how the farmer wants to get
+                    paid. By default this will be an COV address, but it can be
+                    set to any string with a size of less than 1024 characters, so
+                    it can represent another blockchain or payment system
+                    identifier.
+                  </Trans>{' '}
+                  <Link
+                    target="_blank"
+                    href="https://github.com/pinksheetscrypto/pool-reference/blob/main/SPECIFICATION.md#payloadpayout_instructions"
+                    noWrap
+                  >
+                    <Trans>Learn More</Trans>
+                  </Link>
+                </Typography>
+              </Flex>
+            )}
+          </Flex>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="secondary">
             <Trans>Cancel</Trans>
           </Button>
           <Button color="primary" type="submit">
             <Trans>Save</Trans>
-        </Button>
-      </DialogActions>
+          </Button>
+        </DialogActions>
       </Form>
     </Dialog>
   );
