@@ -1,5 +1,4 @@
 import { app, dialog, shell, ipcMain, BrowserWindow, Menu, session } from 'electron';
-require('@electron/remote/main').initialize()
 import path from 'path';
 import React from 'react';
 import url from 'url';
@@ -50,9 +49,13 @@ function openAbout() {
   });
   aboutWindow.loadURL(`data:text/html;charset=utf-8,${about}`);
 
-  aboutWindow.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url);
-    return { action: 'deny' }
+  aboutWindow.webContents.on('will-navigate', (e, url) => {
+    e.preventDefault();
+    shell.openExternal(url);
+  });
+  aboutWindow.webContents.on('new-window', (e, url) => {
+    e.preventDefault();
+    shell.openExternal(url);
   });
 
   aboutWindow.once('closed', () => {
@@ -132,8 +135,7 @@ if (!handleSquirrelEvent()) {
         webPreferences: {
           preload: `${__dirname}/preload.js`,
           nodeIntegration: true,
-          contextIsolation: false,
-          nativeWindowOpen: true
+          enableRemoteModule: true,
         },
       });
 
@@ -161,7 +163,6 @@ if (!handleSquirrelEvent()) {
       console.log('startUrl', startUrl);
 
       mainWindow.loadURL(startUrl);
-      require("@electron/remote/main").enable(mainWindow.webContents)
 
       mainWindow.once('ready-to-show', () => {
         mainWindow.show();
@@ -213,21 +214,7 @@ if (!handleSquirrelEvent()) {
           });
         }
       });
-      mainWindow.on('showMessageBox' , async (e, a) => {
-        e.reply(await dialog.showMessageBox(mainWindow,a))
-      })
-
-      mainWindow.on('showSaveDialog' , async (e, a) => {
-        e.reply(await dialog.showSaveDialog(a))
-      })
-
-      mainWindow.on('showOpenDialog' , async (e, a) => {
-        e.reply(await dialog.showOpenDialog(a))
-      })
-
     };
-
-
 
     const createMenu = () => Menu.buildFromTemplate(getMenuTemplate());
 

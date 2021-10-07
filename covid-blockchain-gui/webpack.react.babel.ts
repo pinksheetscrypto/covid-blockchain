@@ -52,19 +52,12 @@ export default {
   target: 'electron-renderer',
   stats: 'errors-only',
   devServer: DEV ? {
-    client: {
-      overlay: false,
-    },
-    static: {
-      directory: path.join(__dirname, '../dist/renderer'),
-    },
+    contentBase: path.join(__dirname, '../dist/renderer'),
     historyApiFallback: true,
     compress: true,
     hot: true,
     port: PORT,
-    devMiddleware: {
-      publicPath: '/',
-    },
+    publicPath: '/',
   } : undefined,
   output: {
     path: path.resolve(__dirname, './build/renderer'),

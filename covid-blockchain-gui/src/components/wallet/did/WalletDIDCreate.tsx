@@ -154,14 +154,13 @@ export default function WalletDIDCreate() {
               <Flex flexDirection="row" justifyContent="space-between">
                 <Box flexGrow={6}>
                   <Controller
+                    as={TextField}
                     name="num_needed"
                     control={control}
+                    label="Number of Backup IDs needed for recovery"
+                    variant="outlined"
+                    fullWidth
                     defaultValue=""
-                    render={({ field }) => (<TextField
-                      label="Number of Backup IDs needed for recovery"
-                      variant="outlined"
-                      fullWidth
-                      {...field} /> )}
                   />
                 </Box>
               </Flex>
@@ -178,16 +177,14 @@ export default function WalletDIDCreate() {
                 <Flex alignItems="stretch" key={item.id}>
                   <Box flexGrow={1}>
                     <Controller
+                      as={TextField}
                       name={`backup_dids[${index}].backupid`}
                       control={control}
                       defaultValue=""
-                      render={({ field }) => (
-                        <TextField
-                          label="Backup ID"
-                          variant="outlined"
-                          fullWidth
-                          color="secondary"
-                          {...field} /> )}
+                      label="Backup ID"
+                      variant="outlined"
+                      fullWidth
+                      color="secondary"
                     />
                   </Box>
                   <Button

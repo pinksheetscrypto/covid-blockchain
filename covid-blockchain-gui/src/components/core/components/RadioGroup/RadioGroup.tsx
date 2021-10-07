@@ -76,9 +76,10 @@ export default function RadioGroup(props: Props) {
   return (
     // @ts-ignore
     <Controller
+      as={boolean ? ParseBoolean : MaterialRadioGroup}
       name={name}
       control={control}
-      render={({ field }) => (boolean ? <ParseBoolean {...field} {...rest} /> :  <MaterialRadioGroup {...field} {...rest} /> )}
+      {...rest}
     />
   );
 }

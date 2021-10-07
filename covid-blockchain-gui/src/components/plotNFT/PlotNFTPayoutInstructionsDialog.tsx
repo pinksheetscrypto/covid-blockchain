@@ -69,13 +69,8 @@ export default function PlotNFTPayoutInstructionsDialog(props: Props) {
     }
   }
 
-  function handleDialogClose(event: any, reason: any) {
-    if (reason !== 'backdropClick' || reason !== 'EscapeKeyDown') {
-      onClose();
-    }}
-
   return (
-    <Dialog onClose={handleDialogClose} maxWidth="md" open={open}>
+    <Dialog disableBackdropClick disableEscapeKeyDown maxWidth="md" open={open}>
       <Form methods={methods} onSubmit={handleSubmit}>
         <DialogTitle>
           <Trans>Edit Payout Instructions</Trans>

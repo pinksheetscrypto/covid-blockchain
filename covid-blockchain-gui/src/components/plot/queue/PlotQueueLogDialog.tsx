@@ -46,13 +46,14 @@ export default function PlotQueueLogDialog(props: Props) {
     }
   }, [queueItem]);
 
-  function handleClose(event: any, reason: any) {
-    if (reason !== 'backdropClick' || reason !== 'EscapeKeyDown') {
-      onClose();
-    }}
+  function handleClose() {
+    onClose();
+  }
 
   return (
     <Dialog
+      disableBackdropClick
+      disableEscapeKeyDown
       maxWidth="md"
       aria-labelledby="confirmation-dialog-title"
       onClose={handleClose}

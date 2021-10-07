@@ -52,8 +52,9 @@ export default function App() {
   // get the daemon's uri from global storage (put there by loadConfig)
   let daemon_uri = null;
   if (isElectron()) {
-    const {getGlobal} = window.require('@electron/remote');
-    daemon_uri = getGlobal('daemon_rpc_ws');
+    const electron = window.require('electron');
+    const { remote: r } = electron;
+    daemon_uri = r.getGlobal('daemon_rpc_ws');
   }
 
   useEffect(() => {
