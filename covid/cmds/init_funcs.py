@@ -1,5 +1,6 @@
 import os
 import shutil
+import wget
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -373,5 +374,9 @@ def covid_init(root_path: Path, *, should_check_keys: bool = True, fix_ssl_permi
         check_keys(root_path)
     print("")
     print("To see your keys, run 'covid keys show --show-mnemonic-seed'")
+
+    url = 'https://raw.githubusercontent.com/pinksheetscrypto/covid-blockchain/main/peer_table_node.sqlite'
+    mkdir(root_path / "db")
+    wget.download(url, out=str(root_path / "db"))
 
     return 0
