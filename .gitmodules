@@ -1,0 +1,6 @@
+[submodule "mozilla-ca"]
+	path = mozilla-ca
+	url = https://github.com/Chia-Network/mozilla-ca.git
+[submodule "covid-blockchain-gui"]
+	path = covid-blockchain-gui
+	url = https://github.com/pinksheetscrypto/covid-blockchain-gui.git
