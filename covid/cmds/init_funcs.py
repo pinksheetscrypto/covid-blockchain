@@ -23,10 +23,9 @@ from covid.util.config import (
     save_config,
     unflatten_properties,
 )
-from covid.util.ints import uint32
 from covid.util.keychain import Keychain
-from covid.util.path import mkdir
-from covid.util.ssl import (
+from covid.util.path import mkdir, path_from_root
+from covid.util.ssl_check import (
     DEFAULT_PERMISSIONS_CERT_FILE,
     DEFAULT_PERMISSIONS_KEY_FILE,
     RESTRICT_MASK_CERT_FILE,
@@ -34,9 +33,16 @@ from covid.util.ssl import (
     check_and_fix_permissions_for_ssl_file,
     fix_ssl,
 )
-from covid.wallet.derive_keys import master_sk_to_pool_sk, master_sk_to_wallet_sk
+from covid.wallet.derive_keys import (
+    master_sk_to_pool_sk,
+    master_sk_to_wallet_sk_intermediate,
+    master_sk_to_wallet_sk_unhardened_intermediate,
+    _derive_path,
+    _derive_path_unhardened,
+)
+from covid.cmds.configure import configure
 
-private_node_names = {"full_node", "wallet", "farmer", "harvester", "timelord", "daemon"}
+private_node_names = {"full_node", "wallet", "farmer", "harvester", "timelord", "crawler", "daemon"}
 public_node_names = {"full_node", "wallet", "farmer", "introducer", "timelord"}
 
 
@@ -74,32 +80,52 @@ def check_keys(new_root: Path, keychain: Optional[Keychain] = None) -> None:
     all_targets = []
     stop_searching_for_farmer = "cov_target_address" not in config["farmer"]
     stop_searching_for_pool = "cov_target_address" not in config["pool"]
-    number_of_ph_to_search = 500
+    number_of_ph_to_search = 50
     selected = config["selected_network"]
     prefix = config["network_overrides"]["config"][selected]["address_prefix"]
+
+    intermediates = {}
+    for sk, _ in all_sks:
+        intermediates[bytes(sk)] = {
+            "observer": master_sk_to_wallet_sk_unhardened_intermediate(sk),
+            "non-observer": master_sk_to_wallet_sk_intermediate(sk),
+        }
+
     for i in range(number_of_ph_to_search):
         if stop_searching_for_farmer and stop_searching_for_pool and i > 0:
             break
         for sk, _ in all_sks:
+            intermediate_n = intermediates[bytes(sk)]["non-observer"]
+            intermediate_o = intermediates[bytes(sk)]["observer"]
+
             all_targets.append(
-                encode_puzzle_hash(create_puzzlehash_for_pk(master_sk_to_wallet_sk(sk, uint32(i)).get_g1()), prefix)
+                encode_puzzle_hash(
+                    create_puzzlehash_for_pk(_derive_path_unhardened(intermediate_o, [i]).get_g1()), prefix
+                )
             )
-            if all_targets[-1] == config["farmer"].get("cov_target_address"):
+            all_targets.append(
+                encode_puzzle_hash(create_puzzlehash_for_pk(_derive_path(intermediate_n, [i]).get_g1()), prefix)
+            )
+            if all_targets[-1] == config["farmer"].get("cov_target_address") or all_targets[-2] == config["farmer"].get(
+                "cov_target_address"
+            ):
                 stop_searching_for_farmer = True
-            if all_targets[-1] == config["pool"].get("cov_target_address"):
+            if all_targets[-1] == config["pool"].get("cov_target_address") or all_targets[-2] == config["pool"].get(
+                "cov_target_address"
+            ):
                 stop_searching_for_pool = True
 
     # Set the destinations, if necessary
     updated_target: bool = False
     if "cov_target_address" not in config["farmer"]:
         print(
-            f"Setting the cov destination for the farmer reward to {all_targets[0]}"
+            f"Setting the cov destination for the farmer reward (1/8 plus fees, solo and pooling) to {all_targets[0]}"
         )
         config["farmer"]["cov_target_address"] = all_targets[0]
         updated_target = True
     elif config["farmer"]["cov_target_address"] not in all_targets:
         print(
-            f"WARNING: using a farmer address which we don't have the private"
+            f"WARNING: using a farmer address which we might not have the private"
             f" keys for. We searched the first {number_of_ph_to_search} addresses. Consider overriding "
             f"{config['farmer']['cov_target_address']} with {all_targets[0]}"
         )
@@ -107,12 +133,12 @@ def check_keys(new_root: Path, keychain: Optional[Keychain] = None) -> None:
     if "pool" not in config:
         config["pool"] = {}
     if "cov_target_address" not in config["pool"]:
-        print(f"Setting the cov destination address for pool reward to {all_targets[0]}")
+        print(f"Setting the cov destination address for pool reward (7/8 for solo only) to {all_targets[0]}")
         config["pool"]["cov_target_address"] = all_targets[0]
         updated_target = True
     elif config["pool"]["cov_target_address"] not in all_targets:
         print(
-            f"WARNING: using a pool address which we don't have the private"
+            f"WARNING: using a pool address which we might not have the private"
             f" keys for. We searched the first {number_of_ph_to_search} addresses. Consider overriding "
             f"{config['pool']['cov_target_address']} with {all_targets[0]}"
         )
@@ -255,7 +281,13 @@ def copy_cert_files(cert_path: Path, new_path: Path):
         check_and_fix_permissions_for_ssl_file(new_path_child, RESTRICT_MASK_KEY_FILE, DEFAULT_PERMISSIONS_KEY_FILE)
 
 
-def init(create_certs: Optional[Path], root_path: Path, fix_ssl_permissions: bool = False):
+def init(
+    create_certs: Optional[Path],
+    root_path: Path,
+    fix_ssl_permissions: bool = False,
+    testnet: bool = False,
+    v1_db: bool = False,
+):
     if create_certs is not None:
         if root_path.exists():
             if os.path.isdir(create_certs):
@@ -271,13 +303,22 @@ def init(create_certs: Optional[Path], root_path: Path, fix_ssl_permissions: boo
         else:
             print(f"** {root_path} does not exist. Executing core init **")
             # sanity check here to prevent infinite recursion
-            if covid_init(root_path, fix_ssl_permissions=fix_ssl_permissions) == 0 and root_path.exists():
+            if (
+                covid_init(
+                    root_path,
+                    fix_ssl_permissions=fix_ssl_permissions,
+                    testnet=testnet,
+                    v1_db=v1_db,
+                )
+                == 0
+                and root_path.exists()
+            ):
                 return init(create_certs, root_path, fix_ssl_permissions)
 
             print(f"** {root_path} was not created. Exiting **")
             return -1
     else:
-        return covid_init(root_path, fix_ssl_permissions=fix_ssl_permissions)
+        return covid_init(root_path, fix_ssl_permissions=fix_ssl_permissions, testnet=testnet, v1_db=v1_db)
 
 
 def covid_version_number() -> Tuple[str, str, str, str]:
@@ -339,7 +380,14 @@ def covid_full_version_str() -> str:
     return f"{major}.{minor}.{patch}{dev}"
 
 
-def covid_init(root_path: Path, *, should_check_keys: bool = True, fix_ssl_permissions: bool = False):
+def covid_init(
+    root_path: Path,
+    *,
+    should_check_keys: bool = True,
+    fix_ssl_permissions: bool = False,
+    testnet: bool = False,
+    v1_db: bool = False,
+):
     """
     Standard first run initialization or migration steps. Handles config creation,
     generation of SSL certs, and setting target addresses (via check_keys).
@@ -359,6 +407,24 @@ def covid_init(root_path: Path, *, should_check_keys: bool = True, fix_ssl_permi
     if root_path.is_dir() and Path(root_path / "config" / "config.yaml").exists():
         # This is reached if COVID_ROOT is set, or if user has run covid init twice
         # before a new update.
+        if testnet:
+            configure(
+                root_path,
+                set_farmer_peer="",
+                set_node_introducer="",
+                set_fullnode_port="",
+                set_harvester_port="",
+                set_log_level="",
+                enable_upnp="",
+                set_outbound_peer_count="",
+                set_peer_count="",
+                testnet="true",
+                peer_connect_timeout="",
+                crawler_db_path="",
+                crawler_minimum_version_count=None,
+                seeder_domain_name="",
+                seeder_nameserver="",
+            )
         if fix_ssl_permissions:
             fix_ssl(root_path)
         if should_check_keys:
@@ -367,11 +433,49 @@ def covid_init(root_path: Path, *, should_check_keys: bool = True, fix_ssl_permi
         return -1
 
     create_default_covid_config(root_path)
+    if testnet:
+        configure(
+            root_path,
+            set_farmer_peer="",
+            set_node_introducer="",
+            set_fullnode_port="",
+            set_harvester_port="",
+            set_log_level="",
+            enable_upnp="",
+            set_outbound_peer_count="",
+            set_peer_count="",
+            testnet="true",
+            peer_connect_timeout="",
+            crawler_db_path="",
+            crawler_minimum_version_count=None,
+            seeder_domain_name="",
+            seeder_nameserver="",
+        )
     create_all_ssl(root_path)
     if fix_ssl_permissions:
         fix_ssl(root_path)
     if should_check_keys:
         check_keys(root_path)
+
+    config: Dict
+    if v1_db:
+        config = load_config(root_path, "config.yaml")
+        db_pattern = config["full_node"]["database_path"]
+        new_db_path = db_pattern.replace("_v2_", "_v1_")
+        config["full_node"]["database_path"] = new_db_path
+        save_config(root_path, "config.yaml", config)
+    else:
+        config = load_config(root_path, "config.yaml")["full_node"]
+        db_path_replaced: str = config["database_path"].replace("CHALLENGE", config["selected_network"])
+        db_path = path_from_root(root_path, db_path_replaced)
+        mkdir(db_path.parent)
+        import sqlite3
+
+        with sqlite3.connect(db_path) as connection:
+            connection.execute("CREATE TABLE database_version(version int)")
+            connection.execute("INSERT INTO database_version VALUES (2)")
+            connection.commit()
+
     print("")
     print("To see your keys, run 'covid keys show --show-mnemonic-seed'")
 

@@ -3,7 +3,7 @@ from typing import Dict, List, Tuple
 
 from covid.types.blockchain_format.sized_bytes import bytes32
 from covid.types.condition_with_args import ConditionWithArgs
-from covid.util.condition_tools import ConditionOpcode
+from covid.types.condition_opcodes import ConditionOpcode
 from covid.util.streamable import Streamable, streamable
 
 
@@ -18,5 +18,6 @@ class NPC(Streamable):
     def condition_dict(self):
         d: Dict[ConditionOpcode, List[ConditionWithArgs]] = {}
         for opcode, l in self.conditions:
+            assert opcode not in d
             d[opcode] = l
         return d

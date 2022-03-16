@@ -7,7 +7,7 @@ from covid.types.blockchain_format.program import Program
 from covid.types.blockchain_format.sized_bytes import bytes32
 from covid.types.condition_opcodes import ConditionOpcode
 from covid.util.ints import uint64
-from covid.wallet.chialisp import sexp
+from covid.wallet.covidlisp import sexp
 from covid.wallet.puzzles.load_clvm import load_clvm
 
 RATE_LIMITED_MODE = 1

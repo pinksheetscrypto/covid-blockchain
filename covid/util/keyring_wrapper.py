@@ -36,7 +36,7 @@ def get_legacy_keyring_instance() -> Optional[LegacyKeyring]:
         return WinKeyring()
     elif platform == "linux":
         keyring: CryptFileKeyring = CryptFileKeyring()
-        keyring.keyring_key = "your keyring password"  # type: ignore
+        keyring.keyring_key = "your keyring password"
         return keyring
     return None
 
@@ -49,7 +49,7 @@ def get_os_passphrase_store() -> Optional[OSPassphraseStore]:
     return None
 
 
-def check_legacy_keyring_keys_present(keyring: Union[MacKeyring, WinKeyring]) -> bool:
+def check_legacy_keyring_keys_present(keyring: LegacyKeyring) -> bool:
     from keyring.credentials import SimpleCredential
     from covid.util.keychain import default_keychain_user, default_keychain_service, get_private_key_user, MAX_KEYS
 
@@ -104,14 +104,21 @@ class KeyringWrapper:
     cached_passphrase_is_validated: bool = False
     legacy_keyring = None
 
-    def __init__(self, keys_root_path: Path = DEFAULT_KEYS_ROOT_PATH):
+    def __init__(self, keys_root_path: Path = DEFAULT_KEYS_ROOT_PATH, force_legacy: bool = False):
         """
         Initializes the keyring backend based on the OS. For Linux, we previously
         used CryptFileKeyring. We now use our own FileKeyring backend and migrate
         the data from the legacy CryptFileKeyring (on write).
         """
         self.keys_root_path = keys_root_path
-        self.refresh_keyrings()
+        if force_legacy:
+            legacy_keyring = get_legacy_keyring_instance()
+            if check_legacy_keyring_keys_present(legacy_keyring):
+                self.keyring = legacy_keyring
+            else:
+                return None
+        else:
+            self.refresh_keyrings()
 
     def refresh_keyrings(self):
         self.keyring = None
@@ -132,7 +139,7 @@ class KeyringWrapper:
             raise Exception("KeyringWrapper has already been instantiated")
 
         if supports_keyring_passphrase():
-            keyring = FileKeyring(keys_root_path=self.keys_root_path)  # type: ignore
+            keyring = FileKeyring(keys_root_path=self.keys_root_path)
         else:
             legacy_keyring: Optional[LegacyKeyring] = get_legacy_keyring_instance()
             if legacy_keyring is None:
@@ -188,6 +195,10 @@ class KeyringWrapper:
     def cleanup_shared_instance():
         KeyringWrapper.__shared_instance = None
 
+    @staticmethod
+    def get_legacy_instance() -> Optional["KeyringWrapper"]:
+        return KeyringWrapper(force_legacy=True)
+
     def get_keyring(self):
         """
         Return the current keyring backend. The legacy keyring is preferred if it's in use
@@ -238,6 +249,7 @@ class KeyringWrapper:
         *,
         write_to_keyring: bool = True,
         allow_migration: bool = True,
+        passphrase_hint: Optional[str] = None,
         save_passphrase: bool = False,
     ) -> None:
         """
@@ -259,6 +271,8 @@ class KeyringWrapper:
             raise KeyringCurrentPassphraseIsInvalid("invalid current passphrase")
 
         self.set_cached_master_passphrase(new_passphrase, validated=True)
+
+        self.keyring.set_passphrase_hint(passphrase_hint)
 
         if write_to_keyring:
             # We'll migrate the legacy contents to the new keyring at this point
@@ -320,6 +334,11 @@ class KeyringWrapper:
             except KeyringError as e:
                 if not warn_if_macos_errSecInteractionNotAllowed(e):
                     raise e
+        return None
+
+    def get_master_passphrase_hint(self) -> Optional[str]:
+        if self.keyring_supports_master_passphrase():
+            return self.keyring.get_passphrase_hint()
         return None
 
     # Legacy keyring migration
@@ -413,6 +432,8 @@ class KeyringWrapper:
         # Write the keys directly to the new keyring (self.keyring)
         for (user, passphrase) in user_passphrase_pairs:
             self.keyring.set_password(service, user, passphrase)
+
+        Keychain.mark_migration_checked_for_current_version()
 
         return KeyringWrapper.MigrationResults(
             original_private_keys, self.legacy_keyring, service, [user for (user, _) in user_passphrase_pairs]

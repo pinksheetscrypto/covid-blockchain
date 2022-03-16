@@ -1,8 +1,0 @@
-[submodule "covid-blockchain-gui"]
-	path = covid-blockchain-gui
-	url = https://github.com/pinksheetscrypto/covid-blockchain-gui.git
-	branch = pools
-[submodule "mozilla-ca"]
-	path = mozilla-ca
-	url = https://github.com/Chia-Network/mozilla-ca.git
-        branch = main

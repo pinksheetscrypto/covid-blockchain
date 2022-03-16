@@ -10,10 +10,12 @@ SERVICES_FOR_GROUP = {
     "timelord": "covid_timelord_launcher covid_timelord covid_full_node".split(),
     "timelord-only": "covid_timelord".split(),
     "timelord-launcher-only": "covid_timelord_launcher".split(),
-    "wallet": "covid_wallet covid_full_node".split(),
-    "wallet-only": "covid_wallet".split(),
+    "wallet": "covid_wallet".split(),
     "introducer": "covid_introducer".split(),
     "simulator": "covid_full_node_simulator".split(),
+    "crawler": "covid_crawler".split(),
+    "seeder": "covid_crawler covid_seeder".split(),
+    "seeder-only": "covid_seeder".split(),
 }
 
 

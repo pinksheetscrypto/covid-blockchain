@@ -1,23 +1,19 @@
-name: Windows Installer on Windows 10 and Python 3.7
+name: Windows Installer on Windows 10 and Python 3.9
 
 on:
-  #push:
-  #  branches:
-  #    - main
-  #  tags:
-  #      - '**'
-  #pull_request:
-  #  branches:
-  #    - '**'  
-  release:
-    types: # This configuration does not affect the page_build event above
-      - created 
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+    tags:
+        - '**'
+  pull_request:
+    branches:
+      - '**'
 
 jobs:
   build:
     name: Windows Installer on Windows 10 and Python 3.9
-    runs-on: [windows-latest]
+    runs-on: [windows-2019]
     timeout-minutes: 40
 
     steps:
@@ -65,27 +61,61 @@ jobs:
       with:
         python-version: "3.9"
 
-    - name: Test for secrets access
-      id: check_secrets
-      shell: bash
+    # Create our own venv outside of the git directory JUST for getting the ACTUAL version so that install can't break it
+    - name: Get version number
+      id: version_number
       run: |
-        unset HAS_SECRET
-        if [ -n "$SECRET" ]; then HAS_SECRET='true' ; fi
-        echo ::set-output name=HAS_SECRET::${HAS_SECRET}
-      env:
-        SECRET: "${{ secrets.WIN_CODE_SIGN_CERT }}"
+        python -m venv ..\venv
+        . ..\venv\Scripts\Activate.ps1
+        pip3 install setuptools_scm
+        $env:COVID_INSTALLER_VERSION = python .\build_scripts\installer-version.py -win
+        echo "$env:COVID_INSTALLER_VERSION"
+        echo "::set-output name=COVID_INSTALLER_VERSION::$env:COVID_INSTALLER_VERSION"
+        deactivate
 
-    - name: Decode code signing cert into an encrypted file
-      if: steps.check_secrets.outputs.HAS_SECRET
-      uses: kitek/decode-base64-into-file-action@1.0
+      # Get the most recent release from chia-plotter-madmax
+    - uses: actions/github-script@v4
+      id: 'latest-madmax'
       with:
-        encoded-value: ${{ secrets.WIN_CODE_SIGN_CERT }}
-        destination-file: .\covid-blockchain-gui\win_code_sign_cert.p12
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        result-encoding: string
+        script: |
+          const releases = await github.repos.listReleases({
+            owner: 'Chia-Network',
+            repo: 'chia-plotter-madmax',
+          });
+          return releases.data[0].tag_name;
+
+    - name: Get latest madmax plotter
+      run: |
+        mkdir "$env:GITHUB_WORKSPACE\madmax"
+        Invoke-WebRequest https://github.com/Chia-Network/chia-plotter-madmax/releases/download/${{ steps.latest-madmax.outputs.result }}/chia_plot-${{ steps.latest-madmax.outputs.result }}.exe -OutFile "$env:GITHUB_WORKSPACE\madmax\covid_plot.exe"
+        Invoke-WebRequest https://github.com/Chia-Network/chia-plotter-madmax/releases/download/${{ steps.latest-madmax.outputs.result }}/chia_plot_k34-${{ steps.latest-madmax.outputs.result }}.exe -OutFile "$env:GITHUB_WORKSPACE\madmax\covid_plot_k34.exe"
+
+      # Get the most recent release from bladebit
+    - uses: actions/github-script@v4
+      id: 'latest-bladebit'
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        result-encoding: string
+        script: |
+          const releases = await github.repos.listReleases({
+            owner: 'Chia-Network',
+            repo: 'bladebit',
+          });
+          return releases.data[0].tag_name;
+
+    - name: Get latest bladebit plotter
+      run: |
+        mkdir "$env:GITHUB_WORKSPACE\bladebit"
+        Invoke-WebRequest https://github.com/Chia-Network/bladebit/releases/download/${{ steps.latest-bladebit.outputs.result }}/bladebit-${{ steps.latest-bladebit.outputs.result }}-windows-x86-64.zip -OutFile "$env:GITHUB_WORKSPACE\bladebit\bladebit.zip"
+        Expand-Archive -Path "$env:GITHUB_WORKSPACE\bladebit\bladebit.zip" -DestinationPath "$env:GITHUB_WORKSPACE\bladebit\"
+        rm "$env:GITHUB_WORKSPACE\bladebit\bladebit.zip"
 
     - name: Build Windows installer with build_scripts\build_windows.ps1
       env:
         WIN_CODE_SIGN_PASS: ${{ secrets.WIN_CODE_SIGN_PASS }}
-        HAS_SECRET: ${{ steps.check_secrets.outputs.HAS_SECRET }}
+        HAS_SECRET: ${{ steps.check_secrets.outputs.HAS_SIGNING_SECRET }}
       run: |
         $env:path="C:\Program` Files` (x86)\Microsoft` Visual` Studio\2019\Enterprise\SDK\ScopeCppSDK\vc15\VC\bin\;$env:path"
         $env:path="C:\Program` Files` (x86)\Windows` Kits\10\App` Certification` Kit;$env:path"
@@ -102,3 +132,10 @@ jobs:
       with:
         name: Windows-Installers
         path: ${{ github.workspace }}\covid-blockchain-gui\release-builds\
+
+    - name: Create Checksums
+      env:
+        COVID_INSTALLER_VERSION: ${{ steps.version_number.outputs.COVID_INSTALLER_VERSION }}
+      run: |
+         certutil.exe -hashfile ${{ github.workspace }}\covid-blockchain-gui\release-builds\windows-installer\CovidSetup-${{ steps.version_number.outputs.COVID_INSTALLER_VERSION }}.exe SHA256 > ${{ github.workspace }}\covid-blockchain-gui\release-builds\windows-installer\CovidSetup-${{ steps.version_number.outputs.COVID_INSTALLER_VERSION }}.exe.sha256
+         ls ${{ github.workspace }}\covid-blockchain-gui\release-builds\windows-installer\

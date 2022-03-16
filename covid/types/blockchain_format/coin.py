@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 from typing import Any, List
 
+from clvm.casts import int_to_bytes
+
 from covid.types.blockchain_format.sized_bytes import bytes32
-from covid.util.clvm import int_to_bytes
 from covid.util.hash import std_hash
 from covid.util.ints import uint64
 from covid.util.streamable import Streamable, streamable

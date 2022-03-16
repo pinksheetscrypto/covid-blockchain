@@ -8,9 +8,9 @@ from covid.types.blockchain_format.program import Program
 from covid.types.blockchain_format.sized_bytes import bytes32
 from covid.types.blockchain_format.coin import Coin
 from covid.types.coin_spend import CoinSpend
+from covid.types.condition_opcodes import ConditionOpcode
 from covid.types.spend_bundle import SpendBundle
 from covid.util.errors import Err
-from covid.util.condition_tools import ConditionOpcode
 from covid.util.ints import uint64
 from covid.consensus.default_constants import DEFAULT_CONSTANTS
 from covid.wallet.lineage_proof import LineageProof

@@ -6,8 +6,8 @@ from blspy import AugSchemeMPL, BasicSchemeMPL, G1Element, G2Element
 from covid.types.blockchain_format.program import Program
 from covid.types.blockchain_format.sized_bytes import bytes32
 from covid.types.coin_spend import CoinSpend
+from covid.types.condition_opcodes import ConditionOpcode
 from covid.types.spend_bundle import SpendBundle
-from covid.util.condition_tools import ConditionOpcode
 from covid.util.hash import std_hash
 from covid.wallet.puzzles import (
     p2_conditions,

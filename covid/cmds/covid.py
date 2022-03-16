@@ -13,10 +13,16 @@ from covid.cmds.show import show_cmd
 from covid.cmds.start import start_cmd
 from covid.cmds.stop import stop_cmd
 from covid.cmds.wallet import wallet_cmd
-from covid.cmds.plotnft import plotnft_cmd
+from covid.cmds.plotters import plotters_cmd
+from covid.cmds.db import db_cmd
 from covid.util.default_root import DEFAULT_KEYS_ROOT_PATH, DEFAULT_ROOT_PATH
-from covid.util.keychain import set_keys_root_path, supports_keyring_passphrase
-from covid.util.ssl import check_ssl
+from covid.util.keychain import (
+    Keychain,
+    KeyringCurrentPassphraseIsInvalid,
+    set_keys_root_path,
+    supports_keyring_passphrase,
+)
+from covid.util.ssl_check import check_ssl
 from typing import Optional
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
@@ -35,7 +41,7 @@ def monkey_patch_click() -> None:
 
     import click.core
 
-    click.core._verify_python3_env = lambda *args, **kwargs: 0  # type: ignore
+    click.core._verify_python3_env = lambda *args, **kwargs: 0  # type: ignore[attr-defined]
 
 
 @click.group(
@@ -66,10 +72,21 @@ def cli(
         set_keys_root_path(Path(keys_root_path))
 
     if passphrase_file is not None:
-        from .passphrase_funcs import cache_passphrase, read_passphrase_from_file
+        from covid.cmds.passphrase_funcs import cache_passphrase, read_passphrase_from_file
+        from sys import exit
 
         try:
-            cache_passphrase(read_passphrase_from_file(passphrase_file))
+            passphrase = read_passphrase_from_file(passphrase_file)
+            if Keychain.master_passphrase_is_valid(passphrase):
+                cache_passphrase(passphrase)
+            else:
+                raise KeyringCurrentPassphraseIsInvalid("Invalid passphrase")
+        except KeyringCurrentPassphraseIsInvalid:
+            if Path(passphrase_file.name).is_file():
+                print(f'Invalid passphrase found in "{passphrase_file.name}"')
+            else:
+                print("Invalid passphrase")
+            exit(1)
         except Exception as e:
             print(f"Failed to read passphrase: {e}")
 
@@ -110,7 +127,6 @@ def run_daemon_cmd(ctx: click.Context, wait_for_unlock: bool) -> None:
 cli.add_command(keys_cmd)
 cli.add_command(plots_cmd)
 cli.add_command(wallet_cmd)
-cli.add_command(plotnft_cmd)
 cli.add_command(configure_cmd)
 cli.add_command(init_cmd)
 cli.add_command(show_cmd)
@@ -118,6 +134,8 @@ cli.add_command(start_cmd)
 cli.add_command(stop_cmd)
 cli.add_command(netspace_cmd)
 cli.add_command(farm_cmd)
+cli.add_command(plotters_cmd)
+cli.add_command(db_cmd)
 
 if supports_keyring_passphrase():
     cli.add_command(passphrase_cmd)

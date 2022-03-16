@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any, List, Tuple
 
 import pkg_resources
-from covid.util.ssl import DEFAULT_PERMISSIONS_CERT_FILE, DEFAULT_PERMISSIONS_KEY_FILE
+from covid.util.ssl_check import DEFAULT_PERMISSIONS_CERT_FILE, DEFAULT_PERMISSIONS_KEY_FILE
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes, serialization
@@ -55,7 +55,7 @@ def generate_ca_signed_cert(ca_crt: bytes, ca_key: bytes, cert_out: Path, key_ou
         [
             x509.NameAttribute(NameOID.COMMON_NAME, "Covid"),
             x509.NameAttribute(NameOID.ORGANIZATION_NAME, "Covid"),
-            x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, "Pink Sheets Crypto"),
+            x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, "Organic Farming Division"),
         ]
     )
 
@@ -68,7 +68,7 @@ def generate_ca_signed_cert(ca_crt: bytes, ca_key: bytes, cert_out: Path, key_ou
         .not_valid_before(datetime.datetime.today() - one_day)
         .not_valid_after(datetime.datetime(2100, 8, 2))
         .add_extension(
-            x509.SubjectAlternativeName([x509.DNSName("covid.pinksheetscrypto.com")]),
+            x509.SubjectAlternativeName([x509.DNSName("covidnetwork.org")]),
             critical=False,
         )
         .sign(root_key, hashes.SHA256(), default_backend())

@@ -8,12 +8,10 @@ from covid.types.blockchain_format.program import Program, SerializedProgram
 wallet_program_files = set(
     [
         "covid/wallet/puzzles/calculate_synthetic_public_key.clvm",
-        "covid/wallet/puzzles/cc.clvm",
-        "covid/wallet/puzzles/chialisp_deserialisation.clvm",
+        "covid/wallet/puzzles/cat.clvm",
+        "covid/wallet/puzzles/covidlisp_deserialisation.clvm",
         "covid/wallet/puzzles/rom_bootstrap_generator.clvm",
         "covid/wallet/puzzles/generator_for_single_coin.clvm",
-        "covid/wallet/puzzles/genesis-by-coin-id-with-0.clvm",
-        "covid/wallet/puzzles/genesis-by-puzzle-hash-with-0.clvm",
         "covid/wallet/puzzles/lock.inner.puzzle.clvm",
         "covid/wallet/puzzles/p2_conditions.clvm",
         "covid/wallet/puzzles/p2_delegated_conditions.clvm",
@@ -37,6 +35,14 @@ wallet_program_files = set(
         "covid/wallet/puzzles/pool_member_innerpuz.clvm",
         "covid/wallet/puzzles/singleton_launcher.clvm",
         "covid/wallet/puzzles/p2_singleton_or_delayed_puzhash.clvm",
+        "covid/wallet/puzzles/genesis_by_puzzle_hash.clvm",
+        "covid/wallet/puzzles/everything_with_signature.clvm",
+        "covid/wallet/puzzles/delegated_tail.clvm",
+        "covid/wallet/puzzles/settlement_payments.clvm",
+        "covid/wallet/puzzles/genesis_by_coin_id.clvm",
+        "covid/wallet/puzzles/genesis-by-puzzle-hash-with-0.clvm",
+        "covid/wallet/puzzles/delegated_genesis_checker.clvm",
+        "covid/wallet/puzzles/genesis-by-coin-id-with-0.clvm",
     ]
 )
 
