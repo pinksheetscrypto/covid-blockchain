@@ -133,7 +133,7 @@ def configure(
 
         elif testnet == "false" or testnet == "f":
             print("Setting Mainnet")
-            mainnet_port = "7442"
+            mainnet_port = "18120"
             mainnet_introducer = "introducer.pinksheetscrypto.com"
             mainnet_dns_introducer = "dns-introducer.pinksheetscrypto.com"
             bootstrap_peers = ["node.pinksheetscrypto.com"]
