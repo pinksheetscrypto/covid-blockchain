@@ -291,7 +291,7 @@ def _search_derived(
         if search_address:
             # Generate a wallet address using the standard p2_delegated_puzzle_or_hidden_puzzle puzzle
             # TODO: consider generating addresses using other puzzles
-            address = encode_puzzle_hash(create_puzzlehash_for_pk(child_pk), "xch")
+            address = encode_puzzle_hash(create_puzzlehash_for_pk(child_pk), "cov")
 
         for term in remaining_search_terms:
             found_item: Any = None

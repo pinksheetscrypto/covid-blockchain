@@ -255,7 +255,7 @@ def search_cmd(
     "--index", "-i", help="Index of the first wallet address to derive. Index 0 is the first wallet address.", default=0
 )
 @click.option("--count", "-n", help="Number of wallet addresses to derive, starting at index.", default=1)
-@click.option("--prefix", "-x", help="Address prefix (xch for mainnet, txch for testnet)", default=None, type=str)
+@click.option("--prefix", "-x", help="Address prefix (cov for mainnet, tcov for testnet)", default=None, type=str)
 @click.option(
     "--non-observer-derivation",
     "-d",
